@@ -6,12 +6,13 @@ export interface IFirebaseObject {
 
 export interface IMission extends IFirebaseObject {
     id: string;
+    level:Level;
     title: string;
     description: string;
-    companyProfit: number,
-    userExperienceProfit: number,
-    notifyTo: IUser,
-    deliverTo?: IUser,
+    companyProfit: number;
+    userExperienceProfit: number;
+    notifyTo: IUser;
+    deliverTo?: IUser;
     startDate?: Date;
     maxDate?: Date;
     closeDate?: Date;
