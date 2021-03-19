@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RouletteComponent } from './fetures/roulette/roulette.component';
+import { RouletteComponent } from './features/roulette/roulette.component';
 
 @NgModule({
   declarations: [

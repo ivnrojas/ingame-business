@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RouletteComponent } from './fetures/roulette/roulette.component';
+import { RouletteComponent } from './features/roulette/roulette.component';
 
 const routes: Routes = [
   {path: 'roulette', component: RouletteComponent}
