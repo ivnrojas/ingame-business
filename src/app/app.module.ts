@@ -7,7 +7,8 @@ import { RouletteComponent } from './features/roulette/roulette.component'
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from './features/login/login.component';
-import { MissionComponent } from './mission/mission.component';
+import { MissionComponent } from './features/mission/mission.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MissionComponent } from './mission/mission.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
