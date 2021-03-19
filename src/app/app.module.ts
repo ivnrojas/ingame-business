@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouletteComponent } from './fetures/roulette/roulette.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,8 @@ import { RouletteComponent } from './fetures/roulette/roulette.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
