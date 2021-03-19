@@ -1,4 +1,71 @@
-<p>mission-add works!</p>
-<button>
-    Agregate una buena mission
-</button>
+<mat-card>
+    <mat-card-content class="mt-2">
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Nombre</mat-label>
+                    <input required matInput type="text" autocomplete="off">
+                </mat-form-field>
+                <p class="ta-c w-100 description-text">
+                    Nombre por el cual va a ser identificado.
+                </p>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Precio</mat-label>
+                    <input required matInput type="number" min="0" autocomplete="off">
+                </mat-form-field>
+                <p class="description-text ta-c w-100">
+                    Costo del mismo en pesos argentinos.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Limite de usuarios</mat-label>
+                    <input required matInput type="number" min="1" autocomplete="off">
+                </mat-form-field>
+                <p class="ta-c description-text w-100">
+                    Límite de usuarios vinculados.
+                </p>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Días hasta la revisión</mat-label>
+                    <input matInput type="number" min='0' max='9999' autocomplete="off">
+                </mat-form-field>
+                <p class="ta-c description-text w-100">
+                    Después de la cantidad de días ingresada, se le notificará que el plan necesita una
+                    revisión.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Hora de notificación</mat-label>
+                    <input matInput color="warn" type="time" autocomplete="off">
+                </mat-form-field>
+                <p class="ta-c description-text w-100">
+                    Hora a la que se notificará, por ejemplo: 18:00.
+                </p>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Alarma programada</mat-label>
+                    <input matInput autocomplete="off"> 
+                </mat-form-field>
+                <p class="ta-c description-text w-100">
+                    En caso de tener una hora invalida se le notificará a las 18:00 Hrs.
+                </p>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <div class="container-fluid action-buttons">
+            <button color="primary" mat-flat-button mat-button>Cancelar</button>
+            <button color="accent" mat-flat-button>Añadir</button>
+        </div>
+    </mat-card-actions>
+</mat-card>

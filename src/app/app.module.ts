@@ -12,6 +12,15 @@ import { MissionAddComponent } from './features/mission/mission-add/mission-add.
 import { MissionListComponent } from './features/mission/mission-list/mission-list.component';
 import { MissionModifyComponent } from './features/mission/mission-modify/mission-modify.component';
 
+
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +34,11 @@ import { MissionModifyComponent } from './features/mission/mission-modify/missio
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
