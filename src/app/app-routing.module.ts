@@ -1,15 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './features/login/login.component';
+import { MissionAddComponent } from './features/mission/mission-add/mission-add.component';
+import { MissionListComponent } from './features/mission/mission-list/mission-list.component';
+import { MissionModifyComponent } from './features/mission/mission-modify/mission-modify.component';
 import { RouletteComponent } from './features/roulette/roulette.component';
 
 const routes: Routes = [
-  {path: 'roulette', component: RouletteComponent},
-  {path: 'login', component: LoginComponent},
+    { path: 'roulette', component: RouletteComponent },
+    { path: 'login', component: LoginComponent },
+    {
+        path: 'mission', children: [
+            { path: '', component: MissionListComponent },
+            { path: 'add', component: MissionAddComponent },
+            { path: 'modify', component: MissionModifyComponent },
+        ]
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }
