@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { RouletteComponent } from './features/roulette/roulette.component'
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { LoginComponent } from './features/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RouletteComponent
+    RouletteComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
