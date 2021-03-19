@@ -23,10 +23,14 @@
                     </mat-form-field>
                 </div>
                 <div class="col">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Nivel de mision</mat-label>
-                        <input required matInput type="number" min="0" autocomplete="off">
-                    </mat-form-field>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Nivel de mision</mat-label>
+                            <mat-select required>
+                                <mat-option *ngFor="let lm of getLevelMissionKeys()" class="select-panel"  [value]="lm">
+                                    {{lm}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
                 </div>
             </div>
             <div class="row">

@@ -5,7 +5,7 @@ export interface IFirebaseObject {
 
 export interface IMission extends IFirebaseObject {
     id: string;
-    level:Level;
+    level: MissionLevel;
     title: string;
     description: string;
     companyProfit: number;
@@ -34,16 +34,16 @@ export enum missionCategory {
 export interface IUser extends IFirebaseObject {
     id: string;
     name: string;
-    nickname:string;
-    password:string;
-    level:number;
-    experience:number;
-    nextLevel:Level;
-    currentMission?:IMission;
-    missionRecords?:IMission[];
+    nickname: string;
+    password: string;
+    level: UserLevel;
+    experience: number;
+    nextLevel: UserLevel;
+    currentMission?: IMission;
+    missionRecords?: IMission[];
 }
 
-export enum Level {
+export enum UserLevel {
     one = 100,
     two = 200,
     three = 400,
@@ -54,4 +54,17 @@ export enum Level {
     eight = 12800,
     nine = 25600,
     ten = 51200
+}
+
+export enum MissionLevel {
+    one = "1",
+    two = "2",
+    three = "3",
+    four = "4",
+    five = "5",
+    six = "6",
+    seven = "7",
+    eight = "8",
+    nine = "9",
+    ten = "10"
 }
