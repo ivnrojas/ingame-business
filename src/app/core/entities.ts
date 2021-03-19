@@ -54,4 +54,3 @@ export enum Level {
     nine = 25600,
     ten = 51200,
 }
-
