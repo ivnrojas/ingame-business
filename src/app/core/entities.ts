@@ -1,4 +1,3 @@
-
 export interface IFirebaseObject {
     firebaseId?: string;
     firebaseTimestamp?: number;
@@ -40,6 +39,8 @@ export interface IUser extends IFirebaseObject {
     level:number;
     experience:number;
     nextLevel:Level;
+    currentMission?:IMission;
+    missionRecords?:IMission[];
 }
 
 export enum Level {
@@ -52,5 +53,5 @@ export enum Level {
     seven = 6400,
     eight = 12800,
     nine = 25600,
-    ten = 51200,
+    ten = 51200
 }
