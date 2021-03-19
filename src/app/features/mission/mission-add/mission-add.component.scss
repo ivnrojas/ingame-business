@@ -10,10 +10,13 @@ input.price-field::-webkit-inner-spin-button {
     display: none;
 }
 
-
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+.description-box {
+    overflow-y: hidden;
 }
 
 input.price-field {

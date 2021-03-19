@@ -17,6 +17,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import {TextFieldModule} from '@angular/cdk/text-field';
+
 
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -44,7 +46,8 @@ import { ToastrModule } from 'ngx-toastr';
     AngularFirestoreModule,
     AngularFireFunctionsModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TextFieldModule
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent]

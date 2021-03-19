@@ -1,71 +1,77 @@
-<mat-card>
-    <mat-card-content class="mt-2">
-        <div class="row">
-            <div class="col">
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Nombre</mat-label>
-                    <input required matInput type="text" autocomplete="off">
-                </mat-form-field>
-                <p class="ta-c w-100 description-text">
-                    Nombre por el cual va a ser identificado.
-                </p>
-            </div>
-            <div class="col">
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Precio</mat-label>
-                    <input required matInput type="number" min="0" autocomplete="off">
-                </mat-form-field>
-                <p class="description-text ta-c w-100">
-                    Costo del mismo en pesos argentinos.
-                </p>
+<div class="container">
+    <div class="row mt-2">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <mat-card class="align-all-mat-card">
+                        <div class="ta-c mat-h1">
+                            Crear nueva mision
+                        </div>
+                    </mat-card>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Limite de usuarios</mat-label>
-                    <input required matInput type="number" min="1" autocomplete="off">
-                </mat-form-field>
-                <p class="ta-c description-text w-100">
-                    Límite de usuarios vinculados.
-                </p>
+    </div>
+
+    <mat-card class="mt-2">
+        <mat-card-content>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Titulo</mat-label>
+                        <input required matInput type="text" autocomplete="off">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nivel de mision</mat-label>
+                        <input required matInput type="number" min="0" autocomplete="off">
+                    </mat-form-field>
+                </div>
             </div>
-            <div class="col">
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Días hasta la revisión</mat-label>
-                    <input matInput type="number" min='0' max='9999' autocomplete="off">
-                </mat-form-field>
-                <p class="ta-c description-text w-100">
-                    Después de la cantidad de días ingresada, se le notificará que el plan necesita una
-                    revisión.
-                </p>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Descripción</mat-label>
+                        <textarea required autocomplete="off" matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="20" class="description-box">
+                        </textarea>
+                    </mat-form-field>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Hora de notificación</mat-label>
-                    <input matInput color="warn" type="time" autocomplete="off">
-                </mat-form-field>
-                <p class="ta-c description-text w-100">
-                    Hora a la que se notificará, por ejemplo: 18:00.
-                </p>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Limite de usuarios</mat-label>
+                        <input required matInput type="number" min="1" autocomplete="off">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Días hasta la revisión</mat-label>
+                        <input matInput type="number" min='0' max='9999' autocomplete="off">
+                    </mat-form-field>
+                </div>
             </div>
-            <div class="col">
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Alarma programada</mat-label>
-                    <input matInput autocomplete="off"> 
-                </mat-form-field>
-                <p class="ta-c description-text w-100">
-                    En caso de tener una hora invalida se le notificará a las 18:00 Hrs.
-                </p>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Hora de notificación</mat-label>
+                        <input matInput color="warn" type="time" autocomplete="off">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Alarma programada</mat-label>
+                        <input matInput autocomplete="off">
+                    </mat-form-field>
+                </div>
             </div>
-        </div>
-    </mat-card-content>
-    <mat-card-actions>
-        <div class="container-fluid action-buttons">
-            <button color="primary" mat-flat-button mat-button>Cancelar</button>
-            <button color="accent" mat-flat-button>Añadir</button>
-        </div>
-    </mat-card-actions>
-</mat-card>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="container-fluid action-buttons">
+                <button color="primary" mat-flat-button mat-button>Cancelar</button>
+                <button color="accent" mat-flat-button>Añadir</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>
