@@ -14,18 +14,18 @@
     </div>
 
     <mat-card class="mt-2">
-        <mat-card-content>
+        <mat-card-content [formGroup]="missionForm">
             <div class="row">
                 <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Titulo</mat-label>
-                        <input required matInput type="text" autocomplete="off">
+                        <input required matInput type="text" autocomplete="off" formControlName="title">
                     </mat-form-field>
                 </div>
                 <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Nivel de mision</mat-label>
-                        <mat-select required>
+                        <mat-select required formControlName="level">
                             <mat-option *ngFor="let lm of getLevelMissionKeys()" class="select-panel" [value]="lm">
                                 {{lm}}
                             </mat-option>
@@ -37,7 +37,7 @@
                 <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Descripción</mat-label>
-                        <textarea required autocomplete="off" matInput cdkTextareaAutosize cdkAutosizeMinRows="1"
+                        <textarea required autocomplete="off" formControlName="description" matInput cdkTextareaAutosize cdkAutosizeMinRows="1"
                             cdkAutosizeMaxRows="20" class="description-box">
                         </textarea>
                     </mat-form-field>
@@ -47,13 +47,13 @@
                 <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Días para cumplir la mision</mat-label>
-                        <input matInput type="number" min='0' max='9999' autocomplete="off">
+                        <input matInput type="number" min='0' max='9999' autocomplete="off" formControlName="maxDay">
                     </mat-form-field>
                 </div>
                 <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Categoria</mat-label>
-                        <mat-select required>
+                        <mat-select required formControlName="category">
                             <mat-option *ngFor="let mc of getMissionCategory()" class="select-panel" [value]="mc">
                                 {{mc}}
                             </mat-option>
@@ -65,13 +65,13 @@
                 <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Ganancia de la compania</mat-label>
-                        <input matInput type="number" min='0' max='9999' autocomplete="off">
+                        <input matInput type="number" min='0' max='9999' autocomplete="off" formControlName="companyProfit">
                     </mat-form-field>
                 </div>
                 <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Experiencia para el usuario</mat-label>
-                        <input matInput type="number" min='0' max='9999' autocomplete="off">
+                        <input matInput type="number" min='0' max='9999' autocomplete="off" formControlName="userExperience">
                     </mat-form-field>
                 </div>
             </div>
@@ -79,7 +79,7 @@
         <mat-card-actions>
             <div class="container-fluid action-buttons">
                 <button color="primary" mat-flat-button mat-button>Cancelar</button>
-                <button color="accent" mat-flat-button>Añadir</button>
+                <button color="accent" mat-flat-button [disabled]="!missionForm.valid">Añadir</button>
             </div>
         </mat-card-actions>
     </mat-card>
