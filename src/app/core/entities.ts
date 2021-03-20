@@ -1,4 +1,7 @@
-
+export interface IFirebaseError {
+    code: string;
+    message: string;
+}
 export interface IFirebaseObject {
     firebaseId?: string;
     firebaseTimestamp?: number;
