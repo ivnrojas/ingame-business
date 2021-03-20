@@ -4,16 +4,16 @@
             <div class="col-3"></div>
             <div class="col">
                 <div class="card login-card w-100">
-                    <div class="card-body">
+                    <div class="card-body" [formGroup]="loginForm">
                         <h5 class="card-title text-center">Login</h5>
                         <h6 class="card-subtitle mb-4 text-muted mt-1 text-center">Ingresa a tu cuenta con tu nombre y contraseña</h6>
                         <hr>
                         <label class="mt-2" for="name">Nombre</label>
-                        <input type="text" class="form-control" id="name">
+                        <input type="text" class="form-control" formControlName="user" id="name">
                         <label class="mt-3" for="password">Contraseña</label>
-                        <input type="password" class="form-control mb-4" id="password">
+                        <input type="password" class="form-control mb-4" formControlName="pwd" id="password">
                         <hr>
-                        <button class="btn btn-success w-100 mt-3">Ingresar</button>
+                        <button class="btn btn-success w-100 mt-3" (click)="login()">Ingresar</button>
                     </div>
                 </div>
             </div>

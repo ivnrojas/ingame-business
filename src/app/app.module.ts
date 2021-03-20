@@ -29,6 +29,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastrModule } from 'ngx-toastr';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     TextFieldModule,
     MatSelectModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent]
