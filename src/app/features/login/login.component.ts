@@ -24,12 +24,17 @@ export class LoginComponent implements OnInit {
 	}
 
 	public login(): void {
+
+		
+
 		this.auth.loginEmail(this.userControl.value, this.passwordControl.value)
 		.then(() => {
-			this.toastr.success('', '¡Bienvenido!', {
+			this.toastr.success('Ingreso exitoso', '', {
 				timeOut: 4000,
 				positionClass: 'toast-bottom-right',
 			});
+
+			this.loginProcess();
 		})
 		.catch((errorMessage) => {
 			this.toastr.error(errorMessage, '', {
@@ -39,4 +44,7 @@ export class LoginComponent implements OnInit {
 		})
 	}
 
+	private loginProcess(): void {
+
+	}
 }

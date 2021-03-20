@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +30,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastrModule } from 'ngx-toastr';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './features/home/home.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MissionAddComponent,
     MissionListComponent,
     MissionModifyComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [AngularFireAuth],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }
