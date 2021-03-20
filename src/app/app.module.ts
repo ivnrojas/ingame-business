@@ -12,6 +12,12 @@ import { MissionAddComponent } from './features/mission/mission-add/mission-add.
 import { MissionListComponent } from './features/mission/mission-list/mission-list.component';
 import { MissionModifyComponent } from './features/mission/mission-modify/mission-modify.component';
 
+
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -31,6 +37,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
     AngularFirestoreModule,
     AngularFireFunctionsModule,
     ToastrModule.forRoot(),
