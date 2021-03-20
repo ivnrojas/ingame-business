@@ -19,6 +19,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 
 
@@ -26,6 +28,7 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastrModule } from 'ngx-toastr';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     TextFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent]
