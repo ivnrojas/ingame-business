@@ -38,6 +38,7 @@ export enum missionCategory {
 export interface IUser extends IFirebaseObject {
     id: string;
     name: string;
+    email: string;
     nickname: string;
     password: string;
     level: UserLevel;
