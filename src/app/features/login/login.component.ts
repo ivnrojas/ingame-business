@@ -51,6 +51,9 @@ export class LoginComponent implements OnInit {
 					positionClass: 'toast-bottom-right',
 				});
 			})
+			.finally(() => {
+				this.isLoading = false;
+			})
 		}
 		// If we didn't get the user from the nickname, it means the user it's not registered in our app
 		else
@@ -59,6 +62,7 @@ export class LoginComponent implements OnInit {
 				timeOut: 4000,
 				positionClass: 'toast-bottom-right',
 			});
+			this.isLoading = false;
 		}
 	}
 

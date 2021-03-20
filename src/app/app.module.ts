@@ -20,6 +20,8 @@ import {MatInputModule} from '@angular/material/input';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 
@@ -59,6 +61,8 @@ import { HomeComponent } from './features/home/home.component';
     MatSelectModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
     FormsModule,
     ReactiveFormsModule
   ],
