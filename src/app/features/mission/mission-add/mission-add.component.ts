@@ -46,9 +46,16 @@ export class MissionAddComponent implements OnInit {
     }
 
     public generateMissionId(): string {
-        let result: string[] = [];
-        result.push('ms');
+        let date = new Date();
+        let year = String(date.getFullYear());
+        let month = String(date.getMonth() + 1);
+        let day = String(date.getDate());
+        let hour = String(date.getHours());
+        let minute = String(date.getMinutes());
+        let seconds = String(date.getSeconds());
+        month = (month.length == 1) ? "0" + month : month;
+        day = (day.length == 1) ? "0" + day : day;
 
-        return result.toString();
+        return 'MS' + year + month + day + hour + minute + seconds;
     }
 }
