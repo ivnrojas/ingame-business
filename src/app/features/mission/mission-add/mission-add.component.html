@@ -93,7 +93,7 @@
         <mat-card-actions>
             <div class="container-fluid action-buttons">
                 <button color="primary" mat-flat-button mat-button>Cancelar</button>
-                <button color="accent" mat-flat-button [disabled]="!missionForm.valid">Añadir</button>
+                <button color="accent" mat-flat-button [disabled]="!missionForm.valid" (click)="generateNewMission()">Añadir</button>
             </div>
         </mat-card-actions>
     </mat-card>
