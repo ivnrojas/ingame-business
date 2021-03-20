@@ -23,21 +23,22 @@
                     </mat-form-field>
                 </div>
                 <div class="col">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Nivel de mision</mat-label>
-                            <mat-select required>
-                                <mat-option *ngFor="let lm of getLevelMissionKeys()" class="select-panel"  [value]="lm">
-                                    {{lm}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nivel de mision</mat-label>
+                        <mat-select required>
+                            <mat-option *ngFor="let lm of getLevelMissionKeys()" class="select-panel" [value]="lm">
+                                {{lm}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Descripción</mat-label>
-                        <textarea required autocomplete="off" matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="20" class="description-box">
+                        <textarea required autocomplete="off" matInput cdkTextareaAutosize cdkAutosizeMinRows="1"
+                            cdkAutosizeMaxRows="20" class="description-box">
                         </textarea>
                     </mat-form-field>
                 </div>
@@ -51,22 +52,26 @@
                 </div>
                 <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Días hasta la revisión</mat-label>
-                        <input matInput type="number" min='0' max='9999' autocomplete="off">
+                        <mat-label>Categoria</mat-label>
+                        <mat-select required>
+                            <mat-option *ngFor="let mc of getMissionCategory()" class="select-panel" [value]="mc">
+                                {{mc}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Hora de notificación</mat-label>
-                        <input matInput color="warn" type="time" autocomplete="off">
+                        <mat-label>Ganancia de la compania</mat-label>
+                        <input matInput type="number" min='0' max='9999' autocomplete="off">
                     </mat-form-field>
                 </div>
                 <div class="col">
                     <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Alarma programada</mat-label>
-                        <input matInput autocomplete="off">
+                        <mat-label>Experiencia para el usuario</mat-label>
+                        <input matInput type="number" min='0' max='9999' autocomplete="off">
                     </mat-form-field>
                 </div>
             </div>
