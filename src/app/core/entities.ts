@@ -41,11 +41,18 @@ export interface IUser extends IFirebaseObject {
     email: string;
     nickname: string;
     password: string;
+    role: UserRole;
     level: UserLevel;
-    experience: number;
-    nextLevel: UserLevel;
+    experience?: number;
+    nextLevel?: UserLevel;
     currentMission?: IMission;
     missionRecords?: IMission[];
+}
+
+export enum UserRole {
+    User = 'User',
+    Worker = 'Worker',
+    Admin = 'Admin'
 }
 
 export enum UserLevel {
