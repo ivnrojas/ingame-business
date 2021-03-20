@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { missionCategory, MissionLevel } from 'src/app/core/entities';
+import { IMission, missionCategory, MissionLevel, missionState } from 'src/app/core/entities';
 
 @Component({
     selector: 'app-mission-add',
@@ -18,6 +18,8 @@ export class MissionAddComponent implements OnInit {
      public categoryControl = new FormControl(missionCategory.legal,Validators.required);
      public companyProfitControl = new FormControl(null,Validators.required);
      public userExperienceControl = new FormControl(null,Validators.required);
+     public deliverToControl = new FormControl('Ivana',Validators.required);
+     public notifyTocontrol = new FormControl('Ivana',Validators.required);
      
     constructor() { }
 
@@ -33,7 +35,9 @@ export class MissionAddComponent implements OnInit {
             maxDay: this.maxDayControl,
             category: this.categoryControl,
             companyProfit: this.companyProfitControl,
-            userExperience:this.userExperienceControl
+            userExperience:this.userExperienceControl,
+            deliverTo:this.deliverToControl,
+            notifyTo:this.notifyTocontrol
         });
     }
 
@@ -57,5 +61,26 @@ export class MissionAddComponent implements OnInit {
         day = (day.length == 1) ? "0" + day : day;
 
         return 'MS' + year + month + day + hour + minute + seconds;
+    }
+
+    public generateMission():IMission{
+        let newMission: IMission;
+
+        newMission.id = this.generateMissionId();
+        newMission.title = this.missionForm.get('title').value;
+        newMission.level = this.missionForm.get('level').value;
+        newMission.description = this.missionForm.get('description').value;
+        newMission.companyProfit = this.missionForm.get('companyProfit').value;
+        newMission.userExperienceProfit = this.missionForm.get('userExperience').value;
+        newMission.notifyTo = this.missionForm.get('notifyTo').value;
+        newMission.deliverTo = this.missionForm.get('deliverTo').value;
+        newMission.startDate = new Date();
+        newMission.maxDate = this.missionForm.get('maxDate').value;
+        newMission.closeDate = null;
+        newMission.category = this.missionForm.get('category').value;
+        newMission.state = null;
+        newMission.group = null;
+
+        return newMission;
     }
 }
