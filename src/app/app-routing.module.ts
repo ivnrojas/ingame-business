@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 import { MissionAddComponent } from './features/mission/mission-add/mission-add.component';
 import { MissionListComponent } from './features/mission/mission-list/mission-list.component';
@@ -9,6 +10,7 @@ import { RouletteComponent } from './features/roulette/roulette.component';
 const routes: Routes = [
     { path: 'roulette', component: RouletteComponent },
     { path: 'login', component: LoginComponent },
+    { path: '', component: HomeComponent },
     {
         path: 'mission', children: [
             { path: '', component: MissionListComponent },
