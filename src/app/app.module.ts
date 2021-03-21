@@ -8,9 +8,6 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from './features/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MissionAddComponent } from './features/mission/mission-add/mission-add.component';
-import { MissionListComponent } from './features/mission/mission-list/mission-list.component';
-import { MissionModifyComponent } from './features/mission/mission-modify/mission-modify.component';
 
 
 import {MatCardModule} from '@angular/material/card';
@@ -34,20 +31,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './features/home/home.component';
-import { UserAddComponent } from './features/admin/user-add/user-add.component';
-import { UserListComponent } from './features/admin/user-list/user-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RouletteComponent,
     LoginComponent,
-    MissionAddComponent,
-    MissionListComponent,
-    MissionModifyComponent,
     HomeComponent,
-    UserAddComponent,
-    UserListComponent,
   ],
   imports: [
     FormsModule,

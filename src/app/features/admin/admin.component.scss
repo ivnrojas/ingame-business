@@ -1,0 +1,9 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+.toolbar-btn {
+    transition: 200ms;
+}
+.toolbar-btn:hover {
+    color: darken($color: #FFFFFF, $amount: 50);
+}
