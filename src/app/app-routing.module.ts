@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UserAddComponent } from './features/admin/user-add/user-add.component';
+import { UserListComponent } from './features/admin/user-list/user-list.component';
 import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 import { MissionAddComponent } from './features/mission/mission-add/mission-add.component';
@@ -11,6 +13,12 @@ const routes: Routes = [
     { path: 'roulette', component: RouletteComponent },
     { path: 'login', component: LoginComponent },
     { path: '', component: HomeComponent },
+    { path: 'admin', children: [
+        { path: 'user', children: [
+            { path: '', component: UserListComponent },
+            { path: 'add', component: UserAddComponent },
+        ] }
+    ] },
     {
         path: 'mission', children: [
             { path: '', component: MissionListComponent },

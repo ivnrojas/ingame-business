@@ -34,6 +34,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './features/home/home.component';
+import { UserAddComponent } from './features/admin/user-add/user-add.component';
+import { UserListComponent } from './features/admin/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { HomeComponent } from './features/home/home.component';
     MissionListComponent,
     MissionModifyComponent,
     HomeComponent,
+    UserAddComponent,
+    UserListComponent,
   ],
   imports: [
     FormsModule,
