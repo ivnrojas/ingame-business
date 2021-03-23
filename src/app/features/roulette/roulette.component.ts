@@ -41,15 +41,14 @@ export class RouletteComponent implements OnInit {
 		name: 'Escopeta de combate'
 	}
 
-
 	constructor() { }
 
 	ngOnInit(): void {
-		this.crearLista();
-		this.cloneLists();
+		this.generatePossibleItemsList();
+		this.generateRouletteList();
 	}
 
-	private crearLista(): void {
+	private generatePossibleItemsList(): void {
 		this.productList = [];
 		this.productList.push(this.nueveMM);
 		this.productList.push(this.nueveMMSilenciada);
@@ -58,25 +57,17 @@ export class RouletteComponent implements OnInit {
 		this.productList.push(this.escopetaCombate);
 	}
 
-	private cloneLists(): void {
+	private generateRouletteList(): void {
 		this.productListRoulette = [];
 		for (let i=0; i<150; i++) {
-			this.productListRoulette.push(this.getProduct());
+			this.productListRoulette.push(this.getRandomProduct());
+
+			if(i==140)
+				this.productListRoulette.push(this.getWinnerProduct());
 		}
 	}
 
-	public tirarRuletaAnimacion(): void {
-		this.btnDisabled = true;
-		this.stateWindow = 'active';
-		
-		setTimeout(() => {
-			this.winProduct = true;
-			this.winner = this.productListRoulette[141];
-		}, 6500);
-		
-	}
-
-	public getProduct(): IProducto {
+	private getWinnerProduct(): IProducto {
 		let numberRandom = this.random(1, 1765);
 
 		if(numberRandom <= 1000)
@@ -88,12 +79,33 @@ export class RouletteComponent implements OnInit {
 		if(numberRandom > 1750 && numberRandom <= 1760)
 			return this.mp5;
 		if(numberRandom > 1760 && numberRandom <= 1765)
-			return this.escopetaCombate;
-			
+			return this.escopetaCombate;	
 	}
 
-	public randomAnimation(min: number, max: number): number {
-		return Math.floor((Math.random()*(max - min))+min);
+	public getRandomProduct(): IProducto {
+		let numberRandom = this.random(1, 1760);
+
+		if(numberRandom <= 500)
+			return this.nueveMM;
+		if(numberRandom > 500 && numberRandom <= 1000)
+			return this.nueveMMSilenciada;
+		if(numberRandom > 1000 && numberRandom <= 1300)
+			return this.escopeta;
+		if(numberRandom > 1300 && numberRandom <= 1400)
+			return this.mp5;
+		if(numberRandom > 1400)
+			return this.escopetaCombate;	
+	}
+
+	public spinRoulette(): void {
+		this.btnDisabled = true;
+		this.stateWindow = 'active';
+		
+		setTimeout(() => {
+			this.winProduct = true;
+			this.winner = this.productListRoulette[141];
+		}, 6500);
+		
 	}
 
 	private random(min: number, max: number): number {
