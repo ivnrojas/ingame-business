@@ -11,6 +11,7 @@ import { LoginComponent } from './features/login/login.component';
 import { MissionAddComponent } from './features/mission/mission-add/mission-add.component';
 import { MissionListComponent } from './features/mission/mission-list/mission-list.component';
 import { MissionModifyComponent } from './features/mission/mission-modify/mission-modify.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import {MatCardModule} from '@angular/material/card';
@@ -40,9 +41,6 @@ import { HomeComponent } from './features/home/home.component';
     AppComponent,
     RouletteComponent,
     LoginComponent,
-    MissionAddComponent,
-    MissionListComponent,
-    MissionModifyComponent,
     HomeComponent,
   ],
   imports: [
