@@ -1,21 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { rouletteAnimation } from 'src/app/core/animations';
 
 @Component({
 	selector: 'app-roulette',
 	templateUrl: './roulette.component.html',
 	styleUrls: ['./roulette.component.scss'],
-	animations: [
-		trigger('windowAnimation', [
-			state('inactive', style({
-				right: 0
-			})),
-			state('active', style({
-				transform: 'translateX(-77.15%)'//.15 a .4
-			})),
-			transition('inactive => active', animate('6000ms ease'))
-		]),
-	]
+	animations: [rouletteAnimation]
 })
 export class RouletteComponent implements OnInit {
 
