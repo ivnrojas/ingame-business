@@ -8,9 +8,6 @@ import { RouletteComponent } from './features/roulette/roulette.component'
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from './features/login/login.component';
-import { MissionAddComponent } from './features/mission/mission-add/mission-add.component';
-import { MissionListComponent } from './features/mission/mission-list/mission-list.component';
-import { MissionModifyComponent } from './features/mission/mission-modify/mission-modify.component';
 
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -22,8 +19,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
-
 
 
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
