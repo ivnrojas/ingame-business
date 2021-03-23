@@ -1,50 +1,117 @@
 import { Component, OnInit } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
 	selector: 'app-roulette',
 	templateUrl: './roulette.component.html',
-	styleUrls: ['./roulette.component.scss']
+	styleUrls: ['./roulette.component.scss'],
+	animations: [
+		trigger('windowAnimation', [
+			state('inactive', style({
+				right: 0
+			})),
+			state('active', style({
+				transform: 'translateX(-77.15%)'//.15 a .4
+			})),
+			transition('inactive => active', animate('6000ms ease'))
+		]),
+	]
 })
 export class RouletteComponent implements OnInit {
 
-	public product: string;
+	public stateWindow: string = 'inactive'
 
-	public roulette: boolean = false;
+	public productList: IProducto[];
+	public productListRoulette: IProducto[];
+
+	public winProduct: boolean = false;
+
+	public btnDisabled: boolean = false;
+
+	public winner: IProducto;
+
+	public nueveMM: IProducto = {
+		img:'https://www.seekpng.com/png/detail/263-2638818_c1vu3za-gta-san-andreas-pistol-icon.png',
+		name: '9mm'
+	}
+	public nueveMMSilenciada: IProducto = {
+		img:'https://vignette.wikia.nocookie.net/gtawiki/images/d/d7/Silenced9mm-GTASA-icon.png/revision/latest?cb=20150609170046',
+		name: '9mm silenciada'
+	}
+	public escopeta: IProducto = {
+		img:'https://img.superdanova.com//file/1612129635286ce03.png',
+		name: 'Escopeta'
+	}
+	public mp5: IProducto = {
+		img:'https://steamuserimages-a.akamaihd.net/ugc/795361054990162881/089D16E12BAC2C3BFCFB421DE6AEC85EEADDED3F/',
+		name: 'MP5'
+	}
+	public escopetaCombate: IProducto = {
+		img:'https://img.daylilife.com/i/EscopetaDeCombateSPAS12SanAndreasHD.png',
+		name: 'Escopeta de combate'
+	}
+
 
 	constructor() { }
 
 	ngOnInit(): void {
-		this.roulette = false
+		this.crearLista();
+		this.cloneLists();
 	}
 
-	public tirarRuleta(): void {
-
-		this.roulette = true;
-
-		this.goToDashboard();
-
-		// for(let i=0; i<10; i++){
-
-
-		// }
-
+	private crearLista(): void {
+		this.productList = [];
+		this.productList.push(this.nueveMM);
+		this.productList.push(this.nueveMMSilenciada);
+		this.productList.push(this.escopeta);
+		this.productList.push(this.mp5);
+		this.productList.push(this.escopetaCombate);
 	}
-	public goToDashboard(): void {
-		let numberRandom = this.random(1, 1760);
+
+	private cloneLists(): void {
+		this.productListRoulette = [];
+		for (let i=0; i<150; i++) {
+			this.productListRoulette.push(this.getProduct());
+		}
+	}
+
+	public tirarRuletaAnimacion(): void {
+		this.btnDisabled = true;
+		this.stateWindow = 'active';
+		
+		setTimeout(() => {
+			this.winProduct = true;
+			this.winner = this.productListRoulette[141];
+		}, 6500);
+		
+	}
+
+	public getProduct(): IProducto {
+		let numberRandom = this.random(1, 1765);
 
 		if(numberRandom <= 1000)
-			this.product = '9mm';
+			return this.nueveMM;
 		if(numberRandom > 1000 && numberRandom <= 1500)
-			this.product = '9mm sileciada';
+			return this.nueveMMSilenciada;
 		if(numberRandom > 1500 && numberRandom <= 1750)
-			this.product = 'Escopeta';
+			return this.escopeta;
 		if(numberRandom > 1750 && numberRandom <= 1760)
-			this.product = 'AK47';
+			return this.mp5;
+		if(numberRandom > 1760 && numberRandom <= 1765)
+			return this.escopetaCombate;
 			
-			console.log(this.product);
+	}
+
+	public randomAnimation(min: number, max: number): number {
+		return Math.floor((Math.random()*(max - min))+min);
 	}
 
 	private random(min: number, max: number): number {
 		return Math.floor((Math.random()*(max - min))+min);
 	}
+}
+
+export interface IProducto {
+    img: string;
+    name: string;
 }
