@@ -41,12 +41,35 @@ export interface IUser extends IFirebaseObject {
     email: string;
     nickname: string;
     password: string;
+    ingameRole: IngameRole;
     role: UserRole;
-    level: UserLevel;
-    experience?: number;
-    nextLevel?: UserLevel;
-    currentMission?: IMission;
-    missionRecords?: IMission[];
+    level: ILevel;
+    experience: number;
+    currentMissions?: IMission[];
+    missionHistory?: IMission[];
+    money: number;
+    casesLS: number;
+    casesSF: number;
+    casesLV: number;
+    inventory: IItem[];
+    respect: number;
+}
+
+export interface IItem extends IFirebaseObject {
+    name: string;
+    img: string;
+    cost: number;
+}
+
+export enum IngameRole {
+    Asistente = 'Asistente',
+    Profesional = 'Profesional',
+    Experto = 'Experto',
+    JefeDeFinanzas = 'Jefe de Finanzas',
+    Administrador = 'Administrador',
+    Manager = 'Manager',
+    Lider = 'Líder',
+    CEO = 'CEO'
 }
 
 export enum UserRole {
@@ -54,6 +77,44 @@ export enum UserRole {
     Worker = 'Worker',
     Admin = 'Admin'
 }
+
+export interface ILevel {
+    level: number;
+    totalExperience: number;
+}
+
+export const Levels: ILevel[] = [
+    { level: 1, totalExperience: 250 },
+    { level: 2, totalExperience: 500 },
+    { level: 3, totalExperience: 1000 },
+    { level: 4, totalExperience: 1500 },
+    { level: 5, totalExperience: 2000 },
+    { level: 6, totalExperience: 2500 },
+    { level: 7, totalExperience: 3000 },
+    { level: 8, totalExperience: 3000 },
+    { level: 9, totalExperience: 3000 },
+    { level: 10, totalExperience: 3000 },
+    { level: 11, totalExperience: 4000 },
+    { level: 12, totalExperience: 4000 },
+    { level: 13, totalExperience: 4000 },
+    { level: 14, totalExperience: 4000 },
+    { level: 15, totalExperience: 4000 },
+    { level: 16, totalExperience: 4500 },
+    { level: 17, totalExperience: 4500 },
+    { level: 18, totalExperience: 4500 },
+    { level: 19, totalExperience: 4500 },
+    { level: 20, totalExperience: 4500 },
+    { level: 21, totalExperience: 5000 },
+    { level: 22, totalExperience: 5000 },
+    { level: 23, totalExperience: 5000 },
+    { level: 24, totalExperience: 5000 },
+    { level: 25, totalExperience: 5000 },
+    { level: 26, totalExperience: 5500 },
+    { level: 27, totalExperience: 5500 },
+    { level: 28, totalExperience: 5500 },
+    { level: 29, totalExperience: 5500 },
+    { level: 30, totalExperience: 5500 },
+]
 
 export enum UserLevel {
     one = 100,
