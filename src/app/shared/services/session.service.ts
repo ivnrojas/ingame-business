@@ -38,4 +38,9 @@ export class SessionService {
 			return this.currentUser$;
 		}
 	}
+
+	public cleanSession(): void {
+		this.currentUser = undefined;
+		this.currentUser$ = null;
+	}
 }

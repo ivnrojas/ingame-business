@@ -50,7 +50,7 @@ export class UserAddComponent implements OnInit {
 		let user: IUser = {
 			nameInGame: this.ingameNameControl.value,
 			name: this.nameControl.value,
-			email: this.ingameNameControl.value+'@gmail.com',
+			email: (this.ingameNameControl.value as string).toLowerCase()+'@gmail.com',
 			password: this.passwordControl.value,
 			ingameRole: this.ingameRoleControl.value as IngameRole,
 			role: UserRole.User,
