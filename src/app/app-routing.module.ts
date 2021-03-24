@@ -6,7 +6,7 @@ import { RouletteComponent } from './features/roulette/roulette.component';
 
 const routes: Routes = [
     { path: 'admin', loadChildren: () => import('./features/admin/admin.module').then(module => module.AdminModule) }, // canActivate: [AuthGuard, AdminGuard]
-    { path: 'roulette', component: RouletteComponent },
+    { path: 'cases', component: RouletteComponent },
     { path: 'login', component: LoginComponent },
     { path: '', component: HomeComponent }
 ];
