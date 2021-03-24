@@ -19,7 +19,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
+import {MatTableModule} from '@angular/material/table';
 
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -60,7 +60,8 @@ import { HomeComponent } from './features/home/home.component';
     MatProgressSpinnerModule,
     MatProgressBarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent],
