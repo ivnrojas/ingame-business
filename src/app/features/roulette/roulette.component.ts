@@ -9,6 +9,8 @@ import { rouletteAnimation } from 'src/app/core/animations';
 })
 export class RouletteComponent implements OnInit {
 
+	public selectChest: boolean = false;
+
 	public stateWindow: string = 'inactive'
 
 	public productList: IProducto[];
@@ -22,7 +24,7 @@ export class RouletteComponent implements OnInit {
 
 	public unK: IProducto = {
 		img:'/assets/1k.png',
-		name: '1K'
+		name: '$1000'
 	}
 	public nueveMM: IProducto = {
 		img:'/assets/9mm.png',
@@ -30,7 +32,7 @@ export class RouletteComponent implements OnInit {
 	}
 	public dosK: IProducto = {
 		img:'/assets/2k.png',
-		name: '2K'
+		name: '$2000'
 	}
 	public nueveMMSilenciada: IProducto = {
 		img:'/assets/9mm-silenciada.png',
@@ -38,7 +40,7 @@ export class RouletteComponent implements OnInit {
 	}
 	public tresK: IProducto = {
 		img:'/assets/3k.png',
-		name: '3K'
+		name: '$3000'
 	}
 	public escopeta: IProducto = {
 		img:'/assets/escopeta.png',
@@ -48,7 +50,10 @@ export class RouletteComponent implements OnInit {
 		img:'/assets/EDC.png',
 		name: 'Escopeta de combate'
 	}
-
+	public otroCofre: IProducto = {
+		img:'/assets/otro-cofre-los-santos.png',
+		name: 'Cofre Los Santos'
+	}
 	public fz: IProducto = {
 		img:'/assets/fz.png',
 		name: 'FZ'
@@ -67,6 +72,7 @@ export class RouletteComponent implements OnInit {
 		this.productList.push(this.unK);
 		this.productList.push(this.nueveMM);
 		this.productList.push(this.dosK);
+		this.productList.push(this.otroCofre);
 		this.productList.push(this.tresK);
 		this.productList.push(this.escopeta);
 		this.productList.push(this.escopetaCombate);
@@ -99,8 +105,10 @@ export class RouletteComponent implements OnInit {
 			return this.escopeta;
 		if(numberRandom > 3000 && numberRandom <= 3500)
 			return this.fz;	
-		if(numberRandom > 3500)
+		if(numberRandom > 3500 && numberRandom <= 4000)
 			return this.unK;
+		if(numberRandom > 4000)
+			return this.otroCofre;
 	}
 
 	public getRandomProduct(): IProducto {
@@ -118,8 +126,10 @@ export class RouletteComponent implements OnInit {
 			return this.escopeta;
 		if(numberRandom > 3000 && numberRandom <= 3500)
 			return this.fz;	
-		if(numberRandom > 3500)
-			return this.unK;	
+		if(numberRandom > 3500 && numberRandom <= 4000)
+			return this.unK;
+		if(numberRandom > 4000)
+			return this.otroCofre;
 	}
 
 	public spinRoulette(): void {
