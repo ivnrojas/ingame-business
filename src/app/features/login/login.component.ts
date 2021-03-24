@@ -34,12 +34,12 @@ export class LoginComponent implements OnInit {
 	public async login(): Promise<void> {
 		this.isLoading = true;
 		let user: IUser = await this.userService.getByNameInGame(this.userControl.value);
-		console.log(user)
 		// If we got the user from the nickname, try to login
 		if(user)
 		{
 			this.auth.loginEmail(user.email, this.passwordControl.value)
 			.then(async () => {
+				this.session.cleanSession();
 				await this.session.getUser();
 				this.toastr.success('Ingreso exitoso', '', {
 					timeOut: 4000,
