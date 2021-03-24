@@ -20,26 +20,40 @@ export class RouletteComponent implements OnInit {
 
 	public winner: IProducto;
 
+	public unK: IProducto = {
+		img:'/assets/1k.png',
+		name: '1K'
+	}
 	public nueveMM: IProducto = {
-		img:'https://www.seekpng.com/png/detail/263-2638818_c1vu3za-gta-san-andreas-pistol-icon.png',
+		img:'/assets/9mm.png',
 		name: '9mm'
 	}
+	public dosK: IProducto = {
+		img:'/assets/2k.png',
+		name: '2K'
+	}
 	public nueveMMSilenciada: IProducto = {
-		img:'https://vignette.wikia.nocookie.net/gtawiki/images/d/d7/Silenced9mm-GTASA-icon.png/revision/latest?cb=20150609170046',
+		img:'/assets/9mm-silenciada.png',
 		name: '9mm silenciada'
 	}
+	public tresK: IProducto = {
+		img:'/assets/3k.png',
+		name: '3K'
+	}
 	public escopeta: IProducto = {
-		img:'https://img.superdanova.com//file/1612129635286ce03.png',
+		img:'/assets/escopeta.png',
 		name: 'Escopeta'
 	}
-	public mp5: IProducto = {
-		img:'https://steamuserimages-a.akamaihd.net/ugc/795361054990162881/089D16E12BAC2C3BFCFB421DE6AEC85EEADDED3F/',
-		name: 'MP5'
-	}
 	public escopetaCombate: IProducto = {
-		img:'https://img.daylilife.com/i/EscopetaDeCombateSPAS12SanAndreasHD.png',
+		img:'/assets/EDC.png',
 		name: 'Escopeta de combate'
 	}
+
+	public fz: IProducto = {
+		img:'/assets/fz.png',
+		name: 'FZ'
+	}
+
 
 	constructor() { }
 
@@ -50,11 +64,14 @@ export class RouletteComponent implements OnInit {
 
 	private generatePossibleItemsList(): void {
 		this.productList = [];
+		this.productList.push(this.unK);
 		this.productList.push(this.nueveMM);
-		this.productList.push(this.nueveMMSilenciada);
+		this.productList.push(this.dosK);
+		this.productList.push(this.tresK);
 		this.productList.push(this.escopeta);
-		this.productList.push(this.mp5);
 		this.productList.push(this.escopetaCombate);
+
+		this.productList.push(this.fz);
 	}
 
 	private generateRouletteList(): void {
@@ -68,33 +85,41 @@ export class RouletteComponent implements OnInit {
 	}
 
 	private getWinnerProduct(): IProducto {
-		let numberRandom = this.random(1, 1765);
-
-		if(numberRandom <= 1000)
-			return this.nueveMM;
-		if(numberRandom > 1000 && numberRandom <= 1500)
-			return this.nueveMMSilenciada;
-		if(numberRandom > 1500 && numberRandom <= 1750)
-			return this.escopeta;
-		if(numberRandom > 1750 && numberRandom <= 1760)
-			return this.mp5;
-		if(numberRandom > 1760 && numberRandom <= 1765)
-			return this.escopetaCombate;	
-	}
-
-	public getRandomProduct(): IProducto {
-		let numberRandom = this.random(1, 1760);
+		let numberRandom = this.random(1, 5000);
 
 		if(numberRandom <= 500)
 			return this.nueveMM;
 		if(numberRandom > 500 && numberRandom <= 1000)
-			return this.nueveMMSilenciada;
-		if(numberRandom > 1000 && numberRandom <= 1300)
+			return this.escopetaCombate;
+		if(numberRandom > 1000 && numberRandom <= 2000)
+			return this.dosK;
+		if(numberRandom > 2000 && numberRandom <= 2500)
+			return this.tresK;
+		if(numberRandom > 2500 && numberRandom <= 3000)
 			return this.escopeta;
-		if(numberRandom > 1300 && numberRandom <= 1400)
-			return this.mp5;
-		if(numberRandom > 1400)
-			return this.escopetaCombate;	
+		if(numberRandom > 3000 && numberRandom <= 3500)
+			return this.fz;	
+		if(numberRandom > 3500)
+			return this.unK;
+	}
+
+	public getRandomProduct(): IProducto {
+		let numberRandom = this.random(1, 5000);
+
+		if(numberRandom <= 500)
+			return this.nueveMM;
+		if(numberRandom > 500 && numberRandom <= 1000)
+			return this.escopetaCombate;
+		if(numberRandom > 1000 && numberRandom <= 2000)
+			return this.dosK;
+		if(numberRandom > 2000 && numberRandom <= 2500)
+			return this.tresK;
+		if(numberRandom > 2500 && numberRandom <= 3000)
+			return this.escopeta;
+		if(numberRandom > 3000 && numberRandom <= 3500)
+			return this.fz;	
+		if(numberRandom > 3500)
+			return this.unK;	
 	}
 
 	public spinRoulette(): void {
