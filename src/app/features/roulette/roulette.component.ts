@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { rouletteAnimation } from 'src/app/core/animations';
-import { IItem } from 'src/app/core/entities';
+import { IItem, IUser } from 'src/app/core/entities';
 import { ItemService } from 'src/app/shared/services/item.service';
+import { SessionService } from 'src/app/shared/services/session.service';
+import { UserService } from 'src/app/shared/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-roulette',
@@ -13,6 +16,9 @@ export class RouletteComponent implements OnInit {
 
 	// Animation
 	public stateWindow: string = 'inactive'
+
+	// Usuario Conectado
+	private conectedUser: IUser;
 
 	// Lista total de items
 	private itemList: IItem[];
@@ -30,25 +36,53 @@ export class RouletteComponent implements OnInit {
 	// Flag 
 	public btnDisabled: boolean = false;
 
+	// Loading
+	public loading: boolean = true;
 
-	constructor(private db: ItemService) { }
+	constructor(private dbItem: ItemService, private session: SessionService, private dbUser: UserService, private router: Router) { }
 
 	ngOnInit(): void {
+		this.getConectedUser();
+	}
+
+	private async getConectedUser(): Promise<void> {
+		let user$ = await this.session.getUserObservable();
+		user$.subscribe(user => {
+			this.conectedUser = user;
+			this.loading = false;
+			console.log(this.conectedUser)
+		});
 	}
 
 	public async selectChest(type: number): Promise<void> {
-		this.itemList = await this.db.getAll_sync();
-
-		this.selectedChest = type;
+		this.itemList = await this.dbItem.getAll_sync();
 		switch(type){
 			case 1: 
-				this.generatePossibleItemsListInChestLosSantos();
+				if(this.conectedUser.casesLS != 0){
+					this.selectedChest = type;
+					this.conectedUser.casesLS--;
+					this.generatePossibleItemsListInChestLosSantos();
+				}
+				else
+					//toas infomando que no tien cajas
 				break;
 			case 2: 
-				this.generatePossibleItemsListInChestSanFierro();
+				if(this.conectedUser.casesSF != 0){
+					this.selectedChest = type;
+					this.conectedUser.casesSF--;
+					this.generatePossibleItemsListInChestSanFierro();
+				}
+				else
+					//toas infomando que no tien cajas
 				break;
 			case 3: 
-				this.generatePossibleItemsListInChestLasVenturas();
+				if(this.conectedUser.casesLV != 0){
+					this.selectedChest = type;
+					this.conectedUser.casesLV--;
+					this.generatePossibleItemsListInChestLasVenturas();
+				}
+				else
+					//toas infomando que no tien cajas
 				break;
 		}
 		this.generateRouletteList();
@@ -156,8 +190,32 @@ export class RouletteComponent implements OnInit {
 		
 		setTimeout(() => {
 			this.winningItem = this.rouletteItemsList[141];
+			switch(this.winningItem.name){
+				case '$1000':
+				case '$2000':
+				case '$3000':
+					this.conectedUser.money += this.winningItem.cost; 
+					break;
+				case 'Cofre Los Santos':
+					this.conectedUser.casesLS++; 
+					break;
+				case 'Cofre San Fierro':
+					this.conectedUser.casesSF++; 
+					break;
+				case 'Cofre Las Venturas':
+					this.conectedUser.casesLV++; 
+					break;
+				default:
+					this.conectedUser.inventory.push(this.winningItem);
+					break;
+			}
+			this.dbUser.modify(this.conectedUser);
 		}, 6500);
 		
+	}
+
+	public backToTop(): void {
+		this.router.navigate(['']);
 	}
 
 	private random(min: number, max: number): number {

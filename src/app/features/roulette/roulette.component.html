@@ -1,19 +1,139 @@
-<div class="container-fluid">
+<div class="spinner-border m-5" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+</div>
 
-
+<div class="container-fluid" *ngIf="!loading">
     <div *ngIf="!selectedChest">
-        <div class="row text-center mt-5">
-            <div class="col">
-                <img src='/assets/cofre-los-santos.png' style="width: 300px; height: auto;" (click)="selectChest(1)">
+        <div class="row text-center mt-5 justify-content-center">
+            <div class="col-3 mr-2">
+                <mat-card class="mat-elevation-z4">
+                    <div class="row text-center mt-5">
+                        <div class="col">
+                            <img src='/assets/los-santos.png' style="height: 90px; width: auto;">
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col">
+                            <hr style="border: 1px solid rgba(241, 241, 241, 0.562);">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <img src='/assets/cofre-los-santos.png' style="width: 300px; height: auto;">
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col">
+                            <hr style="border: 1px solid rgba(241, 241, 241, 0.562);">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col pricedown" *ngIf="conectedUser.casesLS != 0">
+                            <div class="mat-h1" style="color: rgb(153, 153, 153);">Tenes {{conectedUser.casesLS}} cajas</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col pricedown" *ngIf="conectedUser.casesLS == 0">
+                            <div class="mat-h1" style="color: rgb(153, 153, 153);">No tenes cajas</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" *ngIf="conectedUser.casesLS != 0">
+                            <button mat-raised-button color="primary" class="w-100 mt-1" (click)="selectChest(1)">Abrir</button>
+                        </div>
+                        <div class="col" *ngIf="conectedUser.casesLS == 0">
+                            <button mat-raised-button color="primary" disabled class="w-100 mt-1">Abrir</button>
+                        </div>
+                    </div>
+                </mat-card>
             </div>
-            <div class="col">
-                <img src='/assets/cofre-san-fierro.png' style="width: 300px; height: auto;" (click)="selectChest(2)">
+            <div class="col-3 mr-2">
+                <mat-card class="mat-elevation-z4">
+                    <div class="row text-center mt-5">
+                        <div class="col">
+                            <img src='/assets/san-fierro.png' style="height: 90px; width: auto;">
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col">
+                            <hr style="border: 1px solid rgba(241, 241, 241, 0.562);">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <img src='/assets/cofre-san-fierro.png' style="width: 300px; height: auto;">
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col">
+                            <hr style="border: 1px solid rgba(241, 241, 241, 0.562);">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col pricedown" *ngIf="conectedUser.casesSF != 0">
+                            <div class="mat-h1" style="color: rgb(153, 153, 153);">Tenes {{conectedUser.casesSF}} cajas</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="col pricedown" *ngIf="conectedUser.casesSF == 0">
+                                <div class="mat-h1" style="color: rgb(153, 153, 153);">No tenes cajas</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" *ngIf="conectedUser.casesSF != 0">
+                            <button mat-raised-button color="primary" class="w-100 mt-1" (click)="selectChest(2)">Abrir</button>
+                        </div>
+                        <div class="col" *ngIf="conectedUser.casesSF == 0">
+                            <button mat-raised-button color="primary" disabled class="w-100 mt-1">Abrir</button>
+                        </div>
+                    </div>
+                </mat-card>
             </div>
-            <div class="col">
-                <img src='/assets/cofre-las-venturas.png' style="width: 300px; height: auto;" (click)="selectChest(3)">
+            <div class="col-3">
+                <mat-card class="mat-elevation-z4">
+                    <div class="row text-center mt-5">
+                        <div class="col">
+                            <img src='/assets/las-venturas.png' style="height: 90px; width: auto;">
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col">
+                            <hr style="border: 1px solid rgba(241, 241, 241, 0.562);">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <img src='/assets/cofre-las-venturas.png' style="width: 300px; height: auto;">
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col">
+                            <hr style="border: 1px solid rgba(241, 241, 241, 0.562);">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col pricedown" *ngIf="conectedUser.casesLV != 0">
+                            <div class="mat-h1" style="color: rgb(153, 153, 153);">Tenes {{conectedUser.casesLV}} cajas</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col pricedown" *ngIf="conectedUser.casesLV == 0">
+                            <div class="mat-h1" style="color: rgb(153, 153, 153);">No tenes cajas</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" *ngIf="conectedUser.casesLV != 0">
+                            <button mat-raised-button color="primary" class="w-100 mt-1" (click)="selectChest(3)">Abrir</button>
+                        </div>
+                        <div class="col" *ngIf="conectedUser.casesLV == 0">
+                            <button mat-raised-button color="primary" disabled class="w-100 mt-1">Abrir</button>
+                        </div>
+                    </div>
+                </mat-card>
             </div>
         </div>
-        
     </div>
 
     <div *ngIf="selectedChest">
@@ -104,9 +224,9 @@
                             <div class="mat-h3" style="color: rgb(153, 153, 153);">Fue añadido a inventario</div>
                         </div>
                     </div>
-                    <div class="row mb-4 justify-content-center">
+                    <div class="row justify-content-center">
                         <div class="col">
-                            <button mat-raised-button color="primary" class="w-100 mt-2" (click)="selectChest = false">Volver</button>
+                            <button mat-raised-button color="primary" class="w-100 mt-2" (click)="backToTop()">Regresar al inicio</button>
                         </div>
                     </div>
                 </mat-card>
