@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IUser } from 'src/app/core/entities';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
 	public passwordControl: FormControl = new FormControl('', Validators.required);
 	public isLoading: boolean = false;
 
-	constructor(private auth: AuthService, private toastr: ToastrService, private userService: UserService) { }
+	constructor(private auth: AuthService, private toastr: ToastrService, private userService: UserService, private session: SessionService, private router: Router) { }
 
 	ngOnInit(): void {
 		this.loginForm = new FormGroup({
@@ -37,13 +39,14 @@ export class LoginComponent implements OnInit {
 		if(user)
 		{
 			this.auth.loginEmail(user.email, this.passwordControl.value)
-			.then(() => {
+			.then(async () => {
+				await this.session.getUser();
 				this.toastr.success('Ingreso exitoso', '', {
 					timeOut: 4000,
 					positionClass: 'toast-bottom-right',
 				});
+				this.router.navigate(['/']);
 
-				this.loginProcess();
 			})
 			.catch((errorMessage) => {
 				this.toastr.error(errorMessage, '', {
@@ -64,12 +67,5 @@ export class LoginComponent implements OnInit {
 			});
 			this.isLoading = false;
 		}
-	}
-
-	/**
-	 * Process the successfully login and builds the session for the user
-	 */
-	private loginProcess(): void {
-
 	}
 }
