@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
 	 */
 	public async login(): Promise<void> {
 		this.isLoading = true;
-		let user: IUser = await this.userService.getByNickname(this.userControl.value);
-
+		let user: IUser = await this.userService.getByNameInGame(this.userControl.value);
+		console.log(user)
 		// If we got the user from the nickname, try to login
 		if(user)
 		{

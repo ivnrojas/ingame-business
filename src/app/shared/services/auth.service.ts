@@ -27,6 +27,20 @@ export class AuthService {
 				})
 		})
 	}
+
+	public registerEmail(email: string, pwd: string): Promise<unknown> {
+		return new Promise((resolve, reject) => {
+			this.afa.createUserWithEmailAndPassword(email, pwd)
+				.then(userData => {
+					resolve(userData);
+				})
+				.catch(error => {
+					let description = (error as IFirebaseError).message
+					reject(description);
+				});
+		});
+	}
+
 	
 	public getCurrentUser(): Promise<IUser> {
 		return this.getCurrentEmailLogged().then(email => {

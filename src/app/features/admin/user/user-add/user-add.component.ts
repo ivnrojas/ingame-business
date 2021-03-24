@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ILevel, IngameRole, IUser, Levels, UserRole } from 'src/app/core/entities';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
 	selector: 'app-user-add',
@@ -19,7 +23,7 @@ export class UserAddComponent implements OnInit {
 
 	public roleList: string[] = [];
 
-	constructor() { }
+	constructor(private auth: AuthService, private userService: UserService, private toastr: ToastrService, private router: Router) { }
 
 	ngOnInit(): void {
 		this.initLists();
@@ -63,7 +67,30 @@ export class UserAddComponent implements OnInit {
 			firebaseTimestamp: Date.now()
 		};
 
-		
+		this.auth.registerEmail(user.email, user.password)
+			.then(() => {
+				this.userService.add(user)
+					.then(() => {
+						this.toastr.success('Registrado con éxito', '', {
+							timeOut: 4000,
+							positionClass: 'toast-bottom-right',
+						});
+						
+						this.router.navigate(['/']);
+					})
+					.catch(() => {
+						this.toastr.error('Error al registrar el usuario', '', {
+							timeOut: 4000,
+							positionClass: 'toast-bottom-right',
+						});
+					})
+			})
+			.catch(error => {
+				this.toastr.error(error, '', {
+					timeOut: 4000,
+					positionClass: 'toast-bottom-right',
+				});
+			})
 	}	
 
 	private getLevel(): ILevel {
