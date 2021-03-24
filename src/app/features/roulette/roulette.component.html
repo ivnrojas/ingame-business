@@ -1,21 +1,28 @@
 <div class="container-fluid">
 
 
-    <div *ngIf="!selectChest">
+    <div *ngIf="!selectedChest">
         <div class="row text-center mt-5">
             <div class="col">
-                <img src='/assets/cofre-los-santos.png' style="width: 300px; height: auto;" (click)="selectChest = true">
+                <img src='/assets/cofre-los-santos.png' style="width: 300px; height: auto;" (click)="selectChest(1)">
+            </div>
+            <div class="col">
+                <img src='/assets/cofre-san-fierro.png' style="width: 300px; height: auto;" (click)="selectChest(2)">
+            </div>
+            <div class="col">
+                <img src='/assets/cofre-las-venturas.png' style="width: 300px; height: auto;" (click)="selectChest(3)">
             </div>
         </div>
+        
     </div>
 
-    <div *ngIf="selectChest">
+    <div *ngIf="selectedChest">
         <div class="row text-center mt-5">
             <div class="col">
                 <img src='/assets/los-santos.png'>
             </div>
         </div>
-        <div class="row row justify-content-center mt-5" *ngIf="!winProduct">
+        <div class="row row justify-content-center mt-5" *ngIf="!winningItem">
             <div class="col">
                 <div class="row justify-content-center">
                     <div class="col-4">
@@ -27,8 +34,8 @@
                                         <div class="arrowdown"></div>
                                         <div class="window" [@windowAnimation]="stateWindow">
                                             <ul class="list">
-                                                <li *ngFor="let product of productListRoulette">
-                                                    <img [src]=product.img>
+                                                <li *ngFor="let item of rouletteItemsList">
+                                                    <img [src]=item.img>
                                                 </li>
                                             </ul>
                                         </div>
@@ -47,17 +54,17 @@
                 <div class="row text-center">
                     <div class="col">
                         <ul class="list">
-                            <li *ngFor="let product of productList" class="mr-3 mt-4">
+                            <li *ngFor="let item of possibleItemsList" class="mr-3 mt-4">
                                 <mat-card class="mat-elevation-z4" style="width: 260px">
                                     <div class="row">
                                         <div class="col">
-                                            <img [src]=product.img
+                                            <img [src]=item.img
                                                 style="display:block; margin:auto; margin-top: 2rem;">
                                         </div>
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col pricedown">
-                                            <div class="mat-h1" style="color: rgb(153, 153, 153);">{{product.name}}
+                                            <div class="mat-h1" style="color: rgb(153, 153, 153);">{{item.name}}
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +78,7 @@
 
         <div class="row justify-content-center mt-5">
             <div class="col-2 text-center">
-                <mat-card class="mat-elevation-z4" *ngIf="winProduct">
+                <mat-card class="mat-elevation-z4" *ngIf="winningItem">
                     <div class="row">
                         <div class="col pricedown">
                             <div class="mat-h1" style="color: rgb(153, 153, 153);">Ganaste : </div>
@@ -79,12 +86,12 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <img [src]=winner.img style=" width: 130px; height: 130px;">
+                            <img [src]=winningItem.img style=" width: 130px; height: 130px;">
                         </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col pricedown">
-                            <div class="mat-h1" style="color: rgb(153, 153, 153);">{{winner.name}}</div>
+                            <div class="mat-h1" style="color: rgb(153, 153, 153);">{{winningItem.name}}</div>
                         </div>
                     </div>
                     <div class="row">

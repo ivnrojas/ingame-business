@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { rouletteAnimation } from 'src/app/core/animations';
+import { IItem } from 'src/app/core/entities';
+import { ItemService } from 'src/app/shared/services/item.service';
 
 @Component({
 	selector: 'app-roulette',
@@ -9,127 +11,143 @@ import { rouletteAnimation } from 'src/app/core/animations';
 })
 export class RouletteComponent implements OnInit {
 
-	public selectChest: boolean = false;
-
+	// Animation
 	public stateWindow: string = 'inactive'
 
-	public productList: IProducto[];
-	public productListRoulette: IProducto[];
+	// Lista total de items
+	private itemList: IItem[];
 
-	public winProduct: boolean = false;
+	//Cofre seleccionado
+	public selectedChest: number;
 
+	// Lista para el cofre seleccionado
+	public possibleItemsList: IItem[];
+	public rouletteItemsList: IItem[];
+
+	// Item ganador
+	public winningItem: IItem;
+
+	// Flag 
 	public btnDisabled: boolean = false;
 
-	public winner: IProducto;
 
-	public unK: IProducto = {
-		img:'/assets/1k.png',
-		name: '$1000'
-	}
-	public nueveMM: IProducto = {
-		img:'/assets/9mm.png',
-		name: '9mm'
-	}
-	public dosK: IProducto = {
-		img:'/assets/2k.png',
-		name: '$2000'
-	}
-	public nueveMMSilenciada: IProducto = {
-		img:'/assets/9mm-silenciada.png',
-		name: '9mm silenciada'
-	}
-	public tresK: IProducto = {
-		img:'/assets/3k.png',
-		name: '$3000'
-	}
-	public escopeta: IProducto = {
-		img:'/assets/escopeta.png',
-		name: 'Escopeta'
-	}
-	public escopetaCombate: IProducto = {
-		img:'/assets/EDC.png',
-		name: 'Escopeta de combate'
-	}
-	public otroCofre: IProducto = {
-		img:'/assets/otro-cofre-los-santos.png',
-		name: 'Cofre Los Santos'
-	}
-	public fz: IProducto = {
-		img:'/assets/fz.png',
-		name: 'FZ'
-	}
-
-
-	constructor() { }
+	constructor(private db: ItemService) { }
 
 	ngOnInit(): void {
-		this.generatePossibleItemsList();
-		this.generateRouletteList();
 	}
 
-	private generatePossibleItemsList(): void {
-		this.productList = [];
-		this.productList.push(this.unK);
-		this.productList.push(this.nueveMM);
-		this.productList.push(this.dosK);
-		this.productList.push(this.otroCofre);
-		this.productList.push(this.tresK);
-		this.productList.push(this.escopeta);
-		this.productList.push(this.escopetaCombate);
+	public async selectChest(type: number): Promise<void> {
+		this.itemList = await this.db.getAll_sync();
 
-		this.productList.push(this.fz);
+		this.selectedChest = type;
+		switch(type){
+			case 1: 
+				this.generatePossibleItemsListInChestLosSantos();
+				break;
+			case 2: 
+				this.generatePossibleItemsListInChestSanFierro();
+				break;
+			case 3: 
+				this.generatePossibleItemsListInChestLasVenturas();
+				break;
+		}
+		this.generateRouletteList();
+	}
+	
+	private generatePossibleItemsListInChestLosSantos(): void {
+		this.possibleItemsList = [];
+		this.possibleItemsList.push(this.getItemFromList('$1000'));
+		this.possibleItemsList.push(this.getItemFromList('9mm'));
+		this.possibleItemsList.push(this.getItemFromList('$2000'));
+		this.possibleItemsList.push(this.getItemFromList('Cofre Los Santos'));
+		this.possibleItemsList.push(this.getItemFromList('$3000'));
+		this.possibleItemsList.push(this.getItemFromList('Escopeta'));
+		this.possibleItemsList.push(this.getItemFromList('Escopeta de combate'));
+		this.possibleItemsList.push(this.getItemFromList('FZ'));
+	}
+
+	private generatePossibleItemsListInChestSanFierro(): void {
+		this.possibleItemsList = [];
+		this.possibleItemsList.push(this.getItemFromList('$1000'));
+		this.possibleItemsList.push(this.getItemFromList('9mm'));
+		this.possibleItemsList.push(this.getItemFromList('$2000'));
+		this.possibleItemsList.push(this.getItemFromList('Cofre Los Santos'));
+		this.possibleItemsList.push(this.getItemFromList('$3000'));
+		this.possibleItemsList.push(this.getItemFromList('Escopeta'));
+		this.possibleItemsList.push(this.getItemFromList('Escopeta de combate'));
+		this.possibleItemsList.push(this.getItemFromList('FZ'));
+	}
+
+	private generatePossibleItemsListInChestLasVenturas(): void {
+		this.possibleItemsList = [];
+		this.possibleItemsList.push(this.getItemFromList('$1000'));
+		this.possibleItemsList.push(this.getItemFromList('9mm'));
+		this.possibleItemsList.push(this.getItemFromList('$2000'));
+		this.possibleItemsList.push(this.getItemFromList('Cofre Los Santos'));
+		this.possibleItemsList.push(this.getItemFromList('$3000'));
+		this.possibleItemsList.push(this.getItemFromList('Escopeta'));
+		this.possibleItemsList.push(this.getItemFromList('Escopeta de combate'));
+		this.possibleItemsList.push(this.getItemFromList('FZ'));
 	}
 
 	private generateRouletteList(): void {
-		this.productListRoulette = [];
+		this.rouletteItemsList = [];
 		for (let i=0; i<150; i++) {
-			this.productListRoulette.push(this.getRandomProduct());
+			this.rouletteItemsList.push(this.getRandomProduct());
 
 			if(i==140)
-				this.productListRoulette.push(this.getWinnerProduct());
+				this.rouletteItemsList.push(this.getWinnerProduct());
 		}
 	}
 
-	private getWinnerProduct(): IProducto {
+	private getWinnerProduct(): IItem {
 		let numberRandom = this.random(1, 5000);
 
 		if(numberRandom <= 500)
-			return this.nueveMM;
+			return this.getItemFromList('$1000');
 		if(numberRandom > 500 && numberRandom <= 1000)
-			return this.escopetaCombate;
+			return this.getItemFromList('9mm');
 		if(numberRandom > 1000 && numberRandom <= 2000)
-			return this.dosK;
+			return this.getItemFromList('$3000');
 		if(numberRandom > 2000 && numberRandom <= 2500)
-			return this.tresK;
-		if(numberRandom > 2500 && numberRandom <= 3000)
-			return this.escopeta;
-		if(numberRandom > 3000 && numberRandom <= 3500)
-			return this.fz;	
-		if(numberRandom > 3500 && numberRandom <= 4000)
-			return this.unK;
-		if(numberRandom > 4000)
-			return this.otroCofre;
+			return this.getItemFromList('Cofre Los Santos');
+		if(numberRandom > 2500 && numberRandom <= 3000)			
+			return this.getItemFromList('$3000');
+		if(numberRandom > 3000 && numberRandom <= 3500)			
+			return this.getItemFromList('Escopeta');
+		if(numberRandom > 3500 && numberRandom <= 4000)			
+			return this.getItemFromList('Escopeta de combate');
+		if(numberRandom > 4000)			
+			return this.getItemFromList('FZ');
+
 	}
 
-	public getRandomProduct(): IProducto {
+	public getRandomProduct(): IItem {
 		let numberRandom = this.random(1, 5000);
 
 		if(numberRandom <= 500)
-			return this.nueveMM;
+			return this.getItemFromList('$1000');
 		if(numberRandom > 500 && numberRandom <= 1000)
-			return this.escopetaCombate;
+			return this.getItemFromList('9mm');
 		if(numberRandom > 1000 && numberRandom <= 2000)
-			return this.dosK;
+			return this.getItemFromList('$3000');
 		if(numberRandom > 2000 && numberRandom <= 2500)
-			return this.tresK;
-		if(numberRandom > 2500 && numberRandom <= 3000)
-			return this.escopeta;
-		if(numberRandom > 3000 && numberRandom <= 3500)
-			return this.fz;	
-		if(numberRandom > 3500 && numberRandom <= 4000)
-			return this.unK;
-		if(numberRandom > 4000)
-			return this.otroCofre;
+			return this.getItemFromList('Cofre Los Santos');
+		if(numberRandom > 2500 && numberRandom <= 3000)			
+			return this.getItemFromList('$3000');
+		if(numberRandom > 3000 && numberRandom <= 3500)			
+			return this.getItemFromList('Escopeta');
+		if(numberRandom > 3500 && numberRandom <= 4000)			
+			return this.getItemFromList('Escopeta de combate');
+		if(numberRandom > 4000)			
+			return this.getItemFromList('FZ');
+	}
+
+	public getItemFromList(itemName: string): IItem {
+		for(let item of this.itemList){
+			if(itemName == item.name)
+				return item;
+		}
 	}
 
 	public spinRoulette(): void {
@@ -137,8 +155,7 @@ export class RouletteComponent implements OnInit {
 		this.stateWindow = 'active';
 		
 		setTimeout(() => {
-			this.winProduct = true;
-			this.winner = this.productListRoulette[141];
+			this.winningItem = this.rouletteItemsList[141];
 		}, 6500);
 		
 	}
@@ -146,9 +163,4 @@ export class RouletteComponent implements OnInit {
 	private random(min: number, max: number): number {
 		return Math.floor((Math.random()*(max - min))+min);
 	}
-}
-
-export interface IProducto {
-    img: string;
-    name: string;
 }
