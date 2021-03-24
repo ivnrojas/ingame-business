@@ -1,51 +1,70 @@
 <div class="container-fluid">
     <div class="row text-center mt-5">
         <div class="col">
-            <h2>Bienvenido a la ruleta</h2>
+            <img src='/assets/los-santos.png'>
         </div>
     </div>
-    <div class="row row justify-content-center">
-        <div class="col-8">
-            <div class="card">
-                <div class="card-body" style="background: rgb(124, 124, 124);">
-                    <div class="row mt-5 mb-5">
-                        <div class="col">
-                            <div class="wraper">
-                                <div class="arrowup"></div>
-                                <div class="arrowdown"></div>
-                                <div class="window" [@windowAnimation]="stateWindow">
-                                    <ul class="list">
-                                        <li *ngFor="let product of productListRoulette">
-                                            <img [src]=product.img>
-                                        </li>
-                                    </ul>
+    <div class="row row justify-content-center mt-5">
+        <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <mat-card>
+                        <div class="row mb-5 mt-4">
+                            <div class="col">
+                                <div class="wraper">
+                                    <div class="arrowup"></div>
+                                    <div class="arrowdown"></div>
+                                    <div class="window" [@windowAnimation]="stateWindow">
+                                        <ul class="list">
+                                            <li *ngFor="let product of productListRoulette">
+                                                <img [src]=product.img>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row" *ngIf="winProduct">
-                        <div class="col">
-                            <img [src]=winner.img>
+                        <div class="row mb-4 justify-content-center">
+                            <div class="col-5">
+                                <button mat-raised-button color="primary" [disabled]="btnDisabled" class="w-100 mt-1"
+                                    (click)="spinRoulette()">Abrir</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <ul class="list">
-                                <li *ngFor="let product of productList" class="mr-3">
-                                    <img [src]=product.img>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row mb-5">
-                        <div class="col-5"></div>
-                        <div class="col">
-                            <button type="button" class="btn btn-info w-100 mt-5" [disabled]="btnDisabled" (click)="spinRoulette()">Tirar</button>
-                        </div>
-                        <div class="col-5"></div>
-                    </div>
+                    </mat-card>
                 </div>
-              </div>
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-2">
+                    <mat-card *ngIf="winProduct">
+                        <div class="row text-center">
+                            <div class="col">
+                                <img [src]=winner.img style=" width: 130px; height: 130px;">
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+            <div class="row text-center mt-5">
+                <div class="col">
+                    <ul class="list">
+                        <li *ngFor="let product of productList" class="mr-3 mt-4">
+                            <mat-card style="width: 240px">
+                                <div class="row">
+                                    <div class="col">
+                                        <img [src]=product.img style="display:block; margin:auto; margin-top: 2rem;">
+
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col">
+                                        <h2 class="card-title">{{product.name}}</h2>
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
