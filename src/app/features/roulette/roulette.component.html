@@ -6,8 +6,8 @@
     <div *ngIf="!selectedChest">
         <div class="row text-center mt-5 justify-content-center">
             <div class="col-3 mr-2">
-                <mat-card class="mat-elevation-z4">
-                    <div class="row text-center mt-5">
+                <mat-card class="mat-elevation-z4 mt-5 ">
+                    <div class="row text-center mt-5 mb-5">
                         <div class="col">
                             <img src='/assets/los-santos.png' style="height: 90px; width: auto;">
                         </div>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="row">
                         <div class="col pricedown" *ngIf="conectedUser.casesLS != 0">
-                            <div class="mat-h1" style="color: rgb(153, 153, 153);">Tenes {{conectedUser.casesLS}} cajas</div>
+                            <div class="mat-h1" style="color: rgb(153, 153, 153);">Tenes <span style="color: rgb(250, 59, 59);">{{conectedUser.casesLS}}</span> cajas</div>
                         </div>
                     </div>
                     <div class="row">
@@ -39,17 +39,17 @@
                     </div>
                     <div class="row">
                         <div class="col" *ngIf="conectedUser.casesLS != 0">
-                            <button mat-raised-button color="primary" class="w-100 mt-1" (click)="selectChest(1)">Abrir</button>
+                            <button mat-raised-button color="primary" class="w-100 mt-1 mb-2" (click)="selectChest(1)">Abrir</button>
                         </div>
                         <div class="col" *ngIf="conectedUser.casesLS == 0">
-                            <button mat-raised-button color="primary" disabled class="w-100 mt-1">Abrir</button>
+                            <button mat-raised-button color="primary" disabled class="w-100 mt-1 mb-2">Abrir</button>
                         </div>
                     </div>
                 </mat-card>
             </div>
             <div class="col-3 mr-2">
-                <mat-card class="mat-elevation-z4">
-                    <div class="row text-center mt-5">
+                <mat-card class="mat-elevation-z4 mt-5">
+                    <div class="row text-center mt-5 mb-5">
                         <div class="col">
                             <img src='/assets/san-fierro.png' style="height: 90px; width: auto;">
                         </div>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="row">
                         <div class="col pricedown" *ngIf="conectedUser.casesSF != 0">
-                            <div class="mat-h1" style="color: rgb(153, 153, 153);">Tenes {{conectedUser.casesSF}} cajas</div>
+                            <div class="mat-h1" style="color: rgb(153, 153, 153);">Tenes <span style="color: rgb(250, 59, 59);">{{conectedUser.casesSF}}</span> cajas</div>
                         </div>
                     </div>
                     <div class="row">
@@ -83,17 +83,17 @@
                     </div>
                     <div class="row">
                         <div class="col" *ngIf="conectedUser.casesSF != 0">
-                            <button mat-raised-button color="primary" class="w-100 mt-1" (click)="selectChest(2)">Abrir</button>
+                            <button mat-raised-button color="primary" class="w-100 mt-1 mb-2" (click)="selectChest(2)">Abrir</button>
                         </div>
                         <div class="col" *ngIf="conectedUser.casesSF == 0">
-                            <button mat-raised-button color="primary" disabled class="w-100 mt-1">Abrir</button>
+                            <button mat-raised-button color="primary" disabled class="w-100 mt-1 mb-2">Abrir</button>
                         </div>
                     </div>
                 </mat-card>
             </div>
             <div class="col-3">
-                <mat-card class="mat-elevation-z4">
-                    <div class="row text-center mt-5">
+                <mat-card class="mat-elevation-z4 mt-5">
+                    <div class="row text-center mt-5 mb-5">
                         <div class="col">
                             <img src='/assets/las-venturas.png' style="height: 90px; width: auto;">
                         </div>
@@ -115,7 +115,8 @@
                     </div>
                     <div class="row">
                         <div class="col pricedown" *ngIf="conectedUser.casesLV != 0">
-                            <div class="mat-h1" style="color: rgb(153, 153, 153);">Tenes {{conectedUser.casesLV}} cajas</div>
+                            <div class="mat-h1" style="color: rgb(153, 153, 153);">Tenes <span style="color: rgb(250, 59, 59);">{{conectedUser.casesLV}}</span> cajas</div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -125,10 +126,10 @@
                     </div>
                     <div class="row">
                         <div class="col" *ngIf="conectedUser.casesLV != 0">
-                            <button mat-raised-button color="primary" class="w-100 mt-1" (click)="selectChest(3)">Abrir</button>
+                            <button mat-raised-button color="primary" class="w-100 mt-1 mb-2" (click)="selectChest(3)">Abrir</button>
                         </div>
                         <div class="col" *ngIf="conectedUser.casesLV == 0">
-                            <button mat-raised-button color="primary" disabled class="w-100 mt-1">Abrir</button>
+                            <button mat-raised-button color="primary" disabled class="w-100 mt-1 mb-2">Abrir</button>
                         </div>
                     </div>
                 </mat-card>
