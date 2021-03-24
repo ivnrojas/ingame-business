@@ -2,25 +2,50 @@
 	<div class="row mt-4">
 		<div class="col">
 			<mat-card class="align-all-mat-card">
-                <div class="ta-c mat-h1">
-                    Crear nuevo usuario
-                </div>
-            </mat-card>
-		</div>
-	</div>
-	<div class="row mt-2">
-		<div class="col">
-			<mat-card>
-				<div class="row mt-3">
-					<div class="col">
-						<p class="mat-small">
-							Crea el Client ID el cual se utilizará para reconocer al cliente dentro
-							del sistema. El Client ID debe estar compuesto de 8 a 20 letras y/o números. No se permiten
-							caractéres especiales ni espacios.
-						</p>
+				<div class="row">
+					<div class="col-3">
+						<button mat-stroked-button color="warn">Cancelar</button>
 					</div>
+					<div class="col-6 text-center" style="display: flex; align-items: center; justify-content: center;">
+						<span style="font-size: 24px !important">Crear usuario</span>
+					</div>
+					<div class="col-3"></div>
 				</div>
 			</mat-card>
 		</div>
 	</div>
-</div>
+	<div class="row mt-2">
+		<div class="col">
+			<mat-card [formGroup]="userForm">
+				<mat-form-field appearance="outline" class="w-100">
+					<mat-label>Nombre del juego (Nicolas_Fernandez)</mat-label>
+					<input required matInput type="text" autocomplete="off" formControlName="ingameName">
+				</mat-form-field>
+				<mat-form-field appearance="outline" class="w-100">
+					<mat-label>Contraseña</mat-label>
+					<input required matInput type="text" autocomplete="off" formControlName="password">
+				</mat-form-field>
+				<mat-form-field appearance="outline" class="w-100">
+					<mat-label>Nombre (Nicolas Fernandez)</mat-label>
+					<input required matInput type="text" autocomplete="off" formControlName="name">
+				</mat-form-field>
+				<mat-form-field appearance="outline" class="w-100">
+					<mat-label>Rol de la banda</mat-label>
+					<mat-select formControlName="ingameRole">
+						<mat-option *ngFor="let role of roleList" [value]="role">
+							{{role}} </mat-option>
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field appearance="outline" class="w-100">
+					<mat-label>Nivel</mat-label>
+					<input required matInput type="number" autocomplete="off" formControlName="level">
+				</mat-form-field>
+				<mat-form-field appearance="outline" class="w-100">
+					<mat-label>Respeto</mat-label>
+					<input required matInput type="number" autocomplete="off" formControlName="respect">
+				</mat-form-field>
+				<button mat-raised-button class="w-100" [disabled]="!userForm.valid" (click)="addUser()"
+					color="primary">Agregar</button>
+			</mat-card>
+		</div>
+	</div>

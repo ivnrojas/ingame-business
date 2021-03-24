@@ -36,10 +36,9 @@ export enum missionCategory {
 }
 
 export interface IUser extends IFirebaseObject {
-    id: string;
+    nameInGame: string;
     name: string;
     email: string;
-    nickname: string;
     password: string;
     ingameRole: IngameRole;
     role: UserRole;
