@@ -1,0 +1,66 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+//Fonts:        Ordenadas descendientes con respecto a mi gusto 
+//  Light 300 || Regular 400
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
+// font-family: "'Ubuntu', sans-serif";
+
+// Regular 400
+//@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+//font-family: 'Montserrat', sans-serif;
+
+// Regular 400
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+//font-family: 'Cabin', sans-serif;
+
+// Regular 400 
+//@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Source+Sans+Pro&display=swap');
+//font-family: 'Source Sans Pro', sans-serif;
+
+// Regular 400
+//@import url('https://fonts.googleapis.com/css2?family=Heebo&display=swap');
+//font-family: 'Heebo', sans-serif;
+
+$ubuntu: mat-typography-config($font-family: "'Ubuntu', sans-serif",
+    $display-4: mat-typography-level(112px, 112px, 300, 400),
+    $display-3: mat-typography-level(56px, 56px, 400, 400),
+    $display-2: mat-typography-level(45px, 48px, 400, 400),
+    $display-1: mat-typography-level(34px, 40px, 400),
+    $headline: mat-typography-level(24px, 32px, 400),
+    $title: mat-typography-level(20px, 32px, 500),
+    $subheading-2: mat-typography-level(18px, 28px, 400),
+    $subheading-1: mat-typography-level(15px, 24px, 400),
+    $body-2: mat-typography-level(18px, 24px, 500),
+    $body-1: mat-typography-level(14px, 20px, 400),
+    $caption: mat-typography-level(12px, 20px, 400),
+    $button: mat-typography-level(14px, 14px, 500),
+    $input: mat-typography-level(14px, 1.125, 400));
+
+//(font-size, line-height, font-weight)
+.regular-size {
+    @include mat-base-typography($ubuntu);
+    @include mat-checkbox-typography($ubuntu);
+    @include angular-material-typography($ubuntu);
+}
+
+$cabin: mat-typography-config($font-family: "'Cabin', sans-serif",    
+    $display-4: mat-typography-level(50px, 52px, 300, 400),
+    $display-3: mat-typography-level(44px, 51px, 400, 400),
+    $display-2: mat-typography-level(38px, 44px, 400, 400),
+    $display-1: mat-typography-level(34px, 41px, 400),
+    $headline: mat-typography-level(30px, 39px, 400),
+    $title: mat-typography-level(26px, 39px, 500),
+    $subheading-2: mat-typography-level(28px, 32px, 400),
+    $subheading-1: mat-typography-level(26px, 26px, 400),
+    $body-2: mat-typography-level(20px, 31px, 500),
+    $body-1: mat-typography-level(20px, 27px, 400),
+    $caption: mat-typography-level(15px, 27px, 400),
+    $button: mat-typography-level(20px, 27px, 500),
+    $input: mat-typography-level(20px, 1.132, 400));
+
+.big-size {
+    @include mat-base-typography($cabin);
+    @include mat-checkbox-typography($cabin);
+    @include angular-material-typography($cabin);
+}
