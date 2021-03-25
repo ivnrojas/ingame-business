@@ -33,8 +33,9 @@ export class RouletteComponent implements OnInit {
 	// Item ganador
 	public winningItem: IItem;
 
-	// Flag 
+	// Flags 
 	public btnDisabled: boolean = false;
+	public backToTopReady: boolean = true;
 
 	// Loading
 	public loading: boolean = true;
@@ -50,7 +51,6 @@ export class RouletteComponent implements OnInit {
 		user$.subscribe(user => {
 			this.conectedUser = user;
 			this.loading = false;
-			console.log(this.conectedUser)
 		});
 	}
 
@@ -195,6 +195,7 @@ export class RouletteComponent implements OnInit {
 				case '$2000':
 				case '$3000':
 					this.conectedUser.money += this.winningItem.cost; 
+					this.conectedUser.inventory.push(this.winningItem);
 					break;
 				case 'Cofre Los Santos':
 					this.conectedUser.casesLS++; 
@@ -210,6 +211,7 @@ export class RouletteComponent implements OnInit {
 					break;
 			}
 			this.dbUser.modify(this.conectedUser);
+			this.backToTopReady = false;
 		}, 6500);
 		
 	}

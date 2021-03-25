@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ICasesRegister, IMissionRegister } from 'src/app/core/entities';
+import { ICasesRegister, IItem, IUser, IMissionRegister } from 'src/app/core/entities';
+import { SessionService } from 'src/app/shared/services/session.service';
 
 @Component({
 	selector: 'app-home',
@@ -32,15 +33,48 @@ export class HomeComponent implements OnInit {
 		{ person: 'Facu Vadell', case: 'SF', winItem: '9mm-silenciada.png' },
 	];
 
+	
+	// Usuario Conectado
+	private conectedUser: IUser;
+
+	// Lista de lo ultimo del inventario (no mas de 6)
+	public listOfLastInventoryItems: IItem[] = [];
+
+	// Flags
+	public loading: boolean = true;
+
 	public latestCasesColumns: string[] = ['person', 'case', 'winItem'];
 	public latestMissionsColumns: string[] = ['mission'];
 	
   	dataSource = this.latestMissions;
   	dataSource2 = this.latestCases;
 
-	constructor() { }
+
+	constructor(private session: SessionService) { }
 
 	ngOnInit(): void {
+		this.getConectedUser();
+	}
+
+	private async getConectedUser(): Promise<void> {
+		let user$ = await this.session.getUserObservable();
+		user$.subscribe(user => {
+			this.conectedUser = user;
+			this.getListOfLastInventoryItems();
+			this.loading = false;
+		});
+	}
+
+	private getListOfLastInventoryItems(): void {
+		this.listOfLastInventoryItems = [];
+		let limit: number = 0;
+
+		if(this.conectedUser.inventory.length > 6)
+			limit = this.conectedUser.inventory.length - 7;
+
+		for(let i=this.conectedUser.inventory.length-1; i>limit; i--){
+			this.listOfLastInventoryItems.push(this.conectedUser.inventory[i]);
+		}
 	}
 
 }
