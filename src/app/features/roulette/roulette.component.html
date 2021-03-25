@@ -1,19 +1,140 @@
-<div class="container-fluid">
+<div class="spinner-border m-5" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+</div>
 
-
+<div class="container-fluid" *ngIf="!loading">
     <div *ngIf="!selectedChest">
-        <div class="row text-center mt-5">
-            <div class="col">
-                <img src='/assets/cofre-los-santos.png' style="width: 300px; height: auto;" (click)="selectChest(1)">
+        <div class="row text-center mt-5 justify-content-center">
+            <div class="col-3 mr-2">
+                <mat-card class="mat-elevation-z4 mt-5 ">
+                    <div class="row text-center mt-5 mb-5">
+                        <div class="col">
+                            <img src='/assets/los-santos.png' class="img-tilte" class="img-tilte">
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col">
+                            <hr class="hr-chest">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <img src='/assets/cofre-los-santos.png' class="img-chest">
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col">
+                            <hr class="hr-chest">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col pricedown" *ngIf="conectedUser.casesLS != 0">
+                            <div class="mat-h1 mat-h1-chest">Tenes <span class="span-text-chest">{{conectedUser.casesLS}}</span> cajas</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col pricedown" *ngIf="conectedUser.casesLS == 0">
+                            <div class="mat-h1 mat-h1-chest">No tenes cajas</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" *ngIf="conectedUser.casesLS != 0">
+                            <button mat-raised-button color="primary" class="w-100 mt-1 mb-2" (click)="selectChest(1)">Abrir</button>
+                        </div>
+                        <div class="col" *ngIf="conectedUser.casesLS == 0">
+                            <button mat-raised-button color="primary" disabled class="w-100 mt-1 mb-2">Abrir</button>
+                        </div>
+                    </div>
+                </mat-card>
             </div>
-            <div class="col">
-                <img src='/assets/cofre-san-fierro.png' style="width: 300px; height: auto;" (click)="selectChest(2)">
+            <div class="col-3 mr-2">
+                <mat-card class="mat-elevation-z4 mt-5">
+                    <div class="row text-center mt-5 mb-5">
+                        <div class="col">
+                            <img src='/assets/san-fierro.png' class="img-tilte">
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col">
+                            <hr class="hr-chest">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <img src='/assets/cofre-san-fierro.png' class="img-chest">
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col">
+                            <hr class="hr-chest">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col pricedown" *ngIf="conectedUser.casesSF != 0">
+                            <div class="mat-h1 mat-h1-chest">Tenes <span class="span-text-chest">{{conectedUser.casesSF}}</span> cajas</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="col pricedown" *ngIf="conectedUser.casesSF == 0">
+                                <div class="mat-h1 mat-h1-chest">No tenes cajas</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" *ngIf="conectedUser.casesSF != 0">
+                            <button mat-raised-button color="primary" class="w-100 mt-1 mb-2" (click)="selectChest(2)">Abrir</button>
+                        </div>
+                        <div class="col" *ngIf="conectedUser.casesSF == 0">
+                            <button mat-raised-button color="primary" disabled class="w-100 mt-1 mb-2">Abrir</button>
+                        </div>
+                    </div>
+                </mat-card>
             </div>
-            <div class="col">
-                <img src='/assets/cofre-las-venturas.png' style="width: 300px; height: auto;" (click)="selectChest(3)">
+            <div class="col-3">
+                <mat-card class="mat-elevation-z4 mt-5">
+                    <div class="row text-center mt-5 mb-5">
+                        <div class="col">
+                            <img src='/assets/las-venturas.png' class="img-tilte">
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col">
+                            <hr class="hr-chest">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <img src='/assets/cofre-las-venturas.png' class="img-chest">
+                        </div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col">
+                            <hr class="hr-chest">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col pricedown" *ngIf="conectedUser.casesLV != 0">
+                            <div class="mat-h1 mat-h1-chest">Tenes <span class="span-text-chest">{{conectedUser.casesLV}}</span> cajas</div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col pricedown" *ngIf="conectedUser.casesLV == 0">
+                            <div class="mat-h1 mat-h1-chest">No tenes cajas</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" *ngIf="conectedUser.casesLV != 0">
+                            <button mat-raised-button color="primary" class="w-100 mt-1 mb-2" (click)="selectChest(3)">Abrir</button>
+                        </div>
+                        <div class="col" *ngIf="conectedUser.casesLV == 0">
+                            <button mat-raised-button color="primary" disabled class="w-100 mt-1 mb-2">Abrir</button>
+                        </div>
+                    </div>
+                </mat-card>
             </div>
         </div>
-        
     </div>
 
     <div *ngIf="selectedChest">
@@ -55,16 +176,15 @@
                     <div class="col">
                         <ul class="list">
                             <li *ngFor="let item of possibleItemsList" class="mr-3 mt-4">
-                                <mat-card class="mat-elevation-z4" style="width: 260px">
+                                <mat-card class="mat-elevation-z4 mat-card-possibleItemsList">
                                     <div class="row">
                                         <div class="col">
-                                            <img [src]=item.img
-                                                style="display:block; margin:auto; margin-top: 2rem;">
+                                            <img [src]=item.img class="img-possibleItemsList">
                                         </div>
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col pricedown">
-                                            <div class="mat-h1" style="color: rgb(153, 153, 153);">{{item.name}}
+                                            <div class="mat-h1 mat-h1-chest">{{item.name}}
                                             </div>
                                         </div>
                                     </div>
@@ -81,17 +201,17 @@
                 <mat-card class="mat-elevation-z4" *ngIf="winningItem">
                     <div class="row">
                         <div class="col pricedown">
-                            <div class="mat-h1" style="color: rgb(153, 153, 153);">Ganaste : </div>
+                            <div class="mat-h1 mat-h1-chest">Ganaste : </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <img [src]=winningItem.img style=" width: 130px; height: 130px;">
+                            <img [src]=winningItem.img class="img-winer">
                         </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col pricedown">
-                            <div class="mat-h1" style="color: rgb(153, 153, 153);">{{winningItem.name}}</div>
+                            <div class="mat-h1 mat-h1-chest">{{winningItem.name}}</div>
                         </div>
                     </div>
                     <div class="row">
@@ -101,12 +221,12 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col pricedown">
-                            <div class="mat-h3" style="color: rgb(153, 153, 153);">Fue añadido a inventario</div>
+                            <div class="mat-h3 mat-h1-chest">Fue añadido a inventario</div>
                         </div>
                     </div>
-                    <div class="row mb-4 justify-content-center">
+                    <div class="row justify-content-center">
                         <div class="col">
-                            <button mat-raised-button color="primary" class="w-100 mt-2" (click)="selectChest = false">Volver</button>
+                            <button mat-raised-button color="primary" class="w-100 mt-2" (click)="backToTop()">Regresar al inicio</button>
                         </div>
                     </div>
                 </mat-card>

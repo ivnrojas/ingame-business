@@ -35,6 +35,10 @@ export class UserService {
         return this.db.collection('users').add(CoreHelper.convertToObject(user));
     }
 
+	public modify(user: IUser): Promise<void> {
+        return this.db.collection('users').doc(user.firebaseId).update(CoreHelper.convertToObject(user));
+    }
+
 	public getByEmail(email: string): Promise<IUser> {
         return this.db.collection('users', ref => ref.where('email', '==', email.toLowerCase())).get().toPromise()
             .then(query => {
