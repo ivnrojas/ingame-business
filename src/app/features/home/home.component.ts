@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ICasesRegister } from 'src/app/core/entities';
 
 @Component({
 	selector: 'app-home',
@@ -18,8 +19,22 @@ export class HomeComponent implements OnInit {
 		{ name: 'Oxygen', weight: 15.9994, symbol: 'O' },
 	];
 
+	public latestCases: ICasesRegister[] = [
+		{ person: 'Ivana Rojas', case: 'LS', winItem: '9mm.png' },
+		{ person: 'Emaa Garcia', case: 'SF', winItem: '1k.png' },
+		{ person: 'Ivana Rojas', case: 'LS', winItem: '3k.png' },
+		{ person: 'Ivana Rojas', case: 'LV', winItem: 'escopeta.png' },
+		{ person: 'Yamil Foglia', case: 'LV', winItem: '9mm.png' },
+		{ person: 'Facu Vadell', case: 'LS', winItem: 'fz.png' },
+		{ person: 'Yamil Foglia', case: 'LS', winItem: 'EDC.png' },
+		{ person: 'Facu Vadell', case: 'SF', winItem: '9mm-silenciada.png' },
+	];
+
+	public latestCasesColumns: string[] = ['person', 'case', 'winItem'];
+
 	displayedColumns: string[] = ['name', 'weight', 'symbol'];
   	dataSource = this.ELEMENT_DATA;
+  	dataSource2 = this.latestCases;
 
 	constructor() { }
 
