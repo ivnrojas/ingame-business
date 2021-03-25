@@ -5,11 +5,11 @@
 <div class="container" *ngIf="!loading">
     <div class="row mt-5">
         <div class="col-6">
-            <mat-card class="mat-elevation-z4 first-row-card profile-card">
+            <mat-card class="mat-elevation-z4 main-card profile-card">
                 <div class="row mt-4">
                     <div class="col text-center">
-                        <span class="name">Ivana Rojas |</span>
-                        <span class="role-description"> Vendedor</span>
+                        <span class="name">{{currentUser.name}} |</span>
+                        <span class="role-description"> {{currentUser.ingameRole}}</span>
                     </div>
                     <div class="col">
 
@@ -17,9 +17,9 @@
                 </div>
                 <div class="row mt-5">
                     <div class="col-6">
-                        Experiencia: 2741/6500
+                        Experiencia: {{currentUser.experience}}/{{currentUser.level.totalExperience}}
                     </div>
-                    <div class="col-6 text-right">Nivel 4</div>
+                    <div class="col-6 text-right">Nivel {{currentUser.level.level}}</div>
                 </div>
                 <div class="row mt-1">
                     <div class="col">
@@ -29,7 +29,7 @@
             </mat-card>
         </div>
         <div class="col-3">
-            <mat-card class="mat-elevation-z4 first-row-card">
+            <mat-card class="mat-elevation-z4 main-card can-select" routerLink="/cases">
                 <div class="row">
                     <div class="col">
                         Dinero total
@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col pricedown">
                         <div class="mat-h1" style="color: rgb(4, 184, 4);">
-                            1400
+                            {{currentUser.money}}
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
             </mat-card>
         </div>
         <div class="col-3">
-            <mat-card class="mat-elevation-z4 first-row-card">
+            <mat-card class="mat-elevation-z4 main-card can-select ">
                 Inventario
                 <hr class="mt-3">
                 <mat-grid-list cols="3" rowHeight="50px" *ngIf="listOfLastInventoryItems.length != 0">
@@ -73,29 +73,29 @@
     </div>  
     <div class="row mt-4">
         <div class="col-3">
-            <mat-card class="mat-elevation-z4 first-row-card">
+            <mat-card class="mat-elevation-z4 main-card">
                 Mis misiones completadas
                 <hr class="mt-3">
                 <div class="pricedown">
                     <div class="mat-h1 text-center">
-                        13 <mat-icon style="color: grey">task_alt</mat-icon>
+                        {{currentUser.missionHistory.length}} <mat-icon style="color: grey">task_alt</mat-icon>
                     </div>
                 </div>
             </mat-card>
         </div>
         <div class="col-3">
-            <mat-card class="mat-elevation-z4 first-row-card">
+            <mat-card class="mat-elevation-z4 main-card">
                 Respeto total
                 <hr class="mt-3">
                 <div class="pricedown">
                     <div class="mat-h1 text-center">
-                        +42 <mat-icon style="color: grey">thumbs_up_down</mat-icon>
+                        {{currentUser.respect | respect}} <mat-icon style="color: grey">thumbs_up_down</mat-icon>
                     </div>
                 </div>
             </mat-card>
         </div>
         <div class="col-6">
-            <mat-card class="mat-elevation-z4 first-row-card">
+            <mat-card class="mat-elevation-z4 main-card">
                 Noticias
                 <hr class="mt-3">
                 
@@ -104,7 +104,7 @@
     </div>
     <div class="row mt-4">
         <div class="col-6">
-            <mat-card class="mat-elevation-z4 first-row-card">
+            <mat-card class="mat-elevation-z4 main-card">
                 <div class="row">
                     <div class="col">
                         Ultimas misiones completadas
@@ -127,7 +127,7 @@
             </mat-card>
         </div>
         <div class="col-6">
-            <mat-card class="mat-elevation-z4 first-row-card">
+            <mat-card class="mat-elevation-z4 main-card">
                 <div class="row">
                     <div class="col">
                         Ultimas cajas abiertas
@@ -164,10 +164,10 @@
     </div>  
     <div class="row mt-4">
         <div class="col-9">
-            <mat-card class="mat-elevation-z4 first-row-card">
+            <mat-card class="mat-elevation-z4 main-card">
                 <div class="row">
                     <div class="col" style="display: flex; align-items: center; justify-content: center">
-                            <button mat-raised-button class="w-100" color="primary">Salir</button>
+                            <button mat-raised-button class="w-100" color="primary" (click)="logout()">Salir</button>
                     </div>
                     <div class="col-8" style="display: flex; align-items: center; justify-content: center">
 
@@ -179,7 +179,7 @@
             </mat-card>
         </div>
         <div class="col-3">
-            <mat-card class="mat-elevation-z4 first-row-card discord-card">
+            <mat-card class="mat-elevation-z4 main-card can-select discord-card">
                 <!-- https://discord.gg/dvrTkZGKAJ -->
             </mat-card>
         </div>

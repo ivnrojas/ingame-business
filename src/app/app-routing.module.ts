@@ -8,7 +8,7 @@ import { AdminGuard } from './shared/guards/admin.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
-    { path: 'admin', loadChildren: () => import('./features/admin/admin.module').then(module => module.AdminModule), canActivate: [AuthGuard, AdminGuard] }, // canActivate: [AuthGuard, AdminGuard]
+    { path: 'admin', loadChildren: () => import('./features/admin/admin.module').then(module => module.AdminModule), canActivate: [AuthGuard, AdminGuard] },
     { path: 'cases', component: RouletteComponent, canActivate: [AuthGuard] },
     { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },

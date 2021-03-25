@@ -14,7 +14,7 @@
     background-position: center;
 }
 
-.first-row-card {
+.main-card {
     height: 100%;
 }
 
@@ -22,4 +22,14 @@
     background: url('/assets/dc.jpg');
     background-size: cover;
     background-position: center;
+}
+
+.can-select {
+    box-shadow: 0 0 0 0 grey;
+    transition: box-shadow 10ms linear;
+}
+
+.can-select:hover {
+    box-shadow: 0 0 1.5pt 1pt;
+    cursor: pointer;
 }

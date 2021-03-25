@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICasesRegister, IItem, IUser, IMissionRegister } from 'src/app/core/entities';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 
 @Component({
@@ -9,7 +11,34 @@ import { SessionService } from 'src/app/shared/services/session.service';
 })
 export class HomeComponent implements OnInit {
 
-	// { mission: 'Ivana Rojas (Nivel 4) cumplió una misión y ganó 1000 de experiencia.' },
+
+	/*
+
+	Pendiente:
+	- Diseño de cajas por abrir en el home
+	- Noticias
+	- Conectar últimas misiones
+	- Conectar cajas abiertas
+	- Discord link
+	- Solicitar mision y ver misiones en el home
+	- Sistema de misiones
+	- Dentro de /cases poder comprar mas cajas o pedir extraccion de dinero
+	- Dentro de /inventory poder extraer los items o pedir extraccion de dinero
+	- Boton para entrar a admin en home
+	- ABM de misión
+	- ABM de cajas
+	- ABM de usuarios
+	- Dar o sacar experiencia
+	- Dar o sacar respeto
+	- Algoritmo de rates para cajas
+	- Asignar mision a una persona o sacar mision
+	- Logs de ultimas cajas abiertas cada vez que se abre una caja
+	- Fake de log de caja abierta
+	- Log de ultimas misiones cada vez que se marca una mision como completa
+	- Fake de log de ultima mision
+
+
+	*/
 
 	public latestMissions: IMissionRegister[] = [
 		{ person: 'Ivana Rojas', level: 4, experience: 1000 },
@@ -35,7 +64,7 @@ export class HomeComponent implements OnInit {
 
 	
 	// Usuario Conectado
-	private conectedUser: IUser;
+	public currentUser: IUser;
 
 	// Lista de lo ultimo del inventario (no mas de 6)
 	public listOfLastInventoryItems: IItem[] = [];
@@ -50,16 +79,16 @@ export class HomeComponent implements OnInit {
   	dataSource2 = this.latestCases;
 
 
-	constructor(private session: SessionService) { }
+	constructor(private session: SessionService, private auth: AuthService, private router: Router) { }
 
 	ngOnInit(): void {
-		this.getConectedUser();
+		this.getCurrentUser();
 	}
 
-	private async getConectedUser(): Promise<void> {
+	private async getCurrentUser(): Promise<void> {
 		let user$ = await this.session.getUserObservable();
 		user$.subscribe(user => {
-			this.conectedUser = user;
+			this.currentUser = user;
 			this.getListOfLastInventoryItems();
 			this.loading = false;
 		});
@@ -69,12 +98,18 @@ export class HomeComponent implements OnInit {
 		this.listOfLastInventoryItems = [];
 		let limit: number = 0;
 
-		if(this.conectedUser.inventory.length > 6)
-			limit = this.conectedUser.inventory.length - 7;
+		if(this.currentUser.inventory.length > 6)
+			limit = this.currentUser.inventory.length - 7;
 
-		for(let i=this.conectedUser.inventory.length-1; i>limit; i--){
-			this.listOfLastInventoryItems.push(this.conectedUser.inventory[i]);
+		for(let i=this.currentUser.inventory.length-1; i>limit; i--){
+			this.listOfLastInventoryItems.push(this.currentUser.inventory[i]);
 		}
+	}
+
+	public logout(): void {
+		this.session.cleanSession();
+		this.auth.logoutEmail();
+		this.router.navigate(['/login']);
 	}
 
 }

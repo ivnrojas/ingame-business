@@ -31,6 +31,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './features/home/home.component';
 import { InventoryComponent } from './features/inventory/inventory.component';
+import { RespectPipe } from './shared/pipes/respect.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { InventoryComponent } from './features/inventory/inventory.component';
     LoginComponent,
     HomeComponent,
     InventoryComponent,
+    RespectPipe,
   ],
   imports: [
     FormsModule,
