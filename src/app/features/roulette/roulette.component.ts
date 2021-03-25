@@ -195,7 +195,6 @@ export class RouletteComponent implements OnInit {
 				case '$2000':
 				case '$3000':
 					this.conectedUser.money += this.winningItem.cost; 
-					this.conectedUser.inventory.push(this.winningItem);
 					break;
 				case 'Cofre Los Santos':
 					this.conectedUser.casesLS++; 

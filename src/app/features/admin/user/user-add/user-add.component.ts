@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ILevel, IngameRole, IUser, Levels, UserRole } from 'src/app/core/entities';
+import { ConnectionStatus, ILevel, IngameRole, IUser, Levels, UserRole } from 'src/app/core/entities';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -64,6 +64,8 @@ export class UserAddComponent implements OnInit {
 			casesLV: 0,
 			inventory: [],
 			respect: this.respectControl.value,
+			connectionStatus: ConnectionStatus.Desconectado,
+			withdrawRequest: [],
 			firebaseTimestamp: Date.now()
 		};
 

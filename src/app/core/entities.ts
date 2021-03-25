@@ -1,3 +1,5 @@
+import { combineAll } from "rxjs/operators"
+
 export interface IFirebaseError {
     code: string;
     message: string;
@@ -52,6 +54,26 @@ export interface IUser extends IFirebaseObject {
     casesLV: number;
     inventory: IItem[];
     respect: number;
+    connectionStatus: ConnectionStatus;
+    withdrawRequest: IWithdrawRequest[]
+}
+
+export enum ConnectionStatus {
+    Conectado = 'Conectado',
+    Desconectado = 'Desconectado',
+}
+
+export enum StateOfWithdrawRequest {
+    Completado = 'Completado',
+    Pendiente = 'Pendiente',
+}
+
+export interface IWithdrawRequest extends IFirebaseObject {
+    itemRequest: IItem;
+    userWhoSent: IUser;
+    userWhoReceiving: IUser;
+    state: StateOfWithdrawRequest; 
+    requestDate: Date;
 }
 
 export interface IItem extends IFirebaseObject {
