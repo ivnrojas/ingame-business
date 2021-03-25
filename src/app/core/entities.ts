@@ -89,8 +89,8 @@ export interface ICasesRegister extends IFirebaseObject {
 }
 export interface IMissionRegister extends IFirebaseObject {
     person: string;
-    case: string;
-    winItem: string;
+    level: number;
+    experience: number;
 }
 
 export const Levels: ILevel[] = [
