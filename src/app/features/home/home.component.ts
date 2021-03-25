@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ICasesRegister } from 'src/app/core/entities';
+import { ICasesRegister, IItem, IUser } from 'src/app/core/entities';
+import { SessionService } from 'src/app/shared/services/session.service';
 
 @Component({
 	selector: 'app-home',
@@ -30,15 +31,42 @@ export class HomeComponent implements OnInit {
 		{ person: 'Facu Vadell', case: 'SF', winItem: '9mm-silenciada.png' },
 	];
 
+	private conectedUser: IUser;
+	public listOfLastInventoryItems: IItem[] = [];
+
 	public latestCasesColumns: string[] = ['person', 'case', 'winItem'];
 
 	displayedColumns: string[] = ['name', 'weight', 'symbol'];
   	dataSource = this.ELEMENT_DATA;
   	dataSource2 = this.latestCases;
 
-	constructor() { }
+	public loading: boolean = true;
+
+	constructor(private session: SessionService) { }
 
 	ngOnInit(): void {
+		this.getConectedUser();
+	}
+
+	private async getConectedUser(): Promise<void> {
+		let user$ = await this.session.getUserObservable();
+		user$.subscribe(user => {
+			this.conectedUser = user;
+			this.getListOfLastInventoryItems();
+			this.loading = false;
+		});
+	}
+
+	private getListOfLastInventoryItems(): void {
+		this.listOfLastInventoryItems = [];
+		let limit: number = 0;
+
+		if(this.conectedUser.inventory.length > 6)
+			limit = this.conectedUser.inventory.length - 7;
+
+		for(let i=this.conectedUser.inventory.length-1; i>limit; i--){
+			this.listOfLastInventoryItems.push(this.conectedUser.inventory[i]);
+		}
 	}
 
 }

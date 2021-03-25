@@ -20,6 +20,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {MatTableModule} from '@angular/material/table';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -57,6 +59,7 @@ import { HomeComponent } from './features/home/home.component';
     MatSelectModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatGridListModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
     FormsModule,
