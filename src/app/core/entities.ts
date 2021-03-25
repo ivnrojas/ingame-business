@@ -82,6 +82,17 @@ export interface ILevel {
     totalExperience: number;
 }
 
+export interface ICasesRegister extends IFirebaseObject {
+    person: string;
+    case: string;
+    winItem: string;
+}
+export interface IMissionRegister extends IFirebaseObject {
+    person: string;
+    case: string;
+    winItem: string;
+}
+
 export const Levels: ILevel[] = [
     { level: 1, totalExperience: 250 },
     { level: 2, totalExperience: 500 },
