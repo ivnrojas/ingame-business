@@ -1,7 +1,142 @@
-<div class="container">
-    <div class="row text-center mt-5 mb-5">
-        <div class="col">
-            <img src='/assets/inventario.png'>
+<div class="spinner-border m-5" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+</div>
+
+<div class="container-fluid" *ngIf="!loading">
+    <div *ngIf="!withdrawItem">
+        <div class="row text-center mt-5 mb-5">
+            <div class="col">
+                <img src='/assets/inventario.png'>
+            </div>
+        </div>
+        <div class="row text-center justify-content-center">
+            <div class="col-4">
+                <mat-card class="mat-elevation-z4">
+                    <div class="row">
+                        <div class="col pricedown">
+                            <div class="mat-h1 mat-h1-chest"> Usuarios para retirar conectados </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" *ngIf="adminUsersConected.length != 0">
+                            <div class="row" *ngFor="let user of adminUsersConected">
+                                <div class="col pricedown">
+                                    <div class="mat-h2 mat-h1-chest">{{user.nameInGame}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col pricedown" *ngIf="adminUsersConected.length == 0">
+                            <div class="mat-h2 mat-h1-chest">En este momento no se encuentra ningún usuario para retirar.</div>
+                        </div>
+                    </div>
+    
+                    
+                </mat-card>
+            </div>
+        </div>
+        <div class="row text-center justify-content-center">
+            <div class="col-8">
+                <ul class="list">
+                    <li *ngFor="let item of listOfItemsInInventory" class="mr-3 mt-4">
+                        <mat-card class="mat-elevation-z4 mat-card-possibleItemsList">
+                            <div class="row">
+                                <div class="col">
+                                    <img [src]=item.img class="img-possibleItemsList">
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col pricedown">
+                                    <div class="mat-h2 mat-h1-chest">{{item.name}}</div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col" *ngIf="!item.pendingWithdrawal">
+                                    <button mat-raised-button color="accent" class="w-100 mt-1 mb-2" (click)="withdraw(item)">Retirar</button>
+                                </div>
+                                <div class="col" *ngIf="item.pendingWithdrawal">
+                                    <button mat-raised-button color="primary" class="w-100 mt-1 mb-2">Pendiente de Retiro</button>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="withdrawItem">
+        <div class="row text-center mt-5 mb-5">
+            <div class="col">
+                <img src='/assets/retirar.png'>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-2">
+                <mat-card class="mat-elevation-z4">
+                    <div class="row text-center mt-5 mb-5">
+                        <div class="col">
+                            <img [src]='withdrawItem.img' class="img-withdrawItem">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col pricedown">
+                            <div class="mat-h1 mat-h1-chest">{{withdrawItem.name}}</div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-4">
+                <mat-card class="mat-elevation-z4">
+                    <div class="row text-center">
+                        <div class="col pricedown">
+                            <div class="mat-h1 mat-h1-chest">Informacion para retirar</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row text-center mt-4">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Nombre en juego</mat-label>
+                                <input required matInput disabled type="text" autocomplete="off" [(ngModel)]="conectedUser.nameInGame">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Retirar por</mat-label>
+                                <mat-select [(ngModel)]="userInChargeOfWithdrawal"> 
+                                    <mat-option *ngFor="let user of adminUsersConected" [value]="user">
+                                        {{user.nameInGame}} </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row mt-2 justify-content-center">
+                        <div class="col">
+                            <button mat-raised-button color="accent" class="w-100 mt-3 mb-2" [disabled]="!userInChargeOfWithdrawal" (click)="withdrawItemOfUser()">Retirar</button>
+                        </div>
+                    </div>
+                    <div class="row mt-2 justify-content-center">
+                        <div class="col">
+                            <button mat-raised-button color="primary" class="w-100 mt-1 mb-2" (click)="withdrawItem = undefined">Volver al inventario</button>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
         </div>
     </div>
 </div>
