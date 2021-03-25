@@ -33,7 +33,7 @@ export class RouletteComponent implements OnInit {
 	// Item ganador
 	public winningItem: IItem;
 
-	// Flag 
+	// Flags 
 	public btnDisabled: boolean = false;
 	public backToTopReady: boolean = true;
 
