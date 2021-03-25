@@ -24,9 +24,15 @@
                     </div>
                     <div class="row">
                         <div class="col" *ngIf="adminUsersConected.length != 0">
-                            <div class="row" *ngFor="let user of adminUsersConected">
-                                <div class="col pricedown">
-                                    <div class="mat-h2 mat-h1-chest">{{user.nameInGame}}</div>
+                            <div class="row justify-content-center" *ngFor="let user of adminUsersConected">
+                                <div class="col-1 text-rigth">
+                                    <mat-icon class="icon-conected">data_usage
+                                    </mat-icon>
+                                </div>
+                                <div class="col-4 text-left">
+                                    <div class="mat-h2 mat-h1-chest">   
+                                        {{user.nameInGame}} 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -42,8 +48,8 @@
         <div class="row text-center justify-content-center">
             <div class="col-8">
                 <ul class="list">
-                    <li *ngFor="let item of listOfItemsInInventory" class="mr-3 mt-4">
-                        <mat-card class="mat-elevation-z4 mat-card-possibleItemsList">
+                    <li *ngFor="let item of listOfItemsInInventory">
+                        <mat-card class="mat-elevation-z4 mat-card-possibleItemsList mr-3 mt-4"s>
                             <div class="row">
                                 <div class="col">
                                     <img [src]=item.img class="img-possibleItemsList">
@@ -54,12 +60,49 @@
                                     <div class="mat-h2 mat-h1-chest">{{item.name}}</div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <hr>
+                                </div>
+                            </div>
                             <div class="row mt-2">
                                 <div class="col" *ngIf="!item.pendingWithdrawal">
-                                    <button mat-raised-button color="accent" class="w-100 mt-1 mb-2" (click)="withdraw(item)">Retirar</button>
+                                    <button mat-raised-button color="accent" class="w-100 mt-2" (click)="withdraw(item)">Retirar</button>
                                 </div>
+                            </div>
+                        </mat-card>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <hr class="hr-chest">
+            </div>
+        </div>
+        <div class="row text-center justify-content-center">
+            <div class="col-8">
+                <ul class="list">
+                    <li *ngFor="let item of listOfItemsInInventoryPending">
+                        <mat-card class="mat-elevation-z4 mat-card-possibleItemsList mr-3 mt-4">
+                            <div class="row">
+                                <div class="col">
+                                    <img [src]=item.img class="img-possibleItemsList">
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col pricedown">
+                                    <div class="mat-h2 mat-h1-chest">{{item.name}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
                                 <div class="col" *ngIf="item.pendingWithdrawal">
-                                    <button mat-raised-button color="primary" class="w-100 mt-1 mb-2">Pendiente de Retiro</button>
+                                    <div>Pendiente de Retiro por <br> <span>{{item.userInChargeOfWithdrawal}}</span></div>
                                 </div>
                             </div>
                         </mat-card>

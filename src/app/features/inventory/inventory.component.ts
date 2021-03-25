@@ -22,8 +22,10 @@ export class InventoryComponent implements OnInit {
 	// Flags
 	public loading: boolean = true;
 
-	// Lista de items dentro del inventario
+	// Listas de items dentro del inventario
 	public listOfItemsInInventory: IItem[];
+	public listOfItemsInInventoryPending : IItem[];
+
 
 	// Item por retirar
 	public withdrawItem: IItem;
@@ -50,7 +52,14 @@ export class InventoryComponent implements OnInit {
 
 	private getInventoryItems(): void {
 		this.listOfItemsInInventory = [];
-		this.listOfItemsInInventory = this.conectedUser.inventory;
+		this.listOfItemsInInventoryPending = [];
+
+		for(let item of this.conectedUser.inventory){
+			if(item.pendingWithdrawal)
+				this.listOfItemsInInventoryPending.push(item);
+			else
+				this.listOfItemsInInventory.push(item)
+		}
 	}
 
 	private async getAdminUser(): Promise<void> {
@@ -80,8 +89,10 @@ export class InventoryComponent implements OnInit {
 		this.userInChargeOfWithdrawal.withdrawRequest.push(withdrawRequest);
 
 		for(let i=0; i< this.conectedUser.inventory.length; i++){
-			if(this.conectedUser.inventory[i] == this.withdrawItem)
+			if(this.conectedUser.inventory[i] == this.withdrawItem){
 				this.conectedUser.inventory[i].pendingWithdrawal = true;
+				this.conectedUser.inventory[i].userInChargeOfWithdrawal = this.userInChargeOfWithdrawal.nameInGame;
+			}
 		}
 		
 		this.loading = true;

@@ -81,6 +81,7 @@ export interface IItem extends IFirebaseObject {
     img: string;
     cost: number;
     pendingWithdrawal: boolean;
+    userInChargeOfWithdrawal: string;
 }
 
 export enum IngameRole {

@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
 		if(this.currentUser.inventory.length > 6)
 			limit = this.currentUser.inventory.length - 7;
 
-		for(let i=this.currentUser.inventory.length-1; i>limit; i--){
+		for(let i=this.currentUser.inventory.length-1; i>=limit; i--){
 			this.listOfLastInventoryItems.push(this.currentUser.inventory[i]);
 		}
 	}
