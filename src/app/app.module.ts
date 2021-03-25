@@ -30,6 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './features/home/home.component';
+import { RespectPipe } from './shared/pipes/respect.pipe';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { HomeComponent } from './features/home/home.component';
     RouletteComponent,
     LoginComponent,
     HomeComponent,
+    RespectPipe,
   ],
   imports: [
     FormsModule,

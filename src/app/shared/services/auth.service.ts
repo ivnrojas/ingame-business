@@ -61,6 +61,10 @@ export class AuthService {
 		.toPromise();
 	}
 
+	public logoutEmail(): Promise<void> {
+		return this.afa.signOut();
+	}
+
 	private handleLoginErrors(error: IFirebaseError): string {
 		switch (error.code) {
 			case LoginErrorCodes.EmailBadlyFormatted:
