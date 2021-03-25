@@ -103,25 +103,13 @@
                     <table mat-table [dataSource]="dataSource" class="w-100">
 
                         <!-- Name Column -->
-                        <ng-container matColumnDef="name">
-                          <th mat-header-cell *matHeaderCellDef> Name </th>
-                          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        <ng-container matColumnDef="mission">
+                          <th mat-header-cell *matHeaderCellDef class="text-center"> Detalles </th>
+                          <td mat-cell *matCellDef="let element"> {{element.person}} <b></b> <span style="color: rgb(187, 75, 75)">(Nivel {{element.level}})</span> cumplió una misión y ganó <span style="color: rgb(66, 178, 253)">{{element.experience}}</span> de experiencia. </td>
                         </ng-container>
                       
-                        <!-- Weight Column -->
-                        <ng-container matColumnDef="weight">
-                          <th mat-header-cell *matHeaderCellDef> Weight </th>
-                          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-                        </ng-container>
-                      
-                        <!-- Symbol Column -->
-                        <ng-container matColumnDef="symbol">
-                          <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-                        </ng-container>
-                      
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <tr mat-header-row *matHeaderRowDef="latestMissionsColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: latestMissionsColumns;"></tr>
                       </table>
                 </div>
             </mat-card>
