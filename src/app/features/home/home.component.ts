@@ -33,8 +33,15 @@ export class HomeComponent implements OnInit {
 		{ person: 'Facu Vadell', case: 'SF', winItem: '9mm-silenciada.png' },
 	];
 
+	
+	// Usuario Conectado
 	private conectedUser: IUser;
+
+	// Lista de lo ultimo del inventario (no mas de 6)
 	public listOfLastInventoryItems: IItem[] = [];
+
+	// Flags
+	public loading: boolean = true;
 
 	public latestCasesColumns: string[] = ['person', 'case', 'winItem'];
 	public latestMissionsColumns: string[] = ['mission'];
@@ -42,7 +49,6 @@ export class HomeComponent implements OnInit {
   	dataSource = this.latestMissions;
   	dataSource2 = this.latestCases;
 
-	public loading: boolean = true;
 
 	constructor(private session: SessionService) { }
 
