@@ -70,8 +70,8 @@ export enum StateOfWithdrawRequest {
 
 export interface IWithdrawRequest extends IFirebaseObject {
     itemRequest: IItem;
-    userWhoSent: IUser;
-    userWhoReceiving: IUser;
+    userWhoSent: string;
+    userWhoReceiving: string;
     state: StateOfWithdrawRequest; 
     requestDate: Date;
 }
@@ -80,6 +80,8 @@ export interface IItem extends IFirebaseObject {
     name: string;
     img: string;
     cost: number;
+    pendingWithdrawal: boolean;
+    userInChargeOfWithdrawal: string;
 }
 
 export enum IngameRole {

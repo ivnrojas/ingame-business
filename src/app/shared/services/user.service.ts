@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { CoreHelper } from 'src/app/core/core-helper';
-import { IUser } from 'src/app/core/entities';
+import { IUser, UserRole } from 'src/app/core/entities';
 
 @Injectable({
 	providedIn: 'root'
@@ -12,6 +12,10 @@ export class UserService {
 
 	public get(email: string): AngularFirestoreCollection<IUser> {
         return this.db.collection('users', ref => ref.where('email', '==', email.toLowerCase()));
+    }
+
+	public getAdminUser(): AngularFirestoreCollection<unknown> {
+        return this.db.collection('users', ref => ref.where('role', '==', UserRole.Admin));
     }
 
 	public getByNameInGame(nameInGame: string): Promise<IUser> {

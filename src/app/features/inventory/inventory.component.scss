@@ -1,0 +1,48 @@
+li {
+    list-style: none;
+    display: inline-block;
+}
+
+.list {
+    position: relative;
+    margin-left: 230;
+    display: inline-block;
+}
+
+.list li {
+    border: 4px solid transparent ;
+}
+
+.list li img {
+    width: 130px;
+    height: 130px;
+
+}
+
+.img-possibleItemsList {
+    display:block; 
+    margin:auto; 
+    margin-top: 2rem;
+}
+
+.img-withdrawItem {
+    height: 200px;
+    width: 200px;
+}
+
+.mat-card-possibleItemsList {
+    width: 260px;
+}
+
+.mat-h1-chest {
+    color: rgb(153, 153, 153);
+}
+
+.hr-chest {
+    border: 1px solid rgba(241, 241, 241, 0.562);
+}
+
+.icon-conected {
+    color: rgb(5, 184, 5); 
+    margin-top: 3px;
+}
