@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
 	/*
 
 	Pendiente:
-	- Diseño de cajas por abrir en el home
+	- Diseño de cajas por abrir en el home NOW
 	- Noticias
 	- Conectar últimas misiones
 	- Conectar cajas abiertas

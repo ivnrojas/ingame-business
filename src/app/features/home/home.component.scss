@@ -33,3 +33,12 @@
     box-shadow: 0 0 1.5pt 1pt;
     cursor: pointer;
 }
+
+.box-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}

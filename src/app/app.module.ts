@@ -21,6 +21,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
@@ -68,7 +69,8 @@ import { RespectPipe } from './shared/pipes/respect.pipe';
     MatProgressBarModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MatBadgeModule
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent],
