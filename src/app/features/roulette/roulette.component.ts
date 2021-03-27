@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { rouletteAnimation } from 'src/app/core/animations';
-import { IItem, IUser } from 'src/app/core/entities';
+import { ICasesRegister, IItem, IUser } from 'src/app/core/entities';
 import { ItemService } from 'src/app/shared/services/item.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { LogService } from 'src/app/shared/services/log.service';
 
 @Component({
 	selector: 'app-roulette',
@@ -19,7 +20,7 @@ export class RouletteComponent implements OnInit {
 	public stateWindow: string = 'inactive'
 
 	// Usuario Conectado
-	private conectedUser: IUser;
+	public conectedUser: IUser;
 
 	// Lista total de items
 	private itemList: IItem[];
@@ -44,7 +45,7 @@ export class RouletteComponent implements OnInit {
 	// Loading
 	public loading: boolean = true;
 
-	constructor(private dbItem: ItemService, private session: SessionService, private dbUser: UserService, private router: Router, private toastr: ToastrService) { }
+	constructor(private dbItem: ItemService, private session: SessionService, private dbUser: UserService, private router: Router, private toastr: ToastrService, private log: LogService) { }
 
 	ngOnInit(): void {
 		this.getConectedUser();
@@ -387,10 +388,36 @@ export class RouletteComponent implements OnInit {
 					break;
 			}
 			this.dbUser.modify(this.conectedUser);
+			this.registerCase();
 			this.backToTopReady = false;
 		}, 6500);
 		
 	}
+
+	private registerCase(): void {
+		let caseInitials = '';
+		switch(this.selectedChest)
+		{
+			case 1:
+				caseInitials = 'LS';
+				break;
+			case 2:
+				caseInitials = 'SF';
+				break;
+			case 3:
+				caseInitials = 'LV';
+				break;
+		}
+
+		let caseRegister: ICasesRegister = {
+			person: this.conectedUser.name,
+			case: caseInitials,
+			winItem: this.winningItem.img,
+			firebaseTimestamp: Date.now()
+		};
+		this.log.addCaseRegister(caseRegister);
+	}
+
 	public backToTop(): void {
 		this.router.navigate(['']);
 	}
