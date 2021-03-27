@@ -372,7 +372,7 @@ export class RouletteComponent implements OnInit {
 				case '$3000':
 				case '$5000':
 				case '$15000':
-					this.conectedUser.money += this.winningItem.cost; 
+					this.conectedUser.money += +this.winningItem.cost; 
 					break;
 				case 'Cofre Los Santos':
 					this.conectedUser.casesLS++; 
@@ -410,6 +410,7 @@ export class RouletteComponent implements OnInit {
 		}
 
 		let caseRegister: ICasesRegister = {
+			date: new Date(),
 			person: this.conectedUser.name,
 			case: caseInitials,
 			winItem: this.winningItem.img,

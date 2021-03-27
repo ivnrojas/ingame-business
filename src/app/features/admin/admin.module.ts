@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MissionAddComponent } from './mission/mission-add/mission-add.component';
 import { MissionListComponent } from './mission/mission-list/mission-list.component';
 import { MissionModifyComponent } from './mission/mission-modify/mission-modify.component';
+import { HomeadminComponent } from './homeadmin/homeadmin.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MissionModifyComponent } from './mission/mission-modify/mission-modify.
     MissionModifyComponent,
     UserAddComponent,
     UserListComponent,
+    HomeadminComponent,
   ],
   imports: [
     CommonModule,

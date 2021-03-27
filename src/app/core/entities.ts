@@ -107,14 +107,17 @@ export interface ILevel {
 }
 
 export interface ICasesRegister extends IFirebaseObject {
+    date: Date;
     person: string;
     case: string;
     winItem: string;
 }
 export interface IMissionRegister extends IFirebaseObject {
+    date: Date;
     person: string;
     level: number;
     experience: number;
+    profit: number;
 }
 
 export const Levels: ILevel[] = [
