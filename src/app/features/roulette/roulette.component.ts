@@ -393,9 +393,6 @@ export class RouletteComponent implements OnInit {
 		}, 6500);
 		
 	}
-<<<<<<< HEAD
-	
-=======
 
 	private registerCase(): void {
 		let caseInitials = '';
@@ -421,7 +418,6 @@ export class RouletteComponent implements OnInit {
 		this.log.addCaseRegister(caseRegister);
 	}
 
->>>>>>> 1686059e991e4e14d8bf7ab1e47b7182c096b245
 	public backToTop(): void {
 		this.router.navigate(['']);
 	}
