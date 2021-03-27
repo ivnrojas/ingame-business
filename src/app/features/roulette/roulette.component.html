@@ -165,7 +165,11 @@
     <div *ngIf="selectedChest">
         <div class="row text-center mt-5">
             <div class="col">
-                <img src='/assets/los-santos.png'>
+                <ng-container [ngSwitch]="selectedChest">
+                    <img *ngSwitchCase="1" src='/assets/los-santos.png'>
+                    <img *ngSwitchCase="2" src='/assets/san-fierro.png'>
+                    <img *ngSwitchCase="3" src='/assets/las-venturas.png'>
+                </ng-container>
             </div>
         </div>
         <div class="row row justify-content-center mt-5" *ngIf="!winningItem">
@@ -179,7 +183,7 @@
                                         <div class="arrowup"></div>
                                         <div class="arrowdown"></div>
                                         <div class="window" [@windowAnimation]="stateWindow">
-                                            <ul class="list">
+                                            <ul class="list" style="padding-left: 0;">
                                                 <li *ngFor="let item of rouletteItemsList">
                                                     <img [src]=item.img>
                                                 </li>
