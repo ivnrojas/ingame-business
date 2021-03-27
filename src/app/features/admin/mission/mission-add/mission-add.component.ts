@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IMission, missionCategory, MissionLevel, missionState } from 'src/app/core/entities';
+import { IMission, IUser, missionCategory, MissionLevel, missionState } from 'src/app/core/entities';
+import { SessionService } from 'src/app/shared/services/session.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
     selector: 'app-mission-add',
@@ -8,6 +10,8 @@ import { IMission, missionCategory, MissionLevel, missionState } from 'src/app/c
     styleUrls: ['./mission-add.component.scss']
 })
 export class MissionAddComponent implements OnInit {
+
+    public conectedUser: IUser;
 
     public missionForm: FormGroup;
 
@@ -21,12 +25,20 @@ export class MissionAddComponent implements OnInit {
     public deliverToControl = new FormControl('Ivana', Validators.required);
     public notifyTocontrol = new FormControl('Ivana', Validators.required);
 
-    constructor() { }
+    constructor(private db: UserService, private session: SessionService) { }
 
+    
     ngOnInit(): void {
+        this.getConectedUser();
         this.initializeTaskForm();
     }
 
+	private async getConectedUser(): Promise<void> {
+		let user$ = await this.session.getUserObservable();
+		user$.subscribe(user => {
+			this.conectedUser = user;
+		});
+	}
     private initializeTaskForm(): void {
         this.missionForm = new FormGroup({
             title: this.titleControl,
@@ -85,5 +97,7 @@ export class MissionAddComponent implements OnInit {
     public generateNewMission(): void {
         let newMission = this.generateMission();
         console.log(newMission);
+        this.conectedUser.currentMissions.push(newMission);
+        this.db.modify(this.conectedUser);
     }
 }
