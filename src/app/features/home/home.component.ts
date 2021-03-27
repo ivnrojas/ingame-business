@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ICasesRegister, IItem, IUser, IMissionRegister } from 'src/app/core/entities';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { LogService } from 'src/app/shared/services/log.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 
 @Component({
@@ -15,16 +17,12 @@ export class HomeComponent implements OnInit {
 	/*
 
 	Pendiente:
-	- Diseño de cajas por abrir en el home NOW
 	- Noticias
 	- Conectar últimas misiones
-	- Conectar cajas abiertas
-	- Discord link
 	- Solicitar mision y ver misiones en el home
 	- Sistema de misiones
 	- Dentro de /cases poder comprar mas cajas o pedir extraccion de dinero
 	- Dentro de /inventory poder extraer los items o pedir extraccion de dinero
-	- Boton para entrar a admin en home
 	- ABM de misión
 	- ABM de cajas
 	- ABM de usuarios
@@ -76,10 +74,10 @@ export class HomeComponent implements OnInit {
 	public latestMissionsColumns: string[] = ['mission'];
 	
   	dataSource = this.latestMissions;
-  	dataSource2 = this.latestCases;
+	public dataSource2;
 
 
-	constructor(private session: SessionService, private auth: AuthService, private router: Router) { }
+	constructor(private session: SessionService, private auth: AuthService, private router: Router, private log: LogService) { }
 
 	ngOnInit(): void {
 		this.getCurrentUser();
@@ -92,6 +90,11 @@ export class HomeComponent implements OnInit {
 			this.getListOfLastInventoryItems();
 			this.loading = false;
 		});
+
+		(this.log.getAllCasesRegister().valueChanges() as Observable<ICasesRegister[]>).subscribe(data => {
+			let registers = data.slice(0, 8);
+			this.dataSource2 = registers;
+		})
 	}
 
 	private getListOfLastInventoryItems(): void {
@@ -110,6 +113,10 @@ export class HomeComponent implements OnInit {
 		this.session.cleanSession();
 		this.auth.logoutEmail();
 		this.router.navigate(['/login']);
+	}
+
+	public goToDiscord(): void {
+		window.location.href = 'https://discord.gg/dvrTkZGKAJ';
 	}
 
 }
