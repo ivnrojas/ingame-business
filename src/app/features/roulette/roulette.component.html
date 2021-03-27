@@ -42,7 +42,12 @@
                             <button mat-raised-button color="primary" class="w-100 mt-1 mb-2" (click)="selectChest(1)">Abrir</button>
                         </div>
                         <div class="col" *ngIf="conectedUser.casesLS == 0">
-                            <button mat-raised-button color="primary" disabled class="w-100 mt-1 mb-2">Abrir</button>
+                            <button mat-raised-button color="primary" disabled class="w-100 mt-1 mb-2">Comprar</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button mat-raised-button color="accent" class="w-100 mt-1 mb-2" (click)="buyChest(1)">Comprar</button>
                         </div>
                     </div>
                 </mat-card>
@@ -89,6 +94,11 @@
                             <button mat-raised-button color="primary" disabled class="w-100 mt-1 mb-2">Abrir</button>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <button mat-raised-button color="accent" class="w-100 mt-1 mb-2" (click)="buyChest(2)">Comprar</button>
+                        </div>
+                    </div>
                 </mat-card>
             </div>
             <div class="col-3">
@@ -130,6 +140,11 @@
                         </div>
                         <div class="col" *ngIf="conectedUser.casesLV == 0">
                             <button mat-raised-button color="primary" disabled class="w-100 mt-1 mb-2">Abrir</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button mat-raised-button color="accent" class="w-100 mt-1 mb-2" (click)="buyChest(3)">Comprar</button>
                         </div>
                     </div>
                 </mat-card>
@@ -187,9 +202,15 @@
                                             <img [src]=item.img class="img-possibleItemsList">
                                         </div>
                                     </div>
-                                    <div class="row mt-2">
+                                    <div class="row mt-2" *ngIf="item.name != 'FZ'">
                                         <div class="col pricedown">
                                             <div class="mat-h2 mat-h1-chest">{{item.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2" *ngIf="item.name == 'FZ'">
+                                        <div class="col pricedown">
+                                            <div class="mat-h2 mat-h1-chest">{{amountOfFZ}} {{item.name}}
                                             </div>
                                         </div>
                                     </div>
