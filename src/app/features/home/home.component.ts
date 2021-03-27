@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
 	/*
 
 	Pendiente:
-	- Noticias
 	- Conectar últimas misiones
 	- Solicitar mision y ver misiones en el home
 	- Sistema de misiones
