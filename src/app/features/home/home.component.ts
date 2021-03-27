@@ -18,10 +18,7 @@ export class HomeComponent implements OnInit {
 
 	Pendiente:
 	- Conectar últimas misiones
-	- Solicitar mision y ver misiones en el home
 	- Sistema de misiones
-	- Dentro de /cases poder comprar mas cajas o pedir extraccion de dinero
-	- Dentro de /inventory poder extraer los items o pedir extraccion de dinero
 	- ABM de misión
 	- ABM de cajas
 	- ABM de usuarios
@@ -29,10 +26,10 @@ export class HomeComponent implements OnInit {
 	- Dar o sacar respeto
 	- Algoritmo de rates para cajas
 	- Asignar mision a una persona o sacar mision
-	- Logs de ultimas cajas abiertas cada vez que se abre una caja
 	- Fake de log de caja abierta
 	- Log de ultimas misiones cada vez que se marca una mision como completa
 	- Fake de log de ultima mision
+	
 
 
 	*/
