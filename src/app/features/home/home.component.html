@@ -7,12 +7,13 @@
         <div class="col-6">
             <mat-card class="mat-elevation-z4 main-card profile-card">
                 <div class="row mt-4">
-                    <div class="col text-center">
+                    <div class="col"></div>
+                    <div class="col-8 text-left">
                         <span class="name">{{currentUser.name}} |</span>
                         <span class="role-description"> {{currentUser.ingameRole}}</span>
                     </div>
-                    <div class="col">
-
+                    <div class="col-3 text-right">
+                        <button mat-raised-button color="warn" *ngIf="currentUser.role == 'Admin'"><mat-icon>admin_panel_settings</mat-icon> Admin</button>
                     </div>
                 </div>
                 <div class="row mt-5">

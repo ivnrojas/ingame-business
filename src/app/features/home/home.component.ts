@@ -19,12 +19,10 @@ export class HomeComponent implements OnInit {
 	Pendiente:
 	- Noticias
 	- Conectar últimas misiones
-	- Discord link
 	- Solicitar mision y ver misiones en el home
 	- Sistema de misiones
 	- Dentro de /cases poder comprar mas cajas o pedir extraccion de dinero
 	- Dentro de /inventory poder extraer los items o pedir extraccion de dinero
-	- Boton para entrar a admin en home
 	- ABM de misión
 	- ABM de cajas
 	- ABM de usuarios
