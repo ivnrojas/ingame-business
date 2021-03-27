@@ -29,7 +29,8 @@ export class HomeComponent implements OnInit {
 	- Fake de log de caja abierta
 	- Log de ultimas misiones cada vez que se marca una mision como completa
 	- Fake de log de ultima mision
-	
+	- Profit de personas, logueos y panel para visualizar
+	- Ver solicitudes
 
 
 	*/
