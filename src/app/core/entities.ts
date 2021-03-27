@@ -69,7 +69,7 @@ export enum StateOfWithdrawRequest {
 }
 
 export interface IWithdrawRequest extends IFirebaseObject {
-    itemRequest: IItem;
+    itemRequest: IItem | number;
     userWhoSent: string;
     userWhoReceiving: string;
     state: StateOfWithdrawRequest; 
