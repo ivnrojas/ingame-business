@@ -33,6 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './features/home/home.component';
 import { InventoryComponent } from './features/inventory/inventory.component';
 import { RespectPipe } from './shared/pipes/respect.pipe';
+import { WithdrawalsComponent } from './features/withdrawals/withdrawals.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { RespectPipe } from './shared/pipes/respect.pipe';
     HomeComponent,
     InventoryComponent,
     RespectPipe,
+    WithdrawalsComponent,
   ],
   imports: [
     FormsModule,

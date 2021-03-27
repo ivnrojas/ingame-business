@@ -422,6 +422,10 @@ export class RouletteComponent implements OnInit {
 		this.router.navigate(['']);
 	}
 
+	public goToWithdrawals(): void {
+		this.router.navigate(['/withdrawals']);
+	}
+
 	private random(min: number, max: number): number {
 		return Math.floor((Math.random()*(max - min))+min);
 	}

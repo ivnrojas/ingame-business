@@ -1,39 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConnectionStatus, IItem, IUser, IWithdrawRequest, StateOfWithdrawRequest } from 'src/app/core/entities';
-import { ItemService } from 'src/app/shared/services/item.service';
+import { ConnectionStatus, IUser, IWithdrawRequest, StateOfWithdrawRequest } from 'src/app/core/entities';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
-	selector: 'app-inventory',
-	templateUrl: './inventory.component.html',
-	styleUrls: ['./inventory.component.scss']
+	selector: 'app-withdrawals',
+	templateUrl: './withdrawals.component.html',
+	styleUrls: ['./withdrawals.component.scss']
 })
-export class InventoryComponent implements OnInit {
+export class WithdrawalsComponent implements OnInit {
 
-	// Usuario conectado
+	// Usuario Conectado
 	private conectedUser: IUser;
 
 	// Admins conectados
 	public adminUsersConected: IUser[];
 
-	// Flags
-	public loading: boolean = true;
-
-	// Listas de items dentro del inventario
-	public listOfItemsInInventory: IItem[];
-	public listOfItemsInInventoryPending : IItem[];
-
-	// Item por retirar
-	public withdrawItem: IItem;
+	// Cantidad a retirar
+	public quantityToWithdraw: number;
 
 	// Admin encargado del retiro
 	public userInChargeOfWithdrawal: IUser;
-	
 
-	constructor(private session: SessionService, private dbUser: UserService, private toastr: ToastrService, private router: Router) { }
+	// Loading
+	public loading: boolean = true;
+
+	constructor( private session: SessionService, private dbUser: UserService, private router: Router, private toastr: ToastrService) { }
 
 	ngOnInit(): void {
 		this.getConectedUser();
@@ -44,21 +38,8 @@ export class InventoryComponent implements OnInit {
 		let user$ = await this.session.getUserObservable();
 		user$.subscribe(user => {
 			this.conectedUser = user;
-			this.getInventoryItems();
 			this.loading = false;
 		});
-	}
-
-	private getInventoryItems(): void {
-		this.listOfItemsInInventory = [];
-		this.listOfItemsInInventoryPending = [];
-
-		for(let item of this.conectedUser.inventory){
-			if(item.pendingWithdrawal)
-				this.listOfItemsInInventoryPending.push(item);
-			else
-				this.listOfItemsInInventory.push(item)
-		}
 	}
 
 	private async getAdminUser(): Promise<void> {
@@ -72,13 +53,18 @@ export class InventoryComponent implements OnInit {
 		})
 	}
 
-	public withdraw(item: IItem): void {
-		this.withdrawItem = item;
+	public checkFieldsForWithdrawal(): boolean {
+		if(this.userInChargeOfWithdrawal && this.quantityToWithdraw){
+			if(this.conectedUser.money >= this.quantityToWithdraw && this.quantityToWithdraw > 0)
+				return true;
+		}
+		else
+			return false;
 	}
 
-	public withdrawItemOfUser(): void {
+	public withdrawalsOfUser(): void {
 		let withdrawRequest: IWithdrawRequest = {
-			itemRequest: this.withdrawItem,
+			itemRequest: this.quantityToWithdraw,
 			userWhoSent: this.userInChargeOfWithdrawal.nameInGame,
 			userWhoReceiving: this.conectedUser.nameInGame,
 			state: StateOfWithdrawRequest.Pendiente,
@@ -86,13 +72,7 @@ export class InventoryComponent implements OnInit {
 		} 
 		
 		this.userInChargeOfWithdrawal.withdrawRequest.push(withdrawRequest);
-
-		for(let i=0; i< this.conectedUser.inventory.length; i++){
-			if(this.conectedUser.inventory[i] == this.withdrawItem){
-				this.conectedUser.inventory[i].pendingWithdrawal = true;
-				this.conectedUser.inventory[i].userInChargeOfWithdrawal = this.userInChargeOfWithdrawal.nameInGame;
-			}
-		}
+		this.conectedUser.money -= this.quantityToWithdraw;
 		
 		this.loading = true;
 		this.dbUser.modify(this.userInChargeOfWithdrawal)
@@ -118,16 +98,11 @@ export class InventoryComponent implements OnInit {
 				});
 			})
 			.finally(() => {
-				this.withdrawItem = undefined; // para volver al inventario
+				this.router.navigate(['']);
 				this.loading = false;
 			})
 	}
-	
 	public backToTop(): void {
 		this.router.navigate(['']);
-	}
-
-	public goToWithdrawals(): void {
-		this.router.navigate(['/withdrawals']);
 	}
 }
