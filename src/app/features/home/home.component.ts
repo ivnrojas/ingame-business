@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
 	Pendiente:
 	- Noticias
 	- Conectar últimas misiones
-	- Conectar cajas abiertas
 	- Discord link
 	- Solicitar mision y ver misiones en el home
 	- Sistema de misiones
@@ -116,6 +115,10 @@ export class HomeComponent implements OnInit {
 		this.session.cleanSession();
 		this.auth.logoutEmail();
 		this.router.navigate(['/login']);
+	}
+
+	public goToDiscord(): void {
+		window.location.href = 'https://discord.gg/dvrTkZGKAJ';
 	}
 
 }
