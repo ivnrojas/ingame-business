@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
 import { InventoryComponent } from './features/inventory/inventory.component';
 import { LoginComponent } from './features/login/login.component';
+import { MissionUserComponent } from './features/mission-user/mission-user.component';
 import { RouletteComponent } from './features/roulette/roulette.component';
 import { WithdrawalsComponent } from './features/withdrawals/withdrawals.component';
 import { AdminGuard } from './shared/guards/admin.guard';
@@ -13,6 +14,7 @@ const routes: Routes = [
     { path: 'cases', component: RouletteComponent, canActivate: [AuthGuard] },
     { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
     { path: 'withdrawals', component: WithdrawalsComponent, canActivate: [AuthGuard] },
+    { path: 'missionUser', component: MissionUserComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: '', component: HomeComponent, canActivate: [AuthGuard] }
 ];
