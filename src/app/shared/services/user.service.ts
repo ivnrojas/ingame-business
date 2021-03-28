@@ -14,6 +14,10 @@ export class UserService {
         return this.db.collection('users', ref => ref.where('email', '==', email.toLowerCase()));
     }
 
+	public getAll(): AngularFirestoreCollection<IUser> {
+        return this.db.collection('users', ref => ref.orderBy('firebaseTimestamp', 'desc'));
+    }
+
 	public getAdminUser(): AngularFirestoreCollection<unknown> {
         return this.db.collection('users', ref => ref.where('role', '==', UserRole.Admin));
     }

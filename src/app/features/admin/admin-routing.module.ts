@@ -7,6 +7,7 @@ import { ItemListComponent } from './items/item-list/item-list.component';
 import { MissionAddComponent } from './mission/mission-add/mission-add.component';
 import { MissionListComponent } from './mission/mission-list/mission-list.component';
 import { MissionModifyComponent } from './mission/mission-modify/mission-modify.component';
+import { RespectComponent } from './respect/respect.component';
 import { UserAddComponent } from './user/user-add/user-add.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 
@@ -27,6 +28,8 @@ const routes: Routes = [
 				{ path: '', component: ItemListComponent },
 				{ path: 'add', component: ItemAddComponent },
 			]},		
+			{ path: 'respect', component: RespectComponent },
+
 		]
 	}
 ];

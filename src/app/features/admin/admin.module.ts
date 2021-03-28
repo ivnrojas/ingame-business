@@ -26,6 +26,7 @@ import { HomeadminComponent } from './homeadmin/homeadmin.component';
 import { ItemListComponent } from './items/item-list/item-list.component';
 import { ItemAddComponent } from './items/item-add/item-add.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { RespectComponent } from './respect/respect.component';
 
 
 
@@ -40,6 +41,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     HomeadminComponent,
     ItemListComponent,
     ItemAddComponent,
+    RespectComponent,
   ],
   imports: [
     CommonModule,

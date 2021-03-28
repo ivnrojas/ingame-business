@@ -1,0 +1,23 @@
+
+.hr-border {
+    border: 1px solid rgba(241, 241, 241, 0.562);
+}
+
+li {
+    list-style: none;
+    display: inline-block;
+}
+
+.list {
+    position: relative;
+    margin-left: 230;
+    display: inline-block;
+}
+
+.list li {
+    border: 4px solid transparent ;
+}
+
+.mat-h1-color {
+    color: rgb(153, 153, 153);
+}
