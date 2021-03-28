@@ -83,6 +83,9 @@ export interface IItem extends IFirebaseObject {
     cost: number;
     pendingWithdrawal: boolean;
     userInChargeOfWithdrawal: string;
+    case: string;
+    rate: number;
+    order: number;
 }
 
 export enum IngameRole {
