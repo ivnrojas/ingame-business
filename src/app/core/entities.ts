@@ -16,14 +16,15 @@ export interface IMission extends IFirebaseObject {
     description: string;
     companyProfit: number;
     userExperienceProfit: number;
-    notifyTo: IUser;
-    deliverTo?: IUser;
+    deliverTo?: string;
     startDate?: Date;
     maxDate?: Date;
     closeDate?: Date;
     category: missionCategory;
     state: missionState;
     group: string;
+    userInChargeOfDelivery: string
+    requiredLevel: number;
 }
 
 export enum missionState {

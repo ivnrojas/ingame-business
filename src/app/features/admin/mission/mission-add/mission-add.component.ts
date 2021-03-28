@@ -83,14 +83,15 @@ export class MissionAddComponent implements OnInit {
             description: this.missionForm.get('description').value,
             companyProfit: this.missionForm.get('companyProfit').value,
             userExperienceProfit: this.missionForm.get('userExperience').value,
-            notifyTo: this.missionForm.get('notifyTo').value,
             deliverTo: this.missionForm.get('deliverTo').value,
             startDate: new Date(),
             maxDate: this.missionForm.get('maxDay').value,
             closeDate: null,
             category: this.missionForm.get('category').value,
             state: null,
-            group: null
+            group: null,
+            userInChargeOfDelivery: null,
+            requiredLevel: null,
         }
     }
 
