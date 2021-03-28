@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { IUser } from 'src/app/core/entities';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -18,7 +19,7 @@ export class RespectComponent implements OnInit {
 	// Flags
 	public loading: boolean = true;
 	
-	constructor(private dbUser: UserService) { }
+	constructor(private dbUser: UserService, private toastr: ToastrService) { }
 
 	ngOnInit(): void {
 		this.getUsers();
@@ -40,29 +41,51 @@ export class RespectComponent implements OnInit {
 		switch(quantity){
 			case 1:
 				this.userSelected.respect+=1;
-				this.dbUser.modify(this.userSelected);
+				this.modifyUser(1);
 				break;
 			case 2:
 				this.userSelected.respect+=2;
-				this.dbUser.modify(this.userSelected);
+				this.modifyUser(1);
 				break;
 			case 3:
 				this.userSelected.respect+=3;
-				this.dbUser.modify(this.userSelected);
+				this.modifyUser(1);
 				break;
 			case -1:
 				this.userSelected.respect-=1;
-				this.dbUser.modify(this.userSelected);
+				this.modifyUser(0);
 				break;
 			case -2:
 				this.userSelected.respect-=2;
-				this.dbUser.modify(this.userSelected);
+				this.modifyUser(0);
 				break;
 			case -3:
 				this.userSelected.respect-=3;
-				this.dbUser.modify(this.userSelected);
+				this.modifyUser(0);
 				break;
 		}
+	}
+
+	public modifyUser(type: number): void {
+		this.dbUser.modify(this.userSelected)
+			.then(() => {
+				if(type == 1)
+					this.toastr.success('', 'Respeto sumado',  {
+						timeOut: 4000,
+						positionClass: 'toast-bottom-right',
+					});
+				else
+					this.toastr.error('', 'Respeto restado',  {
+						timeOut: 4000,
+						positionClass: 'toast-bottom-right',
+					});
+			})
+			.catch(() => {
+				this.toastr.info('', 'Error en la operación', {
+					timeOut: 4000,
+					positionClass: 'toast-bottom-right',
+				});
+			})
 	}
 
 }
