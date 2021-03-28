@@ -12,15 +12,36 @@
         <div class="col">
             <mat-accordion>
                 <mat-expansion-panel hideToggle>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Los Santos
-                    </mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <hr>
-                  <p *ngFor="let item of casesLS">
-                      {{item.name}}
-                  </p>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Los Santos
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <hr>                    
+                    <div class="row mb-3" *ngFor="let item of casesLS">
+                        <div class="col-4 text-center">
+                            <mat-card>
+                                {{item.name}}
+                            </mat-card>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field >
+                                <mat-label>Porcentaje</mat-label>
+                                <input required matInput class="text-right" type="number" [(ngModel)]="item.rate" autocomplete="off">
+                                <span matSuffix>%</span>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field >
+                                <mat-label>Costo</mat-label>
+                                <input required matInput type="number" [(ngModel)]="item.cost" autocomplete="off">
+                                <span matPrefix class="mr-2">$</span>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-2" style="padding-left: 0;">
+                            <button color="primary" class="w-100" mat-raised-button mat-button (click)="saveChanges(item)">Guardar</button>
+                        </div>
+                    </div>
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
@@ -29,32 +50,74 @@
         <div class="col">
             <mat-accordion>
                 <mat-expansion-panel hideToggle>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        San Fierro
-                    </mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <hr>
-                  <p *ngFor="let item of casesSF">
-                      {{item.name}}
-                  </p>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            San Fierro
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <hr>
+                    <div class="row mb-3" *ngFor="let item of casesSF">
+                        <div class="col-4 text-center">
+                            <mat-card>
+                                {{item.name}}
+                            </mat-card>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field >
+                                <mat-label>Porcentaje</mat-label>
+                                <input required matInput class="text-right" type="number" [(ngModel)]="item.rate" autocomplete="off">
+                                <span matSuffix>%</span>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field >
+                                <mat-label>Costo</mat-label>
+                                <input required matInput type="number" [(ngModel)]="item.cost" autocomplete="off">
+                                <span matPrefix class="mr-2">$</span>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-2" style="padding-left: 0;">
+                            <button color="primary" class="w-100" mat-raised-button mat-button (click)="saveChanges(item)">Guardar</button>
+                        </div>
+                    </div>
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-4 mb-5">
         <div class="col">
             <mat-accordion>
                 <mat-expansion-panel hideToggle>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Las Venturas
-                    </mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <hr>
-                  <p *ngFor="let item of casesLV">
-                      {{item.name}}
-                  </p>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Las Venturas
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <hr>
+                    <div class="row mb-3" *ngFor="let item of casesLV">
+                        <div class="col-4 text-center">
+                            <mat-card>
+                                {{item.name}}
+                            </mat-card>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field >
+                                <mat-label>Porcentaje</mat-label>
+                                <input required matInput class="text-right" type="number" [(ngModel)]="item.rate" autocomplete="off">
+                                <span matSuffix>%</span>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3">
+                            <mat-form-field >
+                                <mat-label>Costo</mat-label>
+                                <input required matInput type="number" [(ngModel)]="item.cost" autocomplete="off">
+                                <span matPrefix class="mr-2">$</span>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-2" style="padding-left: 0;">
+                            <button color="primary" class="w-100" mat-raised-button mat-button (click)="saveChanges(item)">Guardar</button>
+                        </div>
+                    </div>
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
