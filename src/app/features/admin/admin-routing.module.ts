@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { HomeadminComponent } from './homeadmin/homeadmin.component';
+import { ItemAddComponent } from './items/item-add/item-add.component';
+import { ItemListComponent } from './items/item-list/item-list.component';
 import { MissionAddComponent } from './mission/mission-add/mission-add.component';
 import { MissionListComponent } from './mission/mission-list/mission-list.component';
 import { MissionModifyComponent } from './mission/mission-modify/mission-modify.component';
@@ -20,6 +22,10 @@ const routes: Routes = [
 				{ path: '', component: MissionListComponent },
 				{ path: 'add', component: MissionAddComponent },
 				{ path: 'modify', component: MissionModifyComponent },
+			]},		
+			{ path: 'items', children: [
+				{ path: '', component: ItemListComponent },
+				{ path: 'add', component: ItemAddComponent },
 			]},		
 		]
 	}

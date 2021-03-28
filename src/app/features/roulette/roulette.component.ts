@@ -112,7 +112,7 @@ export class RouletteComponent implements OnInit {
 
 	private generatePossibleItemsListInChestLasVenturas(): void {
 		this.possibleItemsList = [];
-		this.possibleItemsList.push(this.getItemFromList('7 Craks'));
+		this.possibleItemsList.push(this.getItemFromList('7 Crack'));
 		this.possibleItemsList.push(this.getItemFromList('$5000'));
 		this.possibleItemsList.push(this.getItemFromList('MP5'));
 		this.possibleItemsList.push(this.getItemFromList('Cofre Las Venturas'));

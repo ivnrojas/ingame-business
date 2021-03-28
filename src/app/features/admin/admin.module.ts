@@ -23,6 +23,10 @@ import { MissionAddComponent } from './mission/mission-add/mission-add.component
 import { MissionListComponent } from './mission/mission-list/mission-list.component';
 import { MissionModifyComponent } from './mission/mission-modify/mission-modify.component';
 import { HomeadminComponent } from './homeadmin/homeadmin.component';
+import { ItemListComponent } from './items/item-list/item-list.component';
+import { ItemAddComponent } from './items/item-add/item-add.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 
 @NgModule({
@@ -34,6 +38,8 @@ import { HomeadminComponent } from './homeadmin/homeadmin.component';
     UserAddComponent,
     UserListComponent,
     HomeadminComponent,
+    ItemListComponent,
+    ItemAddComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +52,7 @@ import { HomeadminComponent } from './homeadmin/homeadmin.component';
     TextFieldModule,
     MatSelectModule,
     MatNativeDateModule,
+    MatExpansionModule,
     MatDatepickerModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
