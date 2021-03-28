@@ -26,6 +26,9 @@ export class MissionUserComponent implements OnInit {
 	public secondPlaceAvailable: IMission;
 	public thirdPlaceAvailable: IMission;
 
+	// Lista de misiones con solicitud de entrega.
+	public listOfMissionsWithDeliveryRequest: IMission [];
+
 	//Solicitud de entrega
 	public deliveryRequest: boolean = false;
 
@@ -58,6 +61,7 @@ export class MissionUserComponent implements OnInit {
 	private getMissionsRunByTheUserConected(): void {
 		let index: number = 0;
 		this.missionsRunByTheUserConected = this.conectedUser.currentMissions;
+		this.listOfMissionsWithDeliveryRequest = [];
 
 		for(let mission of this.missionsRunByTheUserConected){
 			if(index == 0){
@@ -65,19 +69,29 @@ export class MissionUserComponent implements OnInit {
 					this.firstPlaceAvailable = mission;
 					index++
 				}
+				else
+					this.listOfMissionsWithDeliveryRequest.push(mission);
 			}
 			else if(index == 1){
 				if(mission.state == missionState.started){
 					this.secondPlaceAvailable = mission;
 					index++
 				}
+				else
+					this.listOfMissionsWithDeliveryRequest.push(mission);
 			}
 			else if(index == 2){
 				if(mission.state == missionState.started){
 					this.thirdPlaceAvailable = mission;
 					break;
 				}
+				else
+					this.listOfMissionsWithDeliveryRequest.push(mission);
 			}
+		}
+
+		if(this.listOfMissionsWithDeliveryRequest.length == 0){
+			this.listOfMissionsWithDeliveryRequest = undefined;
 		}
 	}
 

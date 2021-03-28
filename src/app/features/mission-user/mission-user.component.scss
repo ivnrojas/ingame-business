@@ -12,6 +12,10 @@
     height: 560px;
 }
 
+.mat-card-width {
+    width: 560px;
+}
+
 
 .img-plus {
     width: 70px;
@@ -22,4 +26,23 @@
     display:flex; 
     justify-content: center;
     align-items: center;
+}
+
+.hr-border {
+    border: 1px solid rgba(241, 241, 241, 0.562);
+}
+
+li {
+    list-style: none;
+    display: inline-block;
+}
+
+.list {
+    position: relative;
+    margin-left: 230;
+    display: inline-block;
+}
+
+.list li {
+    border: 4px solid transparent ;
 }
