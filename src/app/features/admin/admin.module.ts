@@ -27,6 +27,7 @@ import { ItemListComponent } from './items/item-list/item-list.component';
 import { ItemAddComponent } from './items/item-add/item-add.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { RespectComponent } from './respect/respect.component';
+import { ExperienceComponent } from './experience/experience.component';
 
 
 
@@ -42,6 +43,7 @@ import { RespectComponent } from './respect/respect.component';
     ItemListComponent,
     ItemAddComponent,
     RespectComponent,
+    ExperienceComponent,
   ],
   imports: [
     CommonModule,

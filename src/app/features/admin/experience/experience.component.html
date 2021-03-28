@@ -1,0 +1,81 @@
+<div class="spinner-border m-5" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+</div>
+
+<div class="container-fluid" *ngIf="!loading">
+    <div class="row">
+        <div class="col">
+        <div class="row text-center mt-5 mb-5">
+            <div class="col">
+                <img src='/assets/sistema-de-experiencia.png' class="img-fluid">
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-4">
+            <mat-card class="mat-elevation-z4">
+                <div class="row justify-content-center" *ngIf="listOfUser">
+                    <div class="col">
+                        <div class="row mt-2">
+                            <div class="col pricedown text-center">
+                                <div class="mat-h1 mat-h1-color">Usuarios de la banda</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row mt-2" *ngFor="let user of listOfUser">
+                            <div class="col">
+                                <button mat-raised-button color="accent" class="w-100 mt-2" (click)="selectUser(user)">{{user.nameInGame}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5" *ngIf="userSelected">
+        <div class="col-4">
+            <mat-card class="mat-elevation-z4">
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <div class="row mt-2">
+                            <div class="col pricedown text-center">
+                                <div class="mat-h1 mat-h1-color">Experiencia</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-4">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Experiencia</mat-label>
+                                    <input required matInput disabled type="text" autocomplete="off"
+                                        [(ngModel)]="userSelected.experience">
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Experiencia agregada</mat-label>
+                                    <input required matInput type="text" autocomplete="off"
+                                        [(ngModel)]="addedExperience">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <button mat-raised-button color="primary" class="w-100 mt-2" [disabled]="!checkAddedExperience()" (click)="addExperience()">Sumar experiencia</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
