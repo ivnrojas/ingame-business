@@ -65,14 +65,15 @@ export class WithdrawalsComponent implements OnInit {
 	public withdrawalsOfUser(): void {
 		let withdrawRequest: IWithdrawRequest = {
 			itemRequest: this.quantityToWithdraw,
-			userWhoSent: this.userInChargeOfWithdrawal.nameInGame,
-			userWhoReceiving: this.conectedUser.nameInGame,
+			userWhoSent: this.conectedUser.nameInGame,
+			userWhoReceiving: this.userInChargeOfWithdrawal.nameInGame,
 			state: StateOfWithdrawRequest.Pendiente,
 			requestDate: new Date(),
 			requestType: RequestType.Money
 		} 
 		
 		this.userInChargeOfWithdrawal.withdrawRequest.push(withdrawRequest);
+		this.conectedUser.withdrawRequest.push(withdrawRequest);
 		this.conectedUser.money -= this.quantityToWithdraw;
 		
 		this.loading = true;
