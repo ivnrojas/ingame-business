@@ -23,9 +23,8 @@ export class HomeadminComponent implements OnInit {
 		});
 	}
 
-	// Cambiar la forma en la que se obtiene todo tiene que ser en tiempo real, se duplican registros
 	private mapRequests(): void {
-		this.user.withdrawRequest.forEach(x => {
+		this.requests = this.user.withdrawRequest.map(x => {
 			let req: IRequest = {};
 
 			switch(x.requestType)
@@ -52,7 +51,7 @@ export class HomeadminComponent implements OnInit {
 					break;
 			}
 
-			this.requests.push(req);
+			return req;
 		})
 	}
 
