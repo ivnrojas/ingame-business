@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { IMission, IUser, MissionCategory, MissionTitle } from 'src/app/core/entities';
 import { MissionsService } from 'src/app/shared/services/missions.service';
 
@@ -16,13 +17,14 @@ export class MissionAddComponent implements OnInit {
 
     public titleControl = new FormControl(null, Validators.required);
     public levelMinControl = new FormControl(1, Validators.required);
-    public levelMaxControl = new FormControl(2, Validators.required);
+    public levelMaxControl = new FormControl(3, Validators.required);
     public descriptionControl = new FormControl(null, Validators.required);
     public categoryControl = new FormControl(MissionCategory.standard, Validators.required);
+    public requiredLevelControl = new FormControl(null, Validators.required);
     public companyProfitControl = new FormControl(null, Validators.required);
     public userExperienceControl = new FormControl(null, Validators.required);
 
-    constructor(private db: MissionsService) { }
+    constructor(private db: MissionsService, private toastr: ToastrService) { }
 
     
     ngOnInit(): void {
@@ -38,6 +40,7 @@ export class MissionAddComponent implements OnInit {
             'category': this.categoryControl,
             'companyProfit': this.companyProfitControl,
             'userExperience': this.userExperienceControl,
+            'requiredLevel': this.requiredLevelControl,
         });
     }
 
@@ -70,8 +73,6 @@ export class MissionAddComponent implements OnInit {
             levels.push(i);
         }
 
-
-
         let mission : IMission = {
             id: this.generateMissionId(),
             title: this.missionForm.get('title').value,
@@ -85,6 +86,21 @@ export class MissionAddComponent implements OnInit {
             userInChargeOfDelivery: null,
             requiredLevel: null,
         }
-        console.log(mission)
+        
+        this.db.add(mission)
+            .then(() => {
+                this.toastr.success('Misión agregada con éxito', 'Perfecto!', {
+                    timeOut: 4000,
+                    positionClass: 'toast-bottom-right',
+                });
+                this.missionForm.reset();
+
+            })
+            .catch(() => {
+                this.toastr.error('', 'Error en la solicitud', {
+                    timeOut: 4000,
+                    positionClass: 'toast-bottom-right',
+                });
+            })
     }
 }
