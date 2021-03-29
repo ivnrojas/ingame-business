@@ -17,7 +17,7 @@ export class InventoryComponent implements OnInit {
 	private conectedUser: IUser;
 
 	// Admins conectados
-	public adminUsersConected: IUser[];
+	public adminUsersConected: IUser[] = [];
 
 	// Flags
 	public loading: boolean = true;

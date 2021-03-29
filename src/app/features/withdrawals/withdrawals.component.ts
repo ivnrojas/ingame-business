@@ -16,7 +16,7 @@ export class WithdrawalsComponent implements OnInit {
 	private conectedUser: IUser;
 
 	// Admins conectados
-	public adminUsersConected: IUser[];
+	public adminUsersConected: IUser[] = [];
 
 	// Cantidad a retirar
 	public quantityToWithdraw: number;
