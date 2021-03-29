@@ -7,6 +7,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LogService } from 'src/app/shared/services/log.service';
+import { CaseService } from 'src/app/shared/services/case.service';
 
 @Component({
 	selector: 'app-roulette',
@@ -21,9 +22,6 @@ export class RouletteComponent implements OnInit {
 
 	// Usuario Conectado
 	public conectedUser: IUser;
-
-	// Lista total de items
-	private itemList: IItem[];
 
 	//Cofre seleccionado
 	public selectedChest: number;
@@ -45,7 +43,7 @@ export class RouletteComponent implements OnInit {
 	// Loading
 	public loading: boolean = true;
 
-	constructor(private dbItem: ItemService, private session: SessionService, private dbUser: UserService, private router: Router, private toastr: ToastrService, private log: LogService) { }
+	constructor(private caseService: CaseService, private dbItem: ItemService, private session: SessionService, private dbUser: UserService, private router: Router, private toastr: ToastrService, private log: LogService) { }
 
 	ngOnInit(): void {
 		this.getConectedUser();
@@ -60,229 +58,157 @@ export class RouletteComponent implements OnInit {
 	}
 
 	public async selectChest(type: number): Promise<void> {
-		this.itemList = await this.dbItem.getAll_sync();
 		switch(type){
 			case 1:
 				this.selectedChest = type;
 				this.conectedUser.casesLS--;
 				this.amountOfFZ = 1;
-				this.generatePossibleItemsListInChestLosSantos();
+				this.possibleItemsList = await this.caseService.getAllLS();
 				this.generateRouletteListForLS();
 				break;
 			case 2:
 				this.selectedChest = type;
 				this.conectedUser.casesSF--;
 				this.amountOfFZ = 2;
-				this.generatePossibleItemsListInChestSanFierro();
+				this.possibleItemsList = await this.caseService.getAllSF();
 				this.generateRouletteListForSF();
 				break;
 			case 3:
 				this.selectedChest = type;
 				this.conectedUser.casesLV--;
 				this.amountOfFZ = 5;
-				this.generatePossibleItemsListInChestLasVenturas();
+				this.possibleItemsList = await this.caseService.getAllLV();
 				this.generateRouletteListForLV();
 				break;
 		}
 	}
-	
-	private generatePossibleItemsListInChestLosSantos(): void {
-		this.possibleItemsList = [];
-		this.possibleItemsList.push(this.getItemFromList('$1000'));
-		this.possibleItemsList.push(this.getItemFromList('9mm'));
-		this.possibleItemsList.push(this.getItemFromList('$2000'));
-		this.possibleItemsList.push(this.getItemFromList('Cofre Los Santos'));
-		this.possibleItemsList.push(this.getItemFromList('$3000'));
-		this.possibleItemsList.push(this.getItemFromList('Escopeta'));
-		this.possibleItemsList.push(this.getItemFromList('Escopeta de combate'));
-		this.possibleItemsList.push(this.getItemFromList('FZ'));
-	}
 
-	private generatePossibleItemsListInChestSanFierro(): void {
-		this.possibleItemsList = [];
-		this.possibleItemsList.push(this.getItemFromList('9mm silenciada'));
-		this.possibleItemsList.push(this.getItemFromList('5 Medicamentos'));
-		this.possibleItemsList.push(this.getItemFromList('$3000'));
-		this.possibleItemsList.push(this.getItemFromList('Cofre San Fierro'));
-		this.possibleItemsList.push(this.getItemFromList('Desert Eagle'));
-		this.possibleItemsList.push(this.getItemFromList('Rifle'));
-		this.possibleItemsList.push(this.getItemFromList('M4'));
-		this.possibleItemsList.push(this.getItemFromList('FZ'));
-	}
+	private getWinnerProduct(): IItem {
 
-	private generatePossibleItemsListInChestLasVenturas(): void {
-		this.possibleItemsList = [];
-		this.possibleItemsList.push(this.getItemFromList('7 Crack'));
-		this.possibleItemsList.push(this.getItemFromList('$5000'));
-		this.possibleItemsList.push(this.getItemFromList('MP5'));
-		this.possibleItemsList.push(this.getItemFromList('Cofre Las Venturas'));
-		this.possibleItemsList.push(this.getItemFromList('$15000'));
-		this.possibleItemsList.push(this.getItemFromList('AK47'));
-		this.possibleItemsList.push(this.getItemFromList('Granada'));
-		this.possibleItemsList.push(this.getItemFromList('FZ'));
+		// Saldrá de 0 a 99
+		let winNumber = this.random(0, 100);
+
+		let percentageItems: IItem[] = []
+
+		this.possibleItemsList.forEach(item => {
+			for(let i=0;i<item.rate;i++)
+			{
+				percentageItems.push(item);
+			}
+		})
+
+		return percentageItems[winNumber];
 	}
 	
+	// ################################## LOS SANTOS ##################################
+
 	private generateRouletteListForLS(): void {
 		this.rouletteItemsList = [];
 		for (let i=0; i<150; i++) {
 			this.rouletteItemsList.push(this.getRandomProductForLS());
 
 			if(i==140)
-				this.rouletteItemsList.push(this.getWinnerProductForLS());
+				this.rouletteItemsList.push(this.getWinnerProduct());
 		}
-	}
-
-	private getWinnerProductForLS(): IItem {
-		let numberRandom = this.random(1, 5000);
-
-		if(numberRandom <= 500)
-			return this.getItemFromList('$1000');
-		if(numberRandom > 500 && numberRandom <= 1000)
-			return this.getItemFromList('9mm');
-		if(numberRandom > 1000 && numberRandom <= 2000)
-			return this.getItemFromList('$3000');
-		if(numberRandom > 2000 && numberRandom <= 2500)
-			return this.getItemFromList('Cofre Los Santos');
-		if(numberRandom > 2500 && numberRandom <= 3000)			
-			return this.getItemFromList('$3000');
-		if(numberRandom > 3000 && numberRandom <= 3500)			
-			return this.getItemFromList('Escopeta');
-		if(numberRandom > 3500 && numberRandom <= 4000)			
-			return this.getItemFromList('Escopeta de combate');
-		if(numberRandom > 4000)			
-			return this.getItemFromList('FZ');
-
 	}
 
 	public getRandomProductForLS(): IItem {
 		let numberRandom = this.random(1, 5000);
 
-		if(numberRandom <= 500)
+		if(numberRandom <= 750)
 			return this.getItemFromList('$1000');
-		if(numberRandom > 500 && numberRandom <= 1000)
+		if(numberRandom > 750 && numberRandom <= 1500)
 			return this.getItemFromList('9mm');
-		if(numberRandom > 1000 && numberRandom <= 2000)
+		if(numberRandom > 1500 && numberRandom <= 2250)
 			return this.getItemFromList('$3000');
-		if(numberRandom > 2000 && numberRandom <= 2500)
+		if(numberRandom > 2250 && numberRandom <= 3000)
 			return this.getItemFromList('Cofre Los Santos');
-		if(numberRandom > 2500 && numberRandom <= 3000)			
+		if(numberRandom > 3000 && numberRandom <= 3750)			
 			return this.getItemFromList('$3000');
-		if(numberRandom > 3000 && numberRandom <= 3500)			
+		if(numberRandom > 3750 && numberRandom <= 4500)			
 			return this.getItemFromList('Escopeta');
-		if(numberRandom > 3500 && numberRandom <= 4000)			
+		if(numberRandom > 4500 && numberRandom <= 4900)			
 			return this.getItemFromList('Escopeta de combate');
-		if(numberRandom > 4000)			
+		if(numberRandom > 4900)			
 			return this.getItemFromList('FZ');
 	}
+
 	
+
+	// ##############################################################################
+	
+	// ################################## SAN FIERRO ##################################
+
 	private generateRouletteListForSF(): void {
 		this.rouletteItemsList = [];
 		for (let i=0; i<150; i++) {
 			this.rouletteItemsList.push(this.getRandomProductSF());
 
 			if(i==140)
-				this.rouletteItemsList.push(this.getWinnerProductSF());
+				this.rouletteItemsList.push(this.getWinnerProduct());
 		}
-	}
-
-	private getWinnerProductSF(): IItem {
-		let numberRandom = this.random(1, 5000);
-
-		if(numberRandom <= 500)
-			return this.getItemFromList('9mm silenciada');
-		if(numberRandom > 500 && numberRandom <= 1000)
-			return this.getItemFromList('5 Medicamentos');
-		if(numberRandom > 1000 && numberRandom <= 2000)
-			return this.getItemFromList('$3000');
-		if(numberRandom > 2000 && numberRandom <= 2500)
-			return this.getItemFromList('Cofre San Fierro');
-		if(numberRandom > 2500 && numberRandom <= 3000)			
-			return this.getItemFromList('Desert Eagle');
-		if(numberRandom > 3000 && numberRandom <= 3500)			
-			return this.getItemFromList('Rifle');
-		if(numberRandom > 3500 && numberRandom <= 4000)			
-			return this.getItemFromList('M4');
-		if(numberRandom > 4000)			
-			return this.getItemFromList('FZ');
-
 	}
 
 	public getRandomProductSF(): IItem {
 		let numberRandom = this.random(1, 5000);
 
-		if(numberRandom <= 500)
+		if(numberRandom <= 750)
 			return this.getItemFromList('9mm silenciada');
-		if(numberRandom > 500 && numberRandom <= 1000)
+		if(numberRandom > 750 && numberRandom <= 1500)
 			return this.getItemFromList('5 Medicamentos');
-		if(numberRandom > 1000 && numberRandom <= 2000)
+		if(numberRandom > 1500 && numberRandom <= 2250)
 			return this.getItemFromList('$3000');
-		if(numberRandom > 2000 && numberRandom <= 2500)
+		if(numberRandom > 2250 && numberRandom <= 3000)
 			return this.getItemFromList('Cofre San Fierro');
-		if(numberRandom > 2500 && numberRandom <= 3000)			
+		if(numberRandom > 3000 && numberRandom <= 3750)			
 			return this.getItemFromList('Desert Eagle');
-		if(numberRandom > 3000 && numberRandom <= 3500)			
+		if(numberRandom > 3750 && numberRandom <= 4500)			
 			return this.getItemFromList('Rifle');
-		if(numberRandom > 3500 && numberRandom <= 4000)			
+		if(numberRandom > 4500 && numberRandom <= 4900)			
 			return this.getItemFromList('M4');
-		if(numberRandom > 4000)			
-			return this.getItemFromList('FZ');
+		if(numberRandom > 4900)			
+			return this.getItemFromList('3 FZ');
 	}
 
+	// ##############################################################################
+
+	// ################################## LAS VENTURAS ##################################
+	
 	private generateRouletteListForLV(): void {
 		this.rouletteItemsList = [];
 		for (let i=0; i<150; i++) {
 			this.rouletteItemsList.push(this.getRandomProductLV());
 
 			if(i==140)
-				this.rouletteItemsList.push(this.getWinnerProductLV());
+				this.rouletteItemsList.push(this.getWinnerProduct());
 		}
-	}
-
-	private getWinnerProductLV(): IItem {
-		let numberRandom = this.random(1, 5000);
-
-		if(numberRandom <= 500)
-			return this.getItemFromList('7 Craks');
-		if(numberRandom > 500 && numberRandom <= 1000)
-			return this.getItemFromList('$5000');
-		if(numberRandom > 1000 && numberRandom <= 2000)
-			return this.getItemFromList('MP5');
-		if(numberRandom > 2000 && numberRandom <= 2500)
-			return this.getItemFromList('Cofre Las Venturas');
-		if(numberRandom > 2500 && numberRandom <= 3000)			
-			return this.getItemFromList('$15000');
-		if(numberRandom > 3000 && numberRandom <= 3500)			
-			return this.getItemFromList('AK47');
-		if(numberRandom > 3500 && numberRandom <= 4000)			
-			return this.getItemFromList('Granada');
-		if(numberRandom > 4000)			
-			return this.getItemFromList('FZ');
-
 	}
 
 	public getRandomProductLV(): IItem {
 		let numberRandom = this.random(1, 5000);
 
-		if(numberRandom <= 500)
-			return this.getItemFromList('7 Craks');
-		if(numberRandom > 500 && numberRandom <= 1000)
+		if(numberRandom <= 750)
+			return this.getItemFromList('7 Crack');
+		if(numberRandom > 750 && numberRandom <= 1500)
 			return this.getItemFromList('$5000');
-		if(numberRandom > 1000 && numberRandom <= 2000)
+		if(numberRandom > 1500 && numberRandom <= 2250)
 			return this.getItemFromList('MP5');
-		if(numberRandom > 2000 && numberRandom <= 2500)
+		if(numberRandom > 2250 && numberRandom <= 3000)
 			return this.getItemFromList('Cofre Las Venturas');
-		if(numberRandom > 2500 && numberRandom <= 3000)			
+		if(numberRandom > 3000 && numberRandom <= 3750)			
 			return this.getItemFromList('$15000');
-		if(numberRandom > 3000 && numberRandom <= 3500)			
+		if(numberRandom > 3750 && numberRandom <= 4500)			
 			return this.getItemFromList('AK47');
-		if(numberRandom > 3500 && numberRandom <= 4000)			
+		if(numberRandom > 4500 && numberRandom <= 4700)			
 			return this.getItemFromList('Granada');
-		if(numberRandom > 4000)			
-			return this.getItemFromList('FZ');
+		if(numberRandom > 4700)			
+			return this.getItemFromList('5 FZ');
 	}
 
+	// ##############################################################################
+
 	public getItemFromList(itemName: string): IItem {
-		for(let item of this.itemList){
+		for(let item of this.possibleItemsList){
 			if(itemName == item.name)
 				return item;
 		}
@@ -427,6 +353,7 @@ export class RouletteComponent implements OnInit {
 		this.router.navigate(['/withdrawals']);
 	}
 
+	// No incluye el número máximo
 	private random(min: number, max: number): number {
 		return Math.floor((Math.random()*(max - min))+min);
 	}
