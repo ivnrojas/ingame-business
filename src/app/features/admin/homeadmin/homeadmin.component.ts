@@ -13,6 +13,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class HomeadminComponent implements OnInit {
 
 	public user: IUser;
+	public allUsers: IUser[] = [];
 	public requests: IRequest[] = [];
 
 	constructor(private session: SessionService, private userService: UserService, private toastr: ToastrService) { }
@@ -23,6 +24,9 @@ export class HomeadminComponent implements OnInit {
 			this.user = user;
 			this.mapRequests();
 		});
+		this.userService.getAll().valueChanges().subscribe(users => {
+			this.allUsers = users;
+		})
 	}
 
 	// The ID will be the exact date
