@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Session } from 'node:inspector';
-import { IUser, IWithdrawRequest } from 'src/app/core/entities';
+import { IUser } from 'src/app/core/entities';
 import { SessionService } from 'src/app/shared/services/session.service';
 
 @Component({
