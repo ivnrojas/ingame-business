@@ -64,6 +64,11 @@ export class CoreHelper {
 		return year+month+day+hours+minutes+seconds; //YYYYMMDDHHMMSS
 	}
 
+	public static DateFormat(value: string): string {
+		let valueDate = new Date(value);
+		return this.parseSingleNumber(valueDate.getDate()) + "/" + this.parseSingleNumber(valueDate.getMonth() + 1) + "/" + valueDate.getFullYear() + ' ' + this.parseSingleNumber(valueDate.getHours()) + ':' + this.parseSingleNumber(valueDate.getMinutes());
+	}
+
 	public static validateSpecialCharacters(string: string): boolean {
 		if(string){
 			var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?"; 
