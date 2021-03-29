@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConnectionStatus, IItem, IUser, IWithdrawRequest, RequestType, StateOfWithdrawRequest } from 'src/app/core/entities';
+import { ConnectionStatus, IItem, IMission, IUser, IWithdrawRequest, RequestType, StateOfWithdrawRequest } from 'src/app/core/entities';
 import { ItemService } from 'src/app/shared/services/item.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -31,6 +31,9 @@ export class InventoryComponent implements OnInit {
 
 	// Admin encargado del retiro
 	public userInChargeOfWithdrawal: IUser;
+
+	// Solicitudes pendientes 
+	public listOfElementInWithdrawRequest: IWithdrawRequest[];
 	
 
 	constructor(private session: SessionService, private dbUser: UserService, private toastr: ToastrService, private router: Router) { }
@@ -52,12 +55,19 @@ export class InventoryComponent implements OnInit {
 	private getInventoryItems(): void {
 		this.listOfItemsInInventory = [];
 		this.listOfItemsInInventoryPending = [];
+		this.listOfElementInWithdrawRequest = [];
 
 		for(let item of this.conectedUser.inventory){
 			if(item.pendingWithdrawal)
 				this.listOfItemsInInventoryPending.push(item);
 			else
 				this.listOfItemsInInventory.push(item)
+		}
+
+		for(let element of this.conectedUser.withdrawRequest){
+			if(element.requestType == RequestType.Solicitud || element.requestType == RequestType.Money){
+				this.listOfElementInWithdrawRequest.push(element);
+			}
 		}
 	}
 

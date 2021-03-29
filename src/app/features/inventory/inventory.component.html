@@ -108,6 +108,75 @@
                 </ul>
             </div>
         </div>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <hr class="hr-chest">
+            </div>
+        </div>
+        <div class="row text-center justify-content-center">
+            <div class="col-8">
+                <ul class="list">
+                    <li *ngFor="let element of listOfElementInWithdrawRequest">
+                        <mat-card class="mat-elevation-z4 mat-card-possibleItemsList mr-3 mt-4" *ngIf="element.requestType == 3">
+                            <div class="row h-55px">
+                                <div class="col">
+                                    <div class="mat-h2 mat-h1-chest">Solicitud de item/dinero para misión</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row h-100px">
+                                <div class="col">
+                                    <span>Solicitaste un item/dinero para comenzar la siguiente misión:</span>
+                                    <span class="description-span"> {{element.itemRequest.description}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col">
+                                    <div>Pendiente de entrega por <br> <span>{{element.userWhoReceiving}}</span></div>
+                                </div>
+                            </div>
+                        </mat-card>
+                        <mat-card class="mat-elevation-z4 mat-card-possibleItemsList mr-3 mt-4" *ngIf="element.requestType == 1">
+                            <div class="row h-55px">
+                                <div class="col">
+                                    <div class="mat-h2 mat-h1-chest">Retiro de dinero</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row h-100px">
+                                <div class="col">
+                                    <span>Solicitaste un retiro de dinero de:</span>
+                                    <span class="money-span"> ${{element.itemRequest}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col">
+                                    <div>Pendiente de entrega por <br> <span>{{element.userWhoReceiving}}</span></div>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div class="row justify-content-center mt-5">
             <div class="col-4">
                 <button mat-raised-button color="primary" class="w-100 mt-2" (click)="backToTop()">Regresar al inicio</button>

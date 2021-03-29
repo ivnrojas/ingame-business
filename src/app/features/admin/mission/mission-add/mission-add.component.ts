@@ -19,7 +19,7 @@ export class MissionAddComponent implements OnInit {
     public levelControl = new FormControl(MissionLevel.one, Validators.required);
     public descriptionControl = new FormControl(null, Validators.required);
     public maxDayControl = new FormControl(null, Validators.required);
-    public categoryControl = new FormControl(MissionCategory.legal, Validators.required);
+    public categoryControl = new FormControl(MissionCategory.standard, Validators.required);
     public companyProfitControl = new FormControl(null, Validators.required);
     public userExperienceControl = new FormControl(null, Validators.required);
     public deliverToControl = new FormControl('Ivana', Validators.required);

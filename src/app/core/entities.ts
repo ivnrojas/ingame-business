@@ -34,8 +34,9 @@ export enum MissionState {
 }
 
 export enum MissionCategory {
-    legal = 'Legal',
-    ilegal = 'Ilegal'
+    weaponNeeded = 'weaponNeeded',
+    moneyNeeded = 'moneyNeeded',
+    standard = 'standard'
 }
 
 export interface IUser extends IFirebaseObject {
