@@ -52,6 +52,13 @@ export class HomeadminComponent implements OnInit {
 					req.description = `${x.userWhoSent} quiere retirar $${+x.itemRequest} de su dinero.`;
 					req.profit = +x.itemRequest * -1;
 					break;
+				case RequestType.Solicitud:
+					req.date = CoreHelper.DateFormat(x.requestDate.toString());
+					req.title = `Solicitud de dinero/item - ${x.userWhoSent}`;
+					req.description = `${x.userWhoSent} necesita un item o dinero para comenzar la siguiente misión: `;
+					req.mission = (x.itemRequest as IMission).description; 
+					req.profit = (x.itemRequest as IMission).companyProfit;
+					break;
 			}
 
 			return req;
@@ -74,6 +81,9 @@ export class HomeadminComponent implements OnInit {
 						break;
 					case RequestType.Mission:
 						this.userService.removeMissionFromList(userId, withdrawRequest.itemRequest as IMission);
+						break;
+					case RequestType.Solicitud:
+						this.userService.markRequestAsComplete(userId, withdrawRequest);
 						break;
 				}	
 
