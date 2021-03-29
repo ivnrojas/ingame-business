@@ -199,15 +199,17 @@ export class MissionUserComponent implements OnInit {
 					this.missionRequestWeapon = mission;
 					this.requestWeapon = true;
 				}
-				
-
-				this.conectedUser.currentMissions.push(mission);
+				else
+					this.conectedUser.currentMissions.push(mission);
+					
 				break;
 		}
 		this.dbUser.modify(this.conectedUser)
 	}
 
 	public confirmedRequestWeapon(): void {
+		this.conectedUser.currentMissions.push(this.missionRequestWeapon);
+		
 		let withdrawRequest: IWithdrawRequest = {
 			itemRequest: this.missionRequestWeapon,
 			userWhoSent: this.conectedUser.nameInGame,

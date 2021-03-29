@@ -8,308 +8,13 @@
             <img src='/assets/misiones.png' class="img-tilte">
         </div>
     </div>
-    <div class="row justify-content-center mt-5">
-        <div class="col"></div>
-        <div class="col">
-            <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="firstPlaceAvailable">
-                <div class="row text-center mt-2">
-                    <div class="col pricedown">
-                        <div class="mat-h1 mat-h1-color">{{firstPlaceAvailable.title}}</div>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row text-center mt-4">
-                    <div class="col-7">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Fecha de incio</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [ngModel]="firstPlaceAvailable.startDate | datoToString">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-5">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>EXP ganada</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="firstPlaceAvailable.userExperienceProfit">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Descripción</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="firstPlaceAvailable.description">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row justify-content-center mt-2">
-                    <div class="col">
-                        <button mat-raised-button color="primary" class="w-100 mt-2 mb-3"
-                            (click)="performMissionDelivery(firstPlaceAvailable)">Realizar la entrega</button>
-                    </div>
-                </div>
-            </mat-card>
-            <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="!firstPlaceAvailable">
-                <div class="row text-center mt-2">
-                    <div class="col pricedown">
-                        <div class="mat-h1 mat-h1-color">Cupo disponible</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row" style="height: 234px;">
-                    <div class="col div-plus">
-                        <img src="/assets/plus.png" class="img-plus">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row justify-content-center mt-2">
-                    <div class="col">
-                        <button mat-raised-button color="accent" class="w-100 mt-2 mb-3" (click)="requestMission(1)">Solicitar misión</button>
-                    </div>
-                </div>
-            </mat-card>
-        </div>
-        <div class="col">
-            <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="secondPlaceAvailable">
-                <div class="row text-center mt-2">
-                    <div class="col pricedown">
-                        <div class="mat-h1 mat-h1-color">{{secondPlaceAvailable.title}}</div>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row text-center mt-4">
-                    <div class="col-7">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Fecha de incio</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [ngModel]="secondPlaceAvailable.startDate | datoToString">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-5">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>EXP ganada</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="secondPlaceAvailable.userExperienceProfit">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Descripción</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="secondPlaceAvailable.description">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row justify-content-center mt-2">
-                    <div class="col">
-                        <button mat-raised-button color="primary" class="w-100 mt-2 mb-3"
-                            (click)="performMissionDelivery(secondPlaceAvailable)">Realizar la entrega</button>
-                    </div>
-                </div>
-            </mat-card>
-            <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="!secondPlaceAvailable">
-                <div class="row text-center mt-2">
-                    <div class="col pricedown">
-                        <div class="mat-h1 mat-h1-color">Cupo disponible</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row" style="height: 234px;">
-                    <div class="col div-plus">
-                        <img src="/assets/plus.png" class="img-plus">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row justify-content-center mt-2">
-                    <div class="col">
-                        <button mat-raised-button color="accent" class="w-100 mt-2 mb-3" (click)="requestMission(2)">Solicitar misión</button>
-                    </div>
-                </div>
-            </mat-card>
-        </div>
-        <div class="col">
-            <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="thirdPlaceAvailable">
-                <div class="row text-center mt-2">
-                    <div class="col pricedown">
-                        <div class="mat-h1 mat-h1-color">{{thirdPlaceAvailable.title}}</div>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row text-center mt-4">
-                    <div class="col-7">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Fecha de incio</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [ngModel]="thirdPlaceAvailable.startDate | datoToString">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-5">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>EXP ganada</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="thirdPlaceAvailable.userExperienceProfit">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Descripción</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="thirdPlaceAvailable.description">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row justify-content-center mt-2">
-                    <div class="col">
-                        <button mat-raised-button color="primary" class="w-100 mt-2 mb-3"
-                            (click)="performMissionDelivery(thirdPlaceAvailable)">Realizar la entrega</button>
-                    </div>
-                </div>
-            </mat-card>
-            <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="!thirdPlaceAvailable">
-                <div class="row text-center mt-2">
-                    <div class="col pricedown">
-                        <div class="mat-h1 mat-h1-color">Cupo disponible</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row" style="height: 234px;">
-                    <div class="col div-plus">
-                        <img src="/assets/plus.png" class="img-plus">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row justify-content-center mt-2">
-                    <div class="col">
-                        <button mat-raised-button color="accent" class="w-100 mt-2 mb-3" (click)="requestMission(3)">Solicitar misión</button>
-                    </div>
-                </div>
-            </mat-card>
-        </div>
-        <div class="col"></div>
 
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-6">
-            <hr class="hr-border">
-        </div>
-    </div>
     <div class="row justify-content-center mt-5 mb-5" *ngIf="requestWeapon">
-       <div class="col-5">
-        <mat-card class="mat-elevation-z4">
-            <div class="row text-center mt-2">
-                <div class="col pricedown">
-                    <div class="mat-h1 mat-h1-color">Seleccionar usuario para la solicitud</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <hr>
-                </div>
-            </div>
-            <div class="row text-center mt-2">
-                <div class="col pricedown">
-                    <div class="mat-h2 mat-h1-color">{{missionRequestWeapon.description}}</div>
-                </div>
-            </div>
-            <div class="row text-center">
-                <div class="col">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Solitar a</mat-label>
-                        <mat-select [(ngModel)]="userInChargeOfWeaponRequest">
-                            <mat-option *ngFor="let user of adminUsersConected" [value]="user">
-                                {{user.nameInGame}} </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row justify-content-center mt-2">
-                <div class="col">
-                    <button mat-raised-button color="primary" class="w-100 mt-2 mb-3"
-                        [disabled]=!userInChargeOfWeaponRequest (click)="confirmedRequestWeapon()">Solicitar</button>
-                </div>
-            </div>
-        </mat-card>
-       </div>
-    </div>
-
-
-    <div class="row justify-content-center mt-5 mb-5" *ngIf="deliveryRequest">
-        <div class="col-4">
+        <div class="col-5">
             <mat-card class="mat-elevation-z4">
                 <div class="row text-center mt-2">
                     <div class="col pricedown">
-                        <div class="mat-h1 mat-h1-color">Seleccionar usuario para realizar la entrega</div>
+                        <div class="mat-h1 mat-h1-color">Seleccionar usuario para la solicitud</div>
                     </div>
                 </div>
                 <div class="row">
@@ -318,15 +23,15 @@
                     </div>
                 </div>
                 <div class="row text-center mt-2">
-                    <div class="col pricedown">
-                        <div class="mat-h2 mat-h1-color">{{missionToDeliver.description}}</div>
+                    <div class="col">
+                        <div class="mat-h2 mat-h1-color">{{missionRequestWeapon.description}}</div>
                     </div>
                 </div>
                 <div class="row text-center">
                     <div class="col">
                         <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Entregar a</mat-label>
-                            <mat-select [(ngModel)]="userInChargeOfWithdrawal">
+                            <mat-label>Solitar a</mat-label>
+                            <mat-select [(ngModel)]="userInChargeOfWeaponRequest">
                                 <mat-option *ngFor="let user of adminUsersConected" [value]="user">
                                     {{user.nameInGame}} </mat-option>
                             </mat-select>
@@ -335,117 +40,415 @@
                 </div>
                 <div class="row justify-content-center mt-2">
                     <div class="col">
-                        <button mat-raised-button color="primary" class="w-100 mt-2 mb-3"
-                            [disabled]=!userInChargeOfWithdrawal (click)="confirmedPerformMissionDelivery()">Realizar la
-                            entrega</button>
+                        <button mat-raised-button color="accent" class="w-100 mt-2 mb-3"
+                            [disabled]=!userInChargeOfWeaponRequest
+                            (click)="confirmedRequestWeapon()">Solicitar</button>
                     </div>
                 </div>
             </mat-card>
         </div>
-        <div class="col-3">
-            <div class="row text-center">
-                <div class="col">
-                    <mat-card class="mat-elevation-z4">
-                        <div class="row mt-2">
-                            <div class="col pricedown">
-                                <div class="mat-h1 mat-h1-color"> Usuarios para realizar la entrega</div>
-                            </div>
+    </div>
+    <div *ngIf="!requestWeapon">
+
+        <div class="row justify-content-center mt-5">
+            <div class="col"></div>
+            <div class="col">
+                <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="firstPlaceAvailable">
+                    <div class="row text-center mt-2">
+                        <div class="col pricedown">
+                            <div class="mat-h1 mat-h1-color">{{firstPlaceAvailable.title}}</div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <hr>
-                            </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col">
+                            <hr>
                         </div>
-                        <div class="row">
-                            <div class="col" *ngIf="adminUsersConected.length != 0">
-                                <div class="row justify-content-center" *ngFor="let user of adminUsersConected">
-                                    <div class="col-1 text-rigth">
-                                        <mat-icon class="icon-conected">data_usage
-                                        </mat-icon>
-                                    </div>
-                                    <div class="col-4 text-left">
-                                        <div class="mat-h2 mat-h1-chest">
-                                            {{user.nameInGame}}
+                    </div>
+                    <div class="row text-center mt-4">
+                        <div class="col-7">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Fecha de incio</mat-label>
+                                <input required matInput disabled type="text" autocomplete="off"
+                                    [ngModel]="firstPlaceAvailable.startDate | datoToString">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-5">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>EXP ganada</mat-label>
+                                <input required matInput disabled type="text" autocomplete="off"
+                                    [(ngModel)]="firstPlaceAvailable.userExperienceProfit">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Descripción</mat-label>
+                                <textarea  required matInput disabled type="text">{{firstPlaceAvailable.description}}</textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <button mat-raised-button color="primary" class="w-100 mt-2 mb-3"
+                                (click)="performMissionDelivery(firstPlaceAvailable)">Realizar la entrega</button>
+                        </div>
+                    </div>
+                </mat-card>
+                <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="!firstPlaceAvailable">
+                    <div class="row text-center mt-2">
+                        <div class="col pricedown">
+                            <div class="mat-h1 mat-h1-color">Cupo disponible</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 234px;">
+                        <div class="col div-plus">
+                            <img src="/assets/plus.png" class="img-plus">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-2">
+                        <div class="col">
+                            <button mat-raised-button color="accent" class="w-100 mt-2 mb-3"
+                                (click)="requestMission(1)">Solicitar misión</button>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col">
+                <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="secondPlaceAvailable">
+                    <div class="row text-center mt-2">
+                        <div class="col pricedown">
+                            <div class="mat-h1 mat-h1-color">{{secondPlaceAvailable.title}}</div>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row text-center mt-4">
+                        <div class="col-7">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Fecha de incio</mat-label>
+                                <input required matInput disabled type="text" autocomplete="off"
+                                    [ngModel]="secondPlaceAvailable.startDate | datoToString">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-5">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>EXP ganada</mat-label>
+                                <input required matInput disabled type="text" autocomplete="off"
+                                    [(ngModel)]="secondPlaceAvailable.userExperienceProfit">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Descripción</mat-label>
+                                <textarea  required matInput disabled type="text">{{secondPlaceAvailable.description}}</textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <button mat-raised-button color="primary" class="w-100 mt-2 mb-3"
+                                (click)="performMissionDelivery(secondPlaceAvailable)">Realizar la entrega</button>
+                        </div>
+                    </div>
+                </mat-card>
+                <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="!secondPlaceAvailable">
+                    <div class="row text-center mt-2">
+                        <div class="col pricedown">
+                            <div class="mat-h1 mat-h1-color">Cupo disponible</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 234px;">
+                        <div class="col div-plus">
+                            <img src="/assets/plus.png" class="img-plus">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-2">
+                        <div class="col">
+                            <button mat-raised-button color="accent" class="w-100 mt-2 mb-3"
+                                (click)="requestMission(2)">Solicitar misión</button>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col">
+                <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="thirdPlaceAvailable">
+                    <div class="row text-center mt-2">
+                        <div class="col pricedown">
+                            <div class="mat-h1 mat-h1-color">{{thirdPlaceAvailable.title}}</div>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row text-center mt-4">
+                        <div class="col-7">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Fecha de incio</mat-label>
+                                <input required matInput disabled type="text" autocomplete="off"
+                                    [ngModel]="thirdPlaceAvailable.startDate | datoToString">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-5">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>EXP ganada</mat-label>
+                                <input required matInput disabled type="text" autocomplete="off"
+                                    [(ngModel)]="thirdPlaceAvailable.userExperienceProfit">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Descripción</mat-label>
+                                <textarea  required matInput disabled type="text">{{thirdPlaceAvailable.description}}</textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <button mat-raised-button color="primary" class="w-100 mt-2 mb-3"
+                                (click)="performMissionDelivery(thirdPlaceAvailable)">Realizar la entrega</button>
+                        </div>
+                    </div>
+                </mat-card>
+                <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="!thirdPlaceAvailable">
+                    <div class="row text-center mt-2">
+                        <div class="col pricedown">
+                            <div class="mat-h1 mat-h1-color">Cupo disponible</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 234px;">
+                        <div class="col div-plus">
+                            <img src="/assets/plus.png" class="img-plus">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-2">
+                        <div class="col">
+                            <button mat-raised-button color="accent" class="w-100 mt-2 mb-3"
+                                (click)="requestMission(3)">Solicitar misión</button>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col"></div>
+
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <hr class="hr-border">
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5 mb-5" *ngIf="deliveryRequest">
+            <div class="col-4">
+                <mat-card class="mat-elevation-z4">
+                    <div class="row text-center mt-2">
+                        <div class="col pricedown">
+                            <div class="mat-h1 mat-h1-color">Seleccionar usuario para realizar la entrega</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row text-center mt-2">
+                        <div class="col">
+                            <div class="mat-h2 mat-h1-color">{{missionToDeliver.description}}</div>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Entregar a</mat-label>
+                                <mat-select [(ngModel)]="userInChargeOfWithdrawal">
+                                    <mat-option *ngFor="let user of adminUsersConected" [value]="user">
+                                        {{user.nameInGame}} </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-2">
+                        <div class="col">
+                            <button mat-raised-button color="primary" class="w-100 mt-2 mb-3"
+                                [disabled]=!userInChargeOfWithdrawal
+                                (click)="confirmedPerformMissionDelivery()">Realizar la
+                                entrega</button>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-3">
+                <div class="row text-center">
+                    <div class="col">
+                        <mat-card class="mat-elevation-z4">
+                            <div class="row mt-2">
+                                <div class="col pricedown">
+                                    <div class="mat-h1 mat-h1-color"> Usuarios para realizar la entrega</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col" *ngIf="adminUsersConected.length != 0">
+                                    <div class="row justify-content-center" *ngFor="let user of adminUsersConected">
+                                        <div class="col-1 text-rigth">
+                                            <mat-icon class="icon-conected">data_usage
+                                            </mat-icon>
+                                        </div>
+                                        <div class="col-4 text-left">
+                                            <div class="mat-h2 mat-h1-chest">
+                                                {{user.nameInGame}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col pricedown" *ngIf="adminUsersConected.length == 0">
+                                    <div class="mat-h2 mat-h1-chest">En este momento no se encuentra ningún usuario para
+                                        retirar.</div>
+                                </div>
                             </div>
-                            <div class="col pricedown" *ngIf="adminUsersConected.length == 0">
-                                <div class="mat-h2 mat-h1-chest">En este momento no se encuentra ningún usuario para
-                                    retirar.</div>
-                            </div>
-                        </div>
-                    </mat-card>
+                        </mat-card>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row justify-content-center" *ngIf="listOfMissionsWithDeliveryRequest">
-        <div class="col"></div>
-        <div class="col-10">
-            <ul class="list">
-                <li *ngFor="let mission of listOfMissionsWithDeliveryRequest">
-                    <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" style="margin-right: 10px;">
-                        <div class="row text-center mt-2">
-                            <div class="col pricedown">
-                                <div class="mat-h1 mat-h1-color">{{mission.title}}</div>
+        <div class="row justify-content-center" *ngIf="listOfMissionsWithDeliveryRequest">
+            <div class="col"></div>
+            <div class="col-10">
+                <ul class="list">
+                    <li *ngFor="let mission of listOfMissionsWithDeliveryRequest">
+                        <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" style="margin-right: 10px;">
+                            <div class="row text-center mt-2">
+                                <div class="col pricedown">
+                                    <div class="mat-h1 mat-h1-color">{{mission.title}}</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row text-center">
-                            <div class="col">
-                                <hr>
+                            <div class="row text-center">
+                                <div class="col">
+                                    <hr>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row text-center mt-4">
-                            <div class="col-7">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>Fecha de incio</mat-label>
-                                    <input required matInput disabled type="text" autocomplete="off"
-                                        [ngModel]="mission.startDate | datoToString">
-                                </mat-form-field>
+                            <div class="row text-center mt-4">
+                                <div class="col-7">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>Fecha de incio</mat-label>
+                                        <input required matInput disabled type="text" autocomplete="off"
+                                            [ngModel]="mission.startDate | datoToString">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-5">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>EXP ganada</mat-label>
+                                        <input required matInput disabled type="text" autocomplete="off"
+                                            [(ngModel)]="mission.userExperienceProfit">
+                                    </mat-form-field>
+                                </div>
                             </div>
-                            <div class="col-5">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>EXP ganada</mat-label>
-                                    <input required matInput disabled type="text" autocomplete="off"
-                                        [(ngModel)]="mission.userExperienceProfit">
-                                </mat-form-field>
+                            <div class="row">
+                                <div class="col">
+                                    <hr>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <hr>
+                            <div class="row mt-4">
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>Descripción</mat-label>
+                                        <textarea  required matInput disabled type="text">{{mission.description}}</textarea>
+                                    </mat-form-field>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>Descripción</mat-label>
-                                    <input required matInput disabled type="text" autocomplete="off"
-                                        [(ngModel)]="mission.description">
-                                </mat-form-field>
+                            <div class="row">
+                                <div class="col">
+                                    <hr>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <hr>
+                            <div class="row mt-3 text-center">
+                                <div class="col mat-h1-color">
+                                    <div>Pendiente de entrega por <span>{{mission.userInChargeOfDelivery}}</span></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mt-4 text-center">
-                            <div class="col mat-h1-color">
-                                <div>Pendiente de entrega por <span>{{mission.userInChargeOfDelivery}}</span></div>
-                            </div>
-                        </div>
-                    </mat-card>
-                </li>
-            </ul>
+                        </mat-card>
+                    </li>
+                </ul>
+            </div>
+            <div class="col"></div>
         </div>
-        <div class="col"></div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-5 mt-5">
-            <button mat-raised-button color="primary" class="w-100 mt-2" (click)="backToTop()">Regresar al
-                inicio</button>
+        <div class="row justify-content-center">
+            <div class="col-5 mt-5">
+                <button mat-raised-button color="primary" class="w-100 mt-2" (click)="backToTop()">Regresar al
+                    inicio</button>
+            </div>
         </div>
     </div>
 </div>
