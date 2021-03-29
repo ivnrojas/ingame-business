@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CoreHelper } from 'src/app/core/core-helper';
-import { IItem, IMission, IUser, IWithdrawRequest, RequestType } from 'src/app/core/entities';
+import { IItem, IMission, IMissionRegister, IUser, IWithdrawRequest, RequestType } from 'src/app/core/entities';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { LogService } from 'src/app/shared/services/log.service';
 
 @Component({
 	selector: 'app-homeadmin',
@@ -16,7 +17,7 @@ export class HomeadminComponent implements OnInit {
 	public allUsers: IUser[] = [];
 	public requests: IRequest[] = [];
 
-	constructor(private session: SessionService, private userService: UserService, private toastr: ToastrService) { }
+	constructor(private session: SessionService, private userService: UserService, private toastr: ToastrService, private log: LogService) { }
 
 	async ngOnInit() {
 		let user$ = await this.session.getUserObservable();
@@ -41,7 +42,7 @@ export class HomeadminComponent implements OnInit {
 					req.item = (x.itemRequest as IItem).name;
 					req.title =  `Retiro de ${req.item} - ${x.userWhoSent}`;
 					req.description = `${x.userWhoSent} quiere retirar un/una ${req.item} de su inventario.`;
-					req.profit = (x.itemRequest as IItem).profit * -1;
+					req.profit = (x.itemRequest as IItem).cost * -1;
 					break;
 				case RequestType.Mission:
 					req.date = CoreHelper.DateFormat(x.requestDate.toString());
@@ -99,8 +100,24 @@ export class HomeadminComponent implements OnInit {
 					case RequestType.Mission:
 						this.userService.removeMissionFromList(userId, withdrawRequest.itemRequest as IMission)
 							.then(() => {
+
+								/*
+
+								// ALGORITMO DE DAR EXPERIENCIA 
+
+								*/
+
 								let profit = otherUser.generatedProfit + (withdrawRequest.itemRequest as IMission).companyProfit;
 								this.userService.changeProfit(userId, profit);
+								let register: IMissionRegister = {
+									date: new Date(),
+									person: otherUser.nameInGame,
+									level: otherUser.level.level,
+									experience: (withdrawRequest.itemRequest as IMission).userExperienceProfit,
+									profit: (withdrawRequest.itemRequest as IMission).companyProfit,
+									firebaseTimestamp: Date.now()
+								}
+								this.log.addMissionRegister(register);
 								this.handleSuccess();
 							})
 							.catch(() => this.handleError())

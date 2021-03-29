@@ -18,10 +18,6 @@ export class HomeComponent implements OnInit {
 	/*
 
 	Pendiente:
-	- Loguear cuando cumple mision para mostrar en home
-	- Ultimas misiones completadas
-
-
 	- Asignar mision a una persona o sacar mision - DESPUES
 	- ABM de usuarios - DESPUES
 	- ABM de misión - DESPUES
@@ -29,17 +25,6 @@ export class HomeComponent implements OnInit {
 	- Fake de log de ultima mision - DESPUES
 
 	*/
-
-	public latestMissions: IMissionRegister[] = [
-		{ date: new Date(), person: 'Ivana Rojas', level: 4, experience: 1000, profit: 1000 },
-		{ date: new Date(), person: 'Yamil Foglia', level: 5, experience: 450, profit: 1000 },
-		{ date: new Date(), person: 'Ivana Rojas', level: 4, experience: 100, profit: 1000 },
-		{ date: new Date(), person: 'Nicolas Torner', level: 12, experience: 1000, profit: 1000 },
-		{ date: new Date(), person: 'Felipe Melo', level: 1, experience: 350, profit: 1000 },
-		{ date: new Date(), person: 'Yamil Foglia', level: 5, experience: 200, profit: 1000 },
-		{ date: new Date(), person: 'Ivana Rojas', level: 4, experience: 600, profit: 1000 },
-		{ date: new Date(), person: 'Nicolas Torner', level: 12, experience: 200, profit: 1000 },
-	];
 	
 	// Usuario Conectado
 	public currentUser: IUser;
@@ -62,7 +47,7 @@ export class HomeComponent implements OnInit {
 	public latestCasesColumns: string[] = ['person', 'case', 'winItem'];
 	public latestMissionsColumns: string[] = ['mission'];
 	
-  	dataSource = this.latestMissions;
+	public dataSource;
 	public dataSource2;
 
 
@@ -77,7 +62,6 @@ export class HomeComponent implements OnInit {
 		let users$ = await this.dbUser.getAll().valueChanges();
 		users$.subscribe(users => {
 			this.userList = users;			
-			this.getLastestMissions();
 		});
 	}
 
@@ -94,7 +78,12 @@ export class HomeComponent implements OnInit {
 		(this.log.getAllCasesRegister().valueChanges() as Observable<ICasesRegister[]>).subscribe(data => {
 			let registers = data.slice(0, 8);
 			this.dataSource2 = registers;
-		})
+		});
+
+		(this.log.getAllMissionRegister().valueChanges() as Observable<IMissionRegister[]>).subscribe(data => {
+			let registers = data.slice(0, 8);
+			this.dataSource = registers;
+		});
 	}
 
 	private getActiveMissions(): void {
@@ -105,11 +94,6 @@ export class HomeComponent implements OnInit {
 			.filter(x => x.state == MissionState.started)
 			.map(x => x.description);
 	}	
-
-	private getLastestMissions(): void{
-		this.latestMissions = [];
-		
-	}
 
 	private getListOfLastInventoryItems(): void {
 		this.listOfLastInventoryItems = [];

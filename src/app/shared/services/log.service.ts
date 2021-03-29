@@ -22,4 +22,8 @@ export class LogService {
         return this.db.collection('casesRegister', ref => ref.orderBy('firebaseTimestamp', 'desc'));
     }
 
+    public getAllMissionRegister() {
+        return this.db.collection('missionsRegister', ref => ref.orderBy('firebaseTimestamp', 'desc'));
+    }
+
 }
