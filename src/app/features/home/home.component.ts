@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
 
 	Pendiente:
 	- Conectar últimas misiones - YAMA
+	- Conectar misiones activas - IVÁN
 	- Asignar mision a una persona o sacar mision - DESPUES
 	- ABM de misión - DESPUES
 	- ABM de usuarios - DESPUES
@@ -26,7 +27,6 @@ export class HomeComponent implements OnInit {
 	- Log de ultimas misiones cada vez que se marca una mision como completa - IVAN
 	- Fake de log de ultima mision - DESPUES
 	- Profit de personas, logueos y panel para visualizar - IVAN
-	- Ver solicitudes ----> NOW
 
 	*/
 
@@ -50,8 +50,11 @@ export class HomeComponent implements OnInit {
 	// Flags
 	public loading: boolean = true;
 
-	// Porsentaje del nivel 
+	// Porcentaje del nivel 
 	public levelPercentage: number;
+
+	// Misiones activas
+	public activeMissions: string[] = [];
 
 	// Lista de usarios
 	public userList: IUser[];
@@ -73,7 +76,7 @@ export class HomeComponent implements OnInit {
 	private async getUsers(): Promise<void> {
 		let users$ = await this.dbUser.getAll().valueChanges();
 		users$.subscribe(users => {
-			this.userList = users;
+			this.userList = users;			
 			this.getLastestMissions();
 		});
 	}
@@ -84,6 +87,7 @@ export class HomeComponent implements OnInit {
 			this.currentUser = user;
 			this.levelPercentage = (this.currentUser.experience * 100) / this.currentUser.level.totalExperience;
 			this.getListOfLastInventoryItems();
+			this.getActiveMissions();
 			this.loading = false;
 		});
 
@@ -92,6 +96,15 @@ export class HomeComponent implements OnInit {
 			this.dataSource2 = registers;
 		})
 	}
+
+	private getActiveMissions(): void {
+		if(!this.currentUser || !this.currentUser.currentMissions)
+			return;
+		
+		this.activeMissions = this.currentUser.currentMissions
+			.filter(x => x.state == MissionState.started)
+			.map(x => x.description);
+	}	
 
 	private getLastestMissions(): void{
 		this.latestMissions = [];

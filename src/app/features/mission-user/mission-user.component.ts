@@ -190,6 +190,7 @@ export class MissionUserComponent implements OnInit {
 			case Levels[0].level:
 			case Levels[1].level:
 			case Levels[2].level:
+			default:
 				let missionsLevelOne = this.getMisionslevelOne();
 				let mission = missionsLevelOne[this.random(0, missionsLevelOne.length)];
 				mission.state = MissionState.started;
