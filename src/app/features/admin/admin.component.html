@@ -7,6 +7,7 @@
     <button mat-icon-button class="example-icon toolbar-btn favorite-icon mr-4" routerLink="/admin/home" matTooltip="Inicio">
         <mat-icon>home</mat-icon>
     </button>
+    <mat-slide-toggle [(ngModel)]="connectionStatus" *ngIf="!loading" (click)="changeConnectionStatus()" matTooltip="Estado"></mat-slide-toggle>
     <button mat-icon-button class="example-icon toolbar-btn favorite-icon" matTooltip="Usuarios">
         <mat-icon>group</mat-icon>
     </button>

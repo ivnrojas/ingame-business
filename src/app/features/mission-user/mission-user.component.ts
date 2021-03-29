@@ -38,6 +38,13 @@ export class MissionUserComponent implements OnInit {
 
 	// Flags
 	public loading: boolean = true;
+	public requestWeapon: boolean = false;
+
+	// Mision para solicitar arma
+	public missionRequestWeapon: IMission;
+
+	// Admin encargado de la solicitud del arma
+	public userInChargeOfWeaponRequest: IUser = undefined;
 
 	// Admin encargado de la solicitud de entrega
 	public userInChargeOfWithdrawal: IUser = undefined;
@@ -153,7 +160,7 @@ export class MissionUserComponent implements OnInit {
 		.then(() => {
 			this.dbUser.modify(this.conectedUser)
 				.then(() => {
-					this.toastr.success('ahora espera el admin a cargo de tu entrega.', 'Perfecto!',  {
+					this.toastr.success('Ahora espera el admin a cargo de tu entrega.', 'Perfecto!',  {
 						timeOut: 4000,
 						positionClass: 'toast-bottom-right',
 					});
@@ -187,10 +194,46 @@ export class MissionUserComponent implements OnInit {
 				let mission = missionsLevelOne[this.random(0, missionsLevelOne.length)];
 				mission.state = MissionState.started;
 				mission.startDate = new Date();
+				if(mission.title == 'Venta de Armas'){
+					this.missionRequestWeapon = mission;
+					this.requestWeapon = true;
+				}
+				
+
 				this.conectedUser.currentMissions.push(mission);
 				break;
 		}
 		this.dbUser.modify(this.conectedUser)
+	}
+
+	public confirmedRequestWeapon(): void {
+		let withdrawRequest: IWithdrawRequest = {
+			itemRequest: this.missionRequestWeapon,
+			userWhoSent: this.conectedUser.nameInGame, // el usuario conectado solicita la entrega
+			userWhoReceiving: this.userInChargeOfWeaponRequest.nameInGame, // admin conectado para entregar mision
+			state: StateOfWithdrawRequest.Pendiente,
+			requestDate: new Date(),
+			requestType: RequestType.Solicitud
+		} 
+
+		this.userInChargeOfWeaponRequest.withdrawRequest.push(withdrawRequest);
+
+		this.dbUser.modify(this.userInChargeOfWeaponRequest)
+			.then(() => {
+				this.toastr.success('Ahora espera el admin a cargo de tu solicitud.', 'Perfecto!', {
+					timeOut: 4000,
+					positionClass: 'toast-bottom-right',
+				});
+			})
+			.catch(() => {
+				this.toastr.error('Error en la solicitud', 'Contacte con algún líder de la banda', {
+					timeOut: 4000,
+					positionClass: 'toast-bottom-right',
+				});
+			})
+			.finally(() => {
+				this.requestWeapon = false;
+			})
 	}
 
 	private getMisionslevelOne(): IMission[] {
