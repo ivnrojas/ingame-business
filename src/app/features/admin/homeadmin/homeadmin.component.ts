@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CoreHelper } from 'src/app/core/core-helper';
-import { IItem, IMission, IMissionRegister, IUser, IWithdrawRequest, RequestType } from 'src/app/core/entities';
+import { IItem, IMission, IMissionRegister, IUser, IWithdrawRequest, Levels, RequestType } from 'src/app/core/entities';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { LogService } from 'src/app/shared/services/log.service';
@@ -102,25 +102,45 @@ export class HomeadminComponent implements OnInit {
 							.then(() => {
 
 								let experienceToAdd: number = (withdrawRequest.itemRequest as IMission).userExperienceProfit;
+								this.comprobateTotalExperience(otherUser);
 
-								/*
-
-								// ALGORITMO DE DAR EXPERIENCIA 
-
-								*/
-
-								let profit = otherUser.generatedProfit + (withdrawRequest.itemRequest as IMission).companyProfit;
-								this.userService.changeProfit(userId, profit);
-								let register: IMissionRegister = {
-									date: new Date(),
-									person: otherUser.nameInGame,
-									level: otherUser.level.level,
-									experience: (withdrawRequest.itemRequest as IMission).userExperienceProfit,
-									profit: (withdrawRequest.itemRequest as IMission).companyProfit,
-									firebaseTimestamp: Date.now()
+								otherUser.experience += experienceToAdd;
+						
+								if(otherUser.experience >= otherUser.level.totalExperience){
+					
+									otherUser.experience -= otherUser.level.totalExperience;
+									otherUser.level.level++;
+									let count = true;
+					
+									while(count){
+										this.comprobateTotalExperience(otherUser);
+					
+										if(otherUser.experience >= otherUser.level.totalExperience){
+											otherUser.experience -= otherUser.level.totalExperience;
+											otherUser.level.level++;
+										}
+										else
+											count = false;
+									}
 								}
-								this.log.addMissionRegister(register);
-								this.handleSuccess();
+								this.comprobateTotalExperience(otherUser);
+						
+								this.userService.modify(otherUser)
+									.then(() => {
+										let profit = otherUser.generatedProfit + (withdrawRequest.itemRequest as IMission).companyProfit;
+										this.userService.changeProfit(userId, profit);
+										let register: IMissionRegister = {
+											date: new Date(),
+											person: otherUser.nameInGame,
+											level: otherUser.level.level,
+											experience: (withdrawRequest.itemRequest as IMission).userExperienceProfit,
+											profit: (withdrawRequest.itemRequest as IMission).companyProfit,
+											firebaseTimestamp: Date.now()
+										}
+										this.log.addMissionRegister(register);
+										this.handleSuccess();
+									})
+									.catch(() => this.handleError());
 							})
 							.catch(() => this.handleError())
 						break;
@@ -152,6 +172,15 @@ export class HomeadminComponent implements OnInit {
 			timeOut: 10000,
 			positionClass: 'toast-bottom-right',
 		});
+	}
+	
+	private comprobateTotalExperience(user: IUser): void {
+		for(let level of Levels){
+			if(this.user.level.level == level.level){
+				this.user.level.totalExperience = level.totalExperience;
+				break;
+			}
+		}
 	}
 
 }
