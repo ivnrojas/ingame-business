@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConnectionStatus, IMission, IUser, IWithdrawRequest, Levels, MissionLevel, MissionState, StateOfWithdrawRequest, RequestType } from 'src/app/core/entities';
+import { ConnectionStatus, IMission, IUser, IWithdrawRequest, Levels, MissionLevel, MissionState, StateOfWithdrawRequest, RequestType, MissionCategory } from 'src/app/core/entities';
 import { MissionsService } from 'src/app/shared/services/missions.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -194,7 +194,7 @@ export class MissionUserComponent implements OnInit {
 				let mission = missionsLevelOne[this.random(0, missionsLevelOne.length)];
 				mission.state = MissionState.started;
 				mission.startDate = new Date();
-				if(mission.title == 'Venta de Armas'){
+				if(mission.category != MissionCategory.standard){
 					this.missionRequestWeapon = mission;
 					this.requestWeapon = true;
 				}
@@ -217,13 +217,24 @@ export class MissionUserComponent implements OnInit {
 		} 
 
 		this.userInChargeOfWeaponRequest.withdrawRequest.push(withdrawRequest);
+		this.conectedUser.withdrawRequest.push(withdrawRequest);
+
 
 		this.dbUser.modify(this.userInChargeOfWeaponRequest)
 			.then(() => {
-				this.toastr.success('Ahora espera el admin a cargo de tu solicitud.', 'Perfecto!', {
-					timeOut: 4000,
-					positionClass: 'toast-bottom-right',
-				});
+				this.dbUser.modify(this.conectedUser)
+				.then(() => {
+					this.toastr.success('Ahora espera el admin a cargo de tu solicitud.', 'Perfecto!', {
+						timeOut: 4000,
+						positionClass: 'toast-bottom-right',
+					});
+				})
+				.catch(() => {
+					this.toastr.error('Error en la solicitud', 'Contacte con algún líder de la banda', {
+						timeOut: 4000,
+						positionClass: 'toast-bottom-right',
+					});
+				})
 			})
 			.catch(() => {
 				this.toastr.error('Error en la solicitud', 'Contacte con algún líder de la banda', {
