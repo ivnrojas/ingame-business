@@ -19,12 +19,9 @@ export class HomeComponent implements OnInit {
 	Pendiente:
 	- Conectar últimas misiones
 	- Sistema de misiones
+	- Barra de exp
 	- ABM de misión
-	- ABM de cajas
 	- ABM de usuarios
-	- Dar o sacar experiencia
-	- Dar o sacar respeto
-	- Algoritmo de rates para cajas ------> NOW 
 	- Asignar mision a una persona o sacar mision
 	- Fake de log de caja abierta
 	- Log de ultimas misiones cada vez que se marca una mision como completa
