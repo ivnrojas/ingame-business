@@ -86,6 +86,7 @@ export interface IItem extends IFirebaseObject {
     case: string;
     rate: number;
     order: number;
+    profit: number;
 }
 
 export enum IngameRole {

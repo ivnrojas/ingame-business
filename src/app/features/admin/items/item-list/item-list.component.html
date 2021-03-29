@@ -19,7 +19,7 @@
                     </mat-expansion-panel-header>
                     <hr>                    
                     <div class="row mb-3" *ngFor="let item of casesLS">
-                        <div class="col-4 text-center">
+                        <div class="col-2 text-center">
                             <mat-card>
                                 {{item.name}}
                             </mat-card>
@@ -38,8 +38,15 @@
                                 <span matPrefix class="mr-2">$</span>
                             </mat-form-field>
                         </div>
-                        <div class="col-2" style="padding-left: 0;">
-                            <button color="primary" class="w-100" mat-raised-button mat-button (click)="saveChanges(item)">Guardar</button>
+                        <div class="col-3">
+                            <mat-form-field >
+                                <mat-label>Profit</mat-label>
+                                <input required matInput type="number" [(ngModel)]="item.profit" autocomplete="off">
+                                <span matPrefix class="mr-2">$</span>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-1" style="padding-left: 0;">
+                            <button color="primary" mat-mini-fab (click)="saveChanges(item)"> <mat-icon>save</mat-icon> </button>
                         </div>
                     </div>
                 </mat-expansion-panel>
@@ -57,7 +64,7 @@
                     </mat-expansion-panel-header>
                     <hr>
                     <div class="row mb-3" *ngFor="let item of casesSF">
-                        <div class="col-4 text-center">
+                        <div class="col-2 text-center">
                             <mat-card>
                                 {{item.name}}
                             </mat-card>
@@ -76,8 +83,15 @@
                                 <span matPrefix class="mr-2">$</span>
                             </mat-form-field>
                         </div>
-                        <div class="col-2" style="padding-left: 0;">
-                            <button color="primary" class="w-100" mat-raised-button mat-button (click)="saveChanges(item)">Guardar</button>
+                        <div class="col-3">
+                            <mat-form-field >
+                                <mat-label>Profit</mat-label>
+                                <input required matInput type="number" [(ngModel)]="item.profit" autocomplete="off">
+                                <span matPrefix class="mr-2">$</span>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-1" style="padding-left: 0;">
+                            <button color="primary" mat-mini-fab (click)="saveChanges(item)"> <mat-icon>save</mat-icon> </button>
                         </div>
                     </div>
                 </mat-expansion-panel>
@@ -95,7 +109,7 @@
                     </mat-expansion-panel-header>
                     <hr>
                     <div class="row mb-3" *ngFor="let item of casesLV">
-                        <div class="col-4 text-center">
+                        <div class="col-2 text-center">
                             <mat-card>
                                 {{item.name}}
                             </mat-card>
@@ -114,8 +128,15 @@
                                 <span matPrefix class="mr-2">$</span>
                             </mat-form-field>
                         </div>
-                        <div class="col-2" style="padding-left: 0;">
-                            <button color="primary" class="w-100" mat-raised-button mat-button (click)="saveChanges(item)">Guardar</button>
+                        <div class="col-3">
+                            <mat-form-field >
+                                <mat-label>Profit</mat-label>
+                                <input required matInput type="number" [(ngModel)]="item.profit" autocomplete="off">
+                                <span matPrefix class="mr-2">$</span>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-1" style="padding-left: 0;">
+                            <button color="primary" mat-mini-fab (click)="saveChanges(item)"> <mat-icon>save</mat-icon> </button>
                         </div>
                     </div>
                 </mat-expansion-panel>
