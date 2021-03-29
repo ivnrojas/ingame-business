@@ -81,7 +81,8 @@ export interface IWithdrawRequest extends IFirebaseObject {
 export enum RequestType {
     Mission,
     Money,
-    Item
+    Item,
+    Solicitud
 }
 export interface IItem extends IFirebaseObject {
     name: string;

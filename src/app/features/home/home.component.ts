@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ICasesRegister, IItem, IUser, IMissionRegister } from 'src/app/core/entities';
+import { ICasesRegister, IItem, IUser, IMissionRegister, MissionState } from 'src/app/core/entities';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { LogService } from 'src/app/shared/services/log.service';
 import { SessionService } from 'src/app/shared/services/session.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
 	selector: 'app-home',
@@ -54,6 +55,9 @@ export class HomeComponent implements OnInit {
 	// Porsentaje del nivel 
 	public levelPercentage: number;
 
+	// Lista de usarios
+	public userList: IUser[];
+
 	public latestCasesColumns: string[] = ['person', 'case', 'winItem'];
 	public latestMissionsColumns: string[] = ['mission'];
 	
@@ -61,10 +65,19 @@ export class HomeComponent implements OnInit {
 	public dataSource2;
 
 
-	constructor(private session: SessionService, private auth: AuthService, private router: Router, private log: LogService) { }
+	constructor(private session: SessionService, private auth: AuthService, private router: Router, private log: LogService, private dbUser: UserService) { }
 
 	ngOnInit(): void {
 		this.getCurrentUser();
+		this.getUsers();
+	}
+
+	private async getUsers(): Promise<void> {
+		let users$ = await this.dbUser.getAll().valueChanges();
+		users$.subscribe(users => {
+			this.userList = users;
+			this.getLastestMissions();
+		});
 	}
 
 	private async getCurrentUser(): Promise<void> {
@@ -80,6 +93,11 @@ export class HomeComponent implements OnInit {
 			let registers = data.slice(0, 8);
 			this.dataSource2 = registers;
 		})
+	}
+
+	private getLastestMissions(): void{
+		this.latestMissions = [];
+		
 	}
 
 	private getListOfLastInventoryItems(): void {
