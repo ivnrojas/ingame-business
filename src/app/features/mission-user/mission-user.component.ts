@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConnectionStatus, IMission, IUser, IWithdrawRequest, Levels, MissionLevel, MissionState, StateOfWithdrawRequest } from 'src/app/core/entities';
+import { ConnectionStatus, IMission, IUser, IWithdrawRequest, Levels, MissionLevel, MissionState, StateOfWithdrawRequest, RequestType } from 'src/app/core/entities';
 import { MissionsService } from 'src/app/shared/services/missions.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -143,7 +143,8 @@ export class MissionUserComponent implements OnInit {
 			userWhoSent: this.conectedUser.nameInGame, // el usuario conectado solicita la entrega
 			userWhoReceiving: this.userInChargeOfWithdrawal.nameInGame, // admin conectado para entregar mision
 			state: StateOfWithdrawRequest.Pendiente,
-			requestDate: new Date()
+			requestDate: new Date(),
+			requestType: RequestType.Mission
 		} 
 
 		this.userInChargeOfWithdrawal.withdrawRequest.push(withdrawRequest);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConnectionStatus, IItem, IUser, IWithdrawRequest, StateOfWithdrawRequest } from 'src/app/core/entities';
+import { ConnectionStatus, IItem, IUser, IWithdrawRequest, RequestType, StateOfWithdrawRequest } from 'src/app/core/entities';
 import { ItemService } from 'src/app/shared/services/item.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -82,7 +82,8 @@ export class InventoryComponent implements OnInit {
 			userWhoSent: this.userInChargeOfWithdrawal.nameInGame,
 			userWhoReceiving: this.conectedUser.nameInGame,
 			state: StateOfWithdrawRequest.Pendiente,
-			requestDate: new Date()
+			requestDate: new Date(),
+			requestType: RequestType.Item
 		} 
 		
 		this.userInChargeOfWithdrawal.withdrawRequest.push(withdrawRequest);
