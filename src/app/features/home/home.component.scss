@@ -46,3 +46,14 @@
 .mat-progress-bar {
     height: 10px; border-radius: 3px;
 }
+
+.mission-description {
+    display: flex;
+    align-items: center;
+}
+
+.mission-text {
+    color: grey; 
+    margin-left: 1rem; 
+    margin-right: .5rem;
+}

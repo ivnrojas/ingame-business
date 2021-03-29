@@ -111,25 +111,37 @@
                 Misiones activas
                 <hr class="mt-3">
                 <div class="row">
-                    <div class="col" style="display: flex; align-items: center;">
-                        <span style="color: grey; margin-left: 1rem; margin-right: .5rem;"><mat-icon>auto_awesome_motion</mat-icon> </span>Conseguir dos escopetas y entregarlas en mano a un líder.
+                    <div class="col" class="mission-description">
+                        <span class="mission-text"><mat-icon>auto_awesome_motion</mat-icon> </span>
+                        <ng-container *ngIf="(activeMissions[0] && activeMissions[0] != ''); else noMission">
+                            {{activeMissions[0]}}
+                        </ng-container>
                     </div>
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col"  style="display: flex; align-items: center;">
-                        <span style="color: grey; margin-left: 1rem; margin-right: .5rem;"><mat-icon>auto_awesome_motion</mat-icon> </span>Hacer tres viajes de camionero y conseguir una persona para una entrevista. Entregar 3 medicamentos.
+                    <div class="col" class="mission-description">
+                        <span class="mission-text"><mat-icon>auto_awesome_motion</mat-icon> </span>
+                        <ng-container *ngIf="(activeMissions[1] && activeMissions[1] != ''); else noMission">
+                            {{activeMissions[1]}}
+                        </ng-container>
                     </div>
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col"  style="display: flex; align-items: center;">
-                        <span style="color: grey; margin-left: 1rem; margin-right: .5rem;"><mat-icon>auto_awesome_motion</mat-icon> </span>Robar tres tiendas y entregar $3000.
+                    <div class="col" class="mission-description">
+                        <span class="mission-text"><mat-icon>auto_awesome_motion</mat-icon> </span>
+                        <ng-container *ngIf="(activeMissions[2] && activeMissions[2] != ''); else noMission">
+                            {{activeMissions[2]}}
+                        </ng-container>
                     </div>
                 </div>
                 <hr>
                 <div class="text-center" style="color: grey;">Hasta tres misiones máximo.</div>
             </mat-card>
+            <ng-template #noMission>
+                <div class="mission-text w-100 text-center">Cupo disponible para solicitar una misión</div>
+            </ng-template>
         </div>
     </div>
     <div class="row mt-4">
