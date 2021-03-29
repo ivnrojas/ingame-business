@@ -75,8 +75,14 @@ export interface IWithdrawRequest extends IFirebaseObject {
     userWhoReceiving: string;
     state: StateOfWithdrawRequest; 
     requestDate: Date;
+    requestType: RequestType;
 }
 
+export enum RequestType {
+    Mission,
+    Money,
+    Item
+}
 export interface IItem extends IFirebaseObject {
     name: string;
     img: string;

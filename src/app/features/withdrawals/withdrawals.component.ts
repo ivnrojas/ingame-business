@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConnectionStatus, IUser, IWithdrawRequest, StateOfWithdrawRequest } from 'src/app/core/entities';
+import { ConnectionStatus, IUser, IWithdrawRequest, RequestType, StateOfWithdrawRequest } from 'src/app/core/entities';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -68,7 +68,8 @@ export class WithdrawalsComponent implements OnInit {
 			userWhoSent: this.userInChargeOfWithdrawal.nameInGame,
 			userWhoReceiving: this.conectedUser.nameInGame,
 			state: StateOfWithdrawRequest.Pendiente,
-			requestDate: new Date()
+			requestDate: new Date(),
+			requestType: RequestType.Money
 		} 
 		
 		this.userInChargeOfWithdrawal.withdrawRequest.push(withdrawRequest);
