@@ -35,6 +35,7 @@ import { InventoryComponent } from './features/inventory/inventory.component';
 import { RespectPipe } from './shared/pipes/respect.pipe';
 import { WithdrawalsComponent } from './features/withdrawals/withdrawals.component';
 import { MissionUserComponent } from './features/mission-user/mission-user.component';
+import { DatoToStringPipe } from './shared/pipes/dato-to-string.pipe';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MissionUserComponent } from './features/mission-user/mission-user.compo
     RespectPipe,
     WithdrawalsComponent,
     MissionUserComponent,
+    DatoToStringPipe,
   ],
   imports: [
     FormsModule,

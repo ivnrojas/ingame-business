@@ -9,7 +9,8 @@
         </div>
     </div>
     <div class="row justify-content-center mt-5">
-        <div class="col-3">
+        <div class="col"></div>
+        <div class="col">
             <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="firstPlaceAvailable">
                 <div class="row text-center mt-2">
                     <div class="col pricedown">
@@ -22,41 +23,25 @@
                     </div>
                 </div>
                 <div class="row text-center mt-4">
-                    <div class="col-4">
+                    <div class="col-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Categoria</mat-label>
                             <input required matInput disabled type="text" autocomplete="off"
                                 [(ngModel)]="firstPlaceAvailable.category">
                         </mat-form-field>
                     </div>
-                    <div class="col-8">
+                    <div class="col-6">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Fecha de incio</mat-label>
                             <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="firstPlaceAvailable.startDate">
+                                [ngModel]="firstPlaceAvailable.startDate | datoToString">
                         </mat-form-field>
                     </div>
-                </div>
-                <div class="row text-center mt-4">
-                    <div class="col-4">
+                    <div class="col-3">
                         <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Nivel de mision</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="firstPlaceAvailable.level">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-4">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>EXP ganada</mat-label>
+                            <mat-label>EXP</mat-label>
                             <input required matInput disabled type="text" autocomplete="off"
                                 [(ngModel)]="firstPlaceAvailable.userExperienceProfit">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-4">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Dias maximos</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="firstPlaceAvailable.maxDate">
                         </mat-form-field>
                     </div>
                 </div>
@@ -97,7 +82,7 @@
                         <hr>
                     </div>
                 </div>
-                <div class="row" style="height: 334px;">
+                <div class="row" style="height: 234px;">
                     <div class="col div-plus">
                         <img src="/assets/plus.png" class="img-plus">
                     </div>
@@ -109,12 +94,12 @@
                 </div>
                 <div class="row justify-content-center mt-2">
                     <div class="col">
-                        <button mat-raised-button color="accent" class="w-100 mt-2 mb-3">Solicitar misión</button>
+                        <button mat-raised-button color="accent" class="w-100 mt-2 mb-3" (click)="requestMission(1)">Solicitar misión</button>
                     </div>
                 </div>
             </mat-card>
         </div>
-        <div class="col-3">
+        <div class="col">
             <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="secondPlaceAvailable">
                 <div class="row text-center mt-2">
                     <div class="col pricedown">
@@ -127,41 +112,25 @@
                     </div>
                 </div>
                 <div class="row text-center mt-4">
-                    <div class="col-4">
+                    <div class="col-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Categoria</mat-label>
                             <input required matInput disabled type="text" autocomplete="off"
                                 [(ngModel)]="secondPlaceAvailable.category">
                         </mat-form-field>
                     </div>
-                    <div class="col-8">
+                    <div class="col-6">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Fecha de incio</mat-label>
                             <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="secondPlaceAvailable.startDate">
+                                [ngModel]="secondPlaceAvailable.startDate | datoToString">
                         </mat-form-field>
                     </div>
-                </div>
-                <div class="row text-center mt-4">
-                    <div class="col-4">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Nivel de mision</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="secondPlaceAvailable.level">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>EXP ganada</mat-label>
                             <input required matInput disabled type="text" autocomplete="off"
                                 [(ngModel)]="secondPlaceAvailable.userExperienceProfit">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-4">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Dias maximos</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="secondPlaceAvailable.maxDate">
                         </mat-form-field>
                     </div>
                 </div>
@@ -202,7 +171,7 @@
                         <hr>
                     </div>
                 </div>
-                <div class="row" style="height: 334px;">
+                <div class="row" style="height: 234px;">
                     <div class="col div-plus">
                         <img src="/assets/plus.png" class="img-plus">
                     </div>
@@ -214,12 +183,12 @@
                 </div>
                 <div class="row justify-content-center mt-2">
                     <div class="col">
-                        <button mat-raised-button color="accent" class="w-100 mt-2 mb-3">Solicitar misión</button>
+                        <button mat-raised-button color="accent" class="w-100 mt-2 mb-3" (click)="requestMission(2)">Solicitar misión</button>
                     </div>
                 </div>
             </mat-card>
         </div>
-        <div class="col-3">
+        <div class="col">
             <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" *ngIf="thirdPlaceAvailable">
                 <div class="row text-center mt-2">
                     <div class="col pricedown">
@@ -232,41 +201,25 @@
                     </div>
                 </div>
                 <div class="row text-center mt-4">
-                    <div class="col-4">
+                    <div class="col-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Categoria</mat-label>
                             <input required matInput disabled type="text" autocomplete="off"
                                 [(ngModel)]="thirdPlaceAvailable.category">
                         </mat-form-field>
                     </div>
-                    <div class="col-8">
+                    <div class="col-6">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Fecha de incio</mat-label>
                             <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="thirdPlaceAvailable.startDate">
+                                [ngModel]="thirdPlaceAvailable.startDate | datoToString">
                         </mat-form-field>
                     </div>
-                </div>
-                <div class="row text-center mt-4">
-                    <div class="col-4">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Nivel de mision</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="thirdPlaceAvailable.level">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>EXP ganada</mat-label>
                             <input required matInput disabled type="text" autocomplete="off"
                                 [(ngModel)]="thirdPlaceAvailable.userExperienceProfit">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-4">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Dias maximos</mat-label>
-                            <input required matInput disabled type="text" autocomplete="off"
-                                [(ngModel)]="thirdPlaceAvailable.maxDate">
                         </mat-form-field>
                     </div>
                 </div>
@@ -307,7 +260,7 @@
                         <hr>
                     </div>
                 </div>
-                <div class="row" style="height: 334px;">
+                <div class="row" style="height: 234px;">
                     <div class="col div-plus">
                         <img src="/assets/plus.png" class="img-plus">
                     </div>
@@ -319,101 +272,21 @@
                 </div>
                 <div class="row justify-content-center mt-2">
                     <div class="col">
-                        <button mat-raised-button color="accent" class="w-100 mt-2 mb-3">Solicitar misión</button>
+                        <button mat-raised-button color="accent" class="w-100 mt-2 mb-3" (click)="requestMission(3)">Solicitar misión</button>
                     </div>
                 </div>
             </mat-card>
         </div>
+        <div class="col"></div>
+
     </div>
     <div class="row justify-content-center">
         <div class="col-8">
             <hr class="hr-border">
         </div>
     </div>
-    <div class="row justify-content-center" *ngIf="listOfMissionsWithDeliveryRequest">
-        <div class="col-8">
-            <ul class="list">
-                <li *ngFor="let mission of listOfMissionsWithDeliveryRequest">
-                    <mat-card class="mat-elevation-z4 mat-card-height mat-card-width mr-4">
-                        <div class="row text-center mt-2">
-                            <div class="col pricedown">
-                                <div class="mat-h1 mat-h1-color">{{mission.title}}</div>
-                            </div>
-                        </div>
-                        <div class="row text-center">
-                            <div class="col">
-                                <hr>
-                            </div>
-                        </div>
-                        <div class="row text-center mt-4">
-                            <div class="col-4">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>Categoria</mat-label>
-                                    <input required matInput disabled type="text" autocomplete="off"
-                                        [(ngModel)]="mission.category">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-8">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>Fecha de incio</mat-label>
-                                    <input required matInput disabled type="text" autocomplete="off"
-                                        [(ngModel)]="mission.startDate">
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="row text-center mt-4">
-                            <div class="col-4">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>Nivel de mision</mat-label>
-                                    <input required matInput disabled type="text" autocomplete="off"
-                                        [(ngModel)]="mission.level">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-4">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>EXP ganada</mat-label>
-                                    <input required matInput disabled type="text" autocomplete="off"
-                                        [(ngModel)]="mission.userExperienceProfit">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-4">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>Dias maximos</mat-label>
-                                    <input required matInput disabled type="text" autocomplete="off"
-                                        [(ngModel)]="mission.maxDate">
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <hr>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>Descripción</mat-label>
-                                    <input required matInput disabled type="text" autocomplete="off"
-                                        [(ngModel)]="mission.description">
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <hr>
-                            </div>
-                        </div>
-                        <div class="row mt-4 text-center">
-                            <div class="col mat-h1-color">
-                                <div>Pendiente de entrega por <span>{{mission.userInChargeOfDelivery}}</span></div>
-                            </div>
-                        </div>
-                    </mat-card>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="row justify-content-center mt-5" *ngIf="deliveryRequest">
+    
+    <div class="row justify-content-center mt-5 mb-5" *ngIf="deliveryRequest">
         <div class="col-4">
             <mat-card class="mat-elevation-z4">
                 <div class="row text-center mt-2">
@@ -488,6 +361,75 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="listOfMissionsWithDeliveryRequest">
+        <div class="col"></div>
+        <div class="col-10">
+            <ul class="list">
+                <li *ngFor="let mission of listOfMissionsWithDeliveryRequest">
+                    <mat-card class="mat-elevation-z4 mat-card-height mat-card-width" style="margin-right: 10px;">
+                        <div class="row text-center mt-2">
+                            <div class="col pricedown">
+                                <div class="mat-h1 mat-h1-color">{{mission.title}}</div>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col">
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row text-center mt-4">
+                            <div class="col-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Categoria</mat-label>
+                                    <input required matInput disabled type="text" autocomplete="off"
+                                        [(ngModel)]="mission.category">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Fecha de incio</mat-label>
+                                    <input required matInput disabled type="text" autocomplete="off"
+                                        [ngModel]="mission.startDate | datoToString">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>EXP ganada</mat-label>
+                                    <input required matInput disabled type="text" autocomplete="off"
+                                        [(ngModel)]="mission.userExperienceProfit">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Descripción</mat-label>
+                                    <input required matInput disabled type="text" autocomplete="off"
+                                        [(ngModel)]="mission.description">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row mt-4 text-center">
+                            <div class="col mat-h1-color">
+                                <div>Pendiente de entrega por <span>{{mission.userInChargeOfDelivery}}</span></div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </li>
+            </ul>
+        </div>
+        <div class="col"></div>
     </div>
     <div class="row justify-content-center">
         <div class="col-5 mt-5">
