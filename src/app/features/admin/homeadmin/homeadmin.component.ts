@@ -72,6 +72,9 @@ export class HomeadminComponent implements OnInit {
 					case RequestType.Money:
 						this.userService.markRequestAsComplete(userId, withdrawRequest);
 						break;
+					case RequestType.Mission:
+						this.userService.removeMissionFromList(userId, withdrawRequest.itemRequest as IMission);
+						break;
 				}	
 
 				this.toastr.success('Solicitud completada!', '', {
