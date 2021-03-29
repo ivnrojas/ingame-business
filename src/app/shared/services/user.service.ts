@@ -82,4 +82,10 @@ export class UserService {
 			currentMissions: firebase.default.firestore.FieldValue.arrayRemove(CoreHelper.convertToObject(item))
 		})
 	}
+
+	public changeProfit(userFirebaseId: string, amount: number) {
+		return this.db.collection('users').doc(userFirebaseId).update({
+			generatedProfit: amount
+		})
+	}
 }
