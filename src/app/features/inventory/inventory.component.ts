@@ -74,13 +74,14 @@ export class InventoryComponent implements OnInit {
 
 	public withdraw(item: IItem): void {
 		this.withdrawItem = item;
+		this.withdrawItem.firebaseTimestamp = Date.now();
 	}
 
 	public withdrawItemOfUser(): void {
 		let withdrawRequest: IWithdrawRequest = {
 			itemRequest: this.withdrawItem,
-			userWhoSent: this.userInChargeOfWithdrawal.nameInGame,
-			userWhoReceiving: this.conectedUser.nameInGame,
+			userWhoSent: this.conectedUser.nameInGame,
+			userWhoReceiving: this.userInChargeOfWithdrawal.nameInGame,
 			state: StateOfWithdrawRequest.Pendiente,
 			requestDate: new Date(),
 			requestType: RequestType.Item

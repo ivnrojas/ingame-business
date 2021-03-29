@@ -147,8 +147,8 @@ export class MissionUserComponent implements OnInit {
 
 		let withdrawRequest: IWithdrawRequest = {
 			itemRequest: this.missionToDeliver,
-			userWhoSent: this.conectedUser.nameInGame, // el usuario conectado solicita la entrega
-			userWhoReceiving: this.userInChargeOfWithdrawal.nameInGame, // admin conectado para entregar mision
+			userWhoSent: this.conectedUser.nameInGame, 
+			userWhoReceiving: this.userInChargeOfWithdrawal.nameInGame, 
 			state: StateOfWithdrawRequest.Pendiente,
 			requestDate: new Date(),
 			requestType: RequestType.Mission
@@ -209,8 +209,8 @@ export class MissionUserComponent implements OnInit {
 	public confirmedRequestWeapon(): void {
 		let withdrawRequest: IWithdrawRequest = {
 			itemRequest: this.missionRequestWeapon,
-			userWhoSent: this.conectedUser.nameInGame, // el usuario conectado solicita la entrega
-			userWhoReceiving: this.userInChargeOfWeaponRequest.nameInGame, // admin conectado para entregar mision
+			userWhoSent: this.conectedUser.nameInGame,
+			userWhoReceiving: this.userInChargeOfWeaponRequest.nameInGame,
 			state: StateOfWithdrawRequest.Pendiente,
 			requestDate: new Date(),
 			requestType: RequestType.Solicitud
