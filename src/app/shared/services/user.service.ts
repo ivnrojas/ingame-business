@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { CoreHelper } from 'src/app/core/core-helper';
-import { IItem, IUser, IWithdrawRequest, UserRole } from 'src/app/core/entities';
+import { IItem, IMission, IUser, IWithdrawRequest, UserRole } from 'src/app/core/entities';
 import * as firebase from 'firebase/app';
 
 @Injectable({
@@ -74,6 +74,12 @@ export class UserService {
 	public removeItemFromInventory(userFirebaseId: string, item: IItem) {
 		return this.db.collection('users').doc(userFirebaseId).update({
 			inventory: firebase.default.firestore.FieldValue.arrayRemove(CoreHelper.convertToObject(item))
+		})
+	}
+
+	public removeMissionFromList(userFirebaseId: string, item: IMission) {
+		return this.db.collection('users').doc(userFirebaseId).update({
+			currentMissions: firebase.default.firestore.FieldValue.arrayRemove(CoreHelper.convertToObject(item))
 		})
 	}
 }
