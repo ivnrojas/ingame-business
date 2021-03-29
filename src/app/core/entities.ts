@@ -63,7 +63,8 @@ export interface IUser extends IFirebaseObject {
     inventory: IItem[];
     respect: number;
     connectionStatus: ConnectionStatus;
-    withdrawRequest: IWithdrawRequest[]
+    withdrawRequest: IWithdrawRequest[];
+    generatedProfit?: number;
 }
 
 export enum ConnectionStatus {

@@ -13,6 +13,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class HomeadminComponent implements OnInit {
 
 	public user: IUser;
+	public allUsers: IUser[] = [];
 	public requests: IRequest[] = [];
 
 	constructor(private session: SessionService, private userService: UserService, private toastr: ToastrService) { }
@@ -23,6 +24,9 @@ export class HomeadminComponent implements OnInit {
 			this.user = user;
 			this.mapRequests();
 		});
+		this.userService.getAll().valueChanges().subscribe(users => {
+			this.allUsers = users;
+		})
 	}
 
 	// The ID will be the exact date
@@ -69,28 +73,45 @@ export class HomeadminComponent implements OnInit {
 		let withdrawRequest:IWithdrawRequest = this.user.withdrawRequest.find(x => x.requestDate.toString() == reqId);
 		this.userService.markRequestAsComplete(this.user.firebaseId, withdrawRequest)
 			.then(async () => {
-				let userId = (await this.userService.getByNameInGame(withdrawRequest.userWhoSent)).firebaseId;
+				let otherUser = await this.userService.getByNameInGame(withdrawRequest.userWhoSent);
+				let userId = otherUser.firebaseId;
 
 				switch(withdrawRequest.requestType)
 				{
 					case RequestType.Item:
-						this.userService.removeItemFromInventory(userId, withdrawRequest.itemRequest as IItem);
+						this.userService.removeItemFromInventory(userId, withdrawRequest.itemRequest as IItem)
+							.then(() => {
+								let cost = otherUser.generatedProfit + ((withdrawRequest.itemRequest as IItem).cost * -1)
+								this.userService.changeProfit(userId, cost);
+								this.handleSuccess();
+							})
+							.catch(() => this.handleError())
 						break;
 					case RequestType.Money:
-						this.userService.markRequestAsComplete(userId, withdrawRequest);
+						this.userService.markRequestAsComplete(userId, withdrawRequest)
+							.then(() => {
+								let cost = otherUser.generatedProfit + (+withdrawRequest.itemRequest * -1)
+								this.userService.changeProfit(userId, cost);
+								this.handleSuccess();
+							})
+							.catch(() => this.handleError())
 						break;
 					case RequestType.Mission:
-						this.userService.removeMissionFromList(userId, withdrawRequest.itemRequest as IMission);
+						this.userService.removeMissionFromList(userId, withdrawRequest.itemRequest as IMission)
+							.then(() => {
+								let profit = otherUser.generatedProfit + (withdrawRequest.itemRequest as IMission).companyProfit;
+								this.userService.changeProfit(userId, profit);
+								this.handleSuccess();
+							})
+							.catch(() => this.handleError())
 						break;
 					case RequestType.Solicitud:
-						this.userService.markRequestAsComplete(userId, withdrawRequest);
+						this.userService.markRequestAsComplete(userId, withdrawRequest)
+							.then(() => this.handleSuccess())
+							.catch(() => this.handleError())
 						break;
 				}	
 
-				this.toastr.success('Solicitud completada!', '', {
-					timeOut: 4000,
-					positionClass: 'toast-bottom-right',
-				});
 			})
 			.catch(() => {
 				this.toastr.error('No se pudo completar la solicitud', '', {
@@ -98,6 +119,20 @@ export class HomeadminComponent implements OnInit {
 					positionClass: 'toast-bottom-right',
 				});
 			})
+	}
+
+	private handleSuccess(): void {
+		this.toastr.success('Solicitud completada!', '', {
+			timeOut: 4000,
+			positionClass: 'toast-bottom-right',
+		});
+	}
+
+	private handleError(): void {
+		this.toastr.error('No se ha podido completar la transacción.', '', {
+			timeOut: 10000,
+			positionClass: 'toast-bottom-right',
+		});
 	}
 
 }

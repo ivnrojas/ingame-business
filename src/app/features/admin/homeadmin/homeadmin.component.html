@@ -6,6 +6,11 @@
                     Solicitudes
                 </h2>
                 <hr>
+                <div class="row mb-4 mt-4" *ngIf="!requests || requests.length == 0">
+                    <div class="col text-center">
+                        No tenés solicitudes pendientes.
+                    </div>
+                </div>
                 <div class="row mb-4" *ngFor="let req of requests">
                     <div class="col">
                         <mat-accordion>
@@ -48,6 +53,96 @@
                     Profit
                 </h2>
                 <hr>
+                <div class="row mb-4" *ngFor="let u of allUsers">
+                    <div class="col">
+                        <mat-accordion>
+                            <mat-expansion-panel hideToggle>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        {{u.nameInGame}} <span class="ml-3">Profit: ${{u.generatedProfit}}</span> 
+                                            <mat-icon *ngIf="u.generatedProfit > 0" class="ml-2" style="color: rgb(32, 161, 60)">trending_up</mat-icon>
+                                            <mat-icon *ngIf="u.generatedProfit == 0" class="ml-2" style="color: rgb(255, 208, 0)">trending_flat</mat-icon>
+                                            <mat-icon *ngIf="u.generatedProfit < 0" class="ml-2" style="color: rgb(189, 25, 25)">trending_down</mat-icon>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <hr>
+                                <div class="row mt-2">
+                                    <div class="col-6">
+                                        <b>Nombre:</b> {{u.name}}
+                                    </div>
+                                    <div class="col-6">
+                                        <b>Profit: </b>
+                                        <span *ngIf="u.generatedProfit >= 0" style="color: green; margin-left: 5px;">{{u.generatedProfit}}</span>
+                                        <span *ngIf="u.generatedProfit < 0" style="color: red; margin-left: 5px;">{{u.generatedProfit}}</span>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-6">
+                                        <b>Rango:</b> {{u.ingameRole}}
+                                    </div>
+                                    <div class="col-6">
+                                        <b>Nivel:</b> {{u.level.level}}
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-6">
+                                        <b>Experiencia:</b> {{u.experience}}
+                                    </div>
+                                    <div class="col-6">
+                                        <b>Exp. prox nivel:</b> {{u.level.totalExperience}}
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-6">
+                                        <b>Dinero:</b> ${{u.money}}
+                                    </div>
+                                    <div class="col-6">
+                                        <b>Respeto:</b> {{u.respect}}
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-4">
+                                        <b>Caja LS:</b> {{u.casesLS}}
+                                    </div>
+                                    <div class="col-4">
+                                        <b>Caja SF:</b> {{u.casesSF}}
+                                    </div>
+                                    <div class="col-4">
+                                        <b>Caja LV:</b> {{u.casesLV}}
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col">
+                                        <b>Inventario:</b> 
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <ul>
+                                            <li *ngFor="let it of u.inventory">
+                                                {{it.name}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col">
+                                        <b>Misiones activas:</b> 
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <ul>
+                                            <li *ngFor="let mi of u.currentMissions">
+                                                {{mi.description}} - <b style="color: orange"> {{mi.state}}</b>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </div>
             </mat-card>
         </div>
         

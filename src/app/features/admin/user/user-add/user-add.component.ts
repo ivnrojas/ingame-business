@@ -66,7 +66,8 @@ export class UserAddComponent implements OnInit {
 			respect: this.respectControl.value,
 			connectionStatus: ConnectionStatus.Desconectado,
 			withdrawRequest: [],
-			firebaseTimestamp: Date.now()
+			firebaseTimestamp: Date.now(),
+			generatedProfit: 0
 		};
 
 		this.auth.registerEmail(user.email, user.password)

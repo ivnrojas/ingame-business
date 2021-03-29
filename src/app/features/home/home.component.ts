@@ -18,15 +18,15 @@ export class HomeComponent implements OnInit {
 	/*
 
 	Pendiente:
-	- Conectar últimas misiones - YAMA
-	- Conectar misiones activas - IVÁN
+	- Loguear cuando cumple mision para mostrar en home
+	- Ultimas misiones completadas
+
+
 	- Asignar mision a una persona o sacar mision - DESPUES
-	- ABM de misión - DESPUES
 	- ABM de usuarios - DESPUES
+	- ABM de misión - DESPUES
 	- Fake de log de caja abierta - DESPUES
-	- Log de ultimas misiones cada vez que se marca una mision como completa - IVAN
 	- Fake de log de ultima mision - DESPUES
-	- Profit de personas, logueos y panel para visualizar - IVAN
 
 	*/
 
