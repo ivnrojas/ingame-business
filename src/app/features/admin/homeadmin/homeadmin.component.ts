@@ -64,9 +64,16 @@ export class HomeadminComponent implements OnInit {
 			.then(async () => {
 				let userId = (await this.userService.getByNameInGame(withdrawRequest.userWhoSent)).firebaseId;
 
-				if(withdrawRequest.requestType == RequestType.Item)	
-					this.userService.removeItemFromInventory(userId, withdrawRequest.itemRequest as IItem);
-					
+				switch(withdrawRequest.requestType)
+				{
+					case RequestType.Item:
+						this.userService.removeItemFromInventory(userId, withdrawRequest.itemRequest as IItem);
+						break;
+					case RequestType.Money:
+						this.userService.markRequestAsComplete(userId, withdrawRequest);
+						break;
+				}	
+
 				this.toastr.success('Solicitud completada!', '', {
 					timeOut: 4000,
 					positionClass: 'toast-bottom-right',
