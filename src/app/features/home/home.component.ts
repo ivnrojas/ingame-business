@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
 
 	Pendiente:
 	- Conectar últimas misiones - LOPEZ
-	- Sistema de misiones - YAMA
 	- Asignar mision a una persona o sacar mision - DESPUES
 	- ABM de misión - DESPUES
 	- ABM de usuarios - DESPUES
@@ -27,6 +26,7 @@ export class HomeComponent implements OnInit {
 	- Fake de log de ultima mision - DESPUES
 	- Profit de personas, logueos y panel para visualizar - IVAN
 	- Ver solicitudes ----> NOW
+	- Cambiar estado de conectado a desconectado - YAMA
 
 
 	*/
