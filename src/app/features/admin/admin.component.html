@@ -3,11 +3,17 @@
         <mat-icon>arrow_back</mat-icon>
     </button>
     <span>Panel de administrador</span>
+    <div class="text-center w-100">
+        <div style="font-size: 18px"  matTooltip="Aparecer conectado para los demás">
+            <span *ngIf="connectionStatus">Conectado</span>
+            <span *ngIf="!connectionStatus">Desconectado</span>
+            <mat-slide-toggle  class="ml-2" [(ngModel)]="connectionStatus" *ngIf="!loading" (click)="changeConnectionStatus()"></mat-slide-toggle>
+        </div>
+    </div>
     <span class="example-spacer"></span>
     <button mat-icon-button class="example-icon toolbar-btn favorite-icon mr-4" routerLink="/admin/home" matTooltip="Inicio">
         <mat-icon>home</mat-icon>
     </button>
-    <mat-slide-toggle [(ngModel)]="connectionStatus" *ngIf="!loading" (click)="changeConnectionStatus()" matTooltip="Estado"></mat-slide-toggle>
     <button mat-icon-button class="example-icon toolbar-btn favorite-icon" matTooltip="Usuarios">
         <mat-icon>group</mat-icon>
     </button>
