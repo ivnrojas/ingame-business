@@ -42,7 +42,7 @@ export class HomeadminComponent implements OnInit {
 					req.item = (x.itemRequest as IItem).name;
 					req.title =  `Retiro de ${req.item} - ${x.userWhoSent}`;
 					req.description = `${x.userWhoSent} quiere retirar un/una ${req.item} de su inventario.`;
-					req.profit = (x.itemRequest as IItem).profit * -1;
+					req.profit = (x.itemRequest as IItem).cost * -1;
 					break;
 				case RequestType.Mission:
 					req.date = CoreHelper.DateFormat(x.requestDate.toString());
