@@ -58,10 +58,12 @@ export class HomeadminComponent implements OnInit {
 		})
 	}
 
-	public closeRequest(reqId: string): void {
+	public async closeRequest(reqId: string) {
 		let withdrawRequest:IWithdrawRequest = this.user.withdrawRequest.find(x => x.requestDate.toString() == reqId);
 		this.userService.markRequestAsComplete(this.user.firebaseId, withdrawRequest)
-			.then(() => {
+			.then(async () => {
+				let userId = (await this.userService.getByNameInGame(withdrawRequest.userWhoSent)).firebaseId;
+				this.userService.markRequestAsComplete(userId, withdrawRequest);
 				this.toastr.success('Solicitud completada!', '', {
 					timeOut: 4000,
 					positionClass: 'toast-bottom-right',
