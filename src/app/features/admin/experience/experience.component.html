@@ -52,14 +52,19 @@
                                 <hr>
                             </div>
                         </div>
-                        <div class="row justify-content-center mt-4">
-                            <div class="col-4">
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>Experiencia</mat-label>
-                                    <input required matInput disabled type="text" autocomplete="off"
-                                        [(ngModel)]="userSelected.experience">
-                                </mat-form-field>
+                        
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                Experiencia: {{userSelected.experience}}/{{userSelected.level.totalExperience}}
                             </div>
+                            <div class="col-6 text-right">Nivel {{userSelected.level.level}}</div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col">
+                                <mat-progress-bar mode="determinate" class="mat-progress-bar" [value]="levelPercentage" color="warn"></mat-progress-bar>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-4">
                             <div class="col">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Experiencia agregada</mat-label>

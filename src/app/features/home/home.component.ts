@@ -52,6 +52,9 @@ export class HomeComponent implements OnInit {
 	// Flags
 	public loading: boolean = true;
 
+	// Porsentaje del nivel 
+	public levelPercentage: number;
+
 	public latestCasesColumns: string[] = ['person', 'case', 'winItem'];
 	public latestMissionsColumns: string[] = ['mission'];
 	
@@ -69,6 +72,7 @@ export class HomeComponent implements OnInit {
 		let user$ = await this.session.getUserObservable();
 		user$.subscribe(user => {
 			this.currentUser = user;
+			this.levelPercentage = (this.currentUser.experience * 100) / this.currentUser.level.totalExperience;
 			this.getListOfLastInventoryItems();
 			this.loading = false;
 		});
