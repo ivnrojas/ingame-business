@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConnectionStatus, IMission, IUser, IWithdrawRequest, Levels, MissionLevel, MissionState, StateOfWithdrawRequest, RequestType, MissionCategory } from 'src/app/core/entities';
+import { ConnectionStatus, IMission, IUser, IWithdrawRequest, Levels, MissionState, StateOfWithdrawRequest, RequestType, MissionCategory } from 'src/app/core/entities';
 import { MissionsService } from 'src/app/shared/services/missions.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -191,7 +191,7 @@ export class MissionUserComponent implements OnInit {
 			case Levels[1].level:
 			case Levels[2].level:
 			default:
-				let missionsLevelOne = this.getMisionslevelOne();
+				let missionsLevelOne = this.getMimsionsAccordingToLevel(1, 5); // determina el rango de niveles de misiones
 				let mission = missionsLevelOne[this.random(0, missionsLevelOne.length)];
 				mission.state = MissionState.started;
 				mission.startDate = new Date();
@@ -250,14 +250,15 @@ export class MissionUserComponent implements OnInit {
 			})
 	}
 
-	private getMisionslevelOne(): IMission[] {
-		let missionsLevelOne: IMission[] = [];
+	public getMimsionsAccordingToLevel(min: number, max: number): IMission[] {
+		let mimsionsAccordingToLevel: IMission[] = [];
 		for(let mission of this.missions){
-			if(mission.level == MissionLevel.one){
-				missionsLevelOne.push(mission);
+			for(let level of mission.level){
+				if(level<=max || level>=min)
+					mimsionsAccordingToLevel.push(mission);
 			}
 		}
-		return missionsLevelOne;
+		return mimsionsAccordingToLevel;
 	}
 	
 	public backToTop(): void {

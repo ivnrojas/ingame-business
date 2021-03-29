@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IMission, IUser, MissionCategory, MissionLevel, MissionState } from 'src/app/core/entities';
-import { SessionService } from 'src/app/shared/services/session.service';
-import { UserService } from 'src/app/shared/services/user.service';
+import { IMission, IUser, MissionCategory, MissionTitle } from 'src/app/core/entities';
+import { MissionsService } from 'src/app/shared/services/missions.service';
 
 @Component({
     selector: 'app-mission-add',
@@ -16,49 +15,38 @@ export class MissionAddComponent implements OnInit {
     public missionForm: FormGroup;
 
     public titleControl = new FormControl(null, Validators.required);
-    public levelControl = new FormControl(MissionLevel.one, Validators.required);
+    public levelMinControl = new FormControl(1, Validators.required);
+    public levelMaxControl = new FormControl(2, Validators.required);
     public descriptionControl = new FormControl(null, Validators.required);
-    public maxDayControl = new FormControl(null, Validators.required);
     public categoryControl = new FormControl(MissionCategory.standard, Validators.required);
     public companyProfitControl = new FormControl(null, Validators.required);
     public userExperienceControl = new FormControl(null, Validators.required);
-    public deliverToControl = new FormControl('Ivana', Validators.required);
-    public notifyTocontrol = new FormControl('Ivana', Validators.required);
 
-    constructor(private db: UserService, private session: SessionService) { }
+    constructor(private db: MissionsService) { }
 
     
     ngOnInit(): void {
-        this.getConectedUser();
         this.initializeTaskForm();
     }
 
-	private async getConectedUser(): Promise<void> {
-		let user$ = await this.session.getUserObservable();
-		user$.subscribe(user => {
-			this.conectedUser = user;
-		});
-	}
     private initializeTaskForm(): void {
         this.missionForm = new FormGroup({
-            title: this.titleControl,
-            level: this.levelControl,
-            description: this.descriptionControl,
-            maxDay: this.maxDayControl,
-            category: this.categoryControl,
-            companyProfit: this.companyProfitControl,
-            userExperience: this.userExperienceControl,
-            deliverTo: this.deliverToControl,
-            notifyTo: this.notifyTocontrol
+            'title': this.titleControl,
+            'levelMin': this.levelMinControl,
+            'levelMax': this.levelMaxControl,
+            'description': this.descriptionControl,
+            'category': this.categoryControl,
+            'companyProfit': this.companyProfitControl,
+            'userExperience': this.userExperienceControl,
         });
-    }
-
-    public getLevelMissionKeys(): string[] {
-        return Object.values(MissionLevel);
     }
 
     public getMissionCategory(): string[] {
         return Object.values(MissionCategory);
+    }
+
+    public getMissionTitle(): string[] {
+        return Object.values(MissionTitle);
     }
 
     public generateMissionId(): string {
@@ -75,30 +63,28 @@ export class MissionAddComponent implements OnInit {
         return 'MS' + year + month + day + hour + minute + seconds;
     }
 
-    public generateMission(): IMission {
-        return {
+    public generateNewMission(): void {
+        let levels: number[] = [];
+
+        for(let i=this.levelMinControl.value; i<=this.levelMaxControl.value; i++){
+            levels.push(i);
+        }
+
+
+
+        let mission : IMission = {
             id: this.generateMissionId(),
             title: this.missionForm.get('title').value,
-            level: this.missionForm.get('level').value,
+            level: levels,
             description: this.missionForm.get('description').value,
             companyProfit: this.missionForm.get('companyProfit').value,
             userExperienceProfit: this.missionForm.get('userExperience').value,
-            deliverTo: this.missionForm.get('deliverTo').value,
-            startDate: new Date(),
-            maxDate: this.missionForm.get('maxDay').value,
-            closeDate: null,
+            startDate: null,
             category: this.missionForm.get('category').value,
             state: null,
-            group: null,
             userInChargeOfDelivery: null,
             requiredLevel: null,
         }
-    }
-
-    public generateNewMission(): void {
-        let newMission = this.generateMission();
-        console.log(newMission);
-        this.conectedUser.currentMissions.push(newMission);
-        this.db.modify(this.conectedUser);
+        console.log(mission)
     }
 }

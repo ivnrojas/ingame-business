@@ -11,18 +11,15 @@ export interface IFirebaseObject {
 
 export interface IMission extends IFirebaseObject {
     id: string;
-    level: MissionLevel;
-    title: string;
+    level: number[];
+    title: MissionTitle;
     description: string;
     companyProfit: number;
     userExperienceProfit: number;
-    deliverTo?: string;
     startDate?: Date;
-    maxDate?: Date;
     closeDate?: Date;
     category: MissionCategory;
     state: MissionState;
-    group: string;
     userInChargeOfDelivery: string
     requiredLevel: number;
 }
@@ -31,6 +28,15 @@ export enum MissionState {
     started = 'Iniciada',
     finished = 'Terminada',
     canceled = 'Cancelada'
+}
+
+export enum MissionTitle {
+    EntregaDeArmas = 'Entrega de Armas',
+    VentaDeArmas = 'Venta de Armas',
+    EntregaDePiezas = 'Entrega de Piezas',
+    NuevoPersonalEnLaBanda = 'Nuevo personal en la banda',
+    EntregaDeConsumible = 'Entrega de Consumible',
+    EntregaDeDinero = 'Entrega de Dinero', 
 }
 
 export enum MissionCategory {
@@ -165,29 +171,3 @@ export const Levels: ILevel[] = [
     { level: 29, totalExperience: 5500 },
     { level: 30, totalExperience: 5500 },
 ]
-
-export enum UserLevel {
-    one = 100,
-    two = 200,
-    three = 400,
-    four = 800,
-    five = 1600,
-    six = 3200,
-    seven = 6400,
-    eight = 12800,
-    nine = 25600,
-    ten = 51200
-}
-
-export enum MissionLevel {
-    one = "1",
-    two = "2",
-    three = "3",
-    four = "4",
-    five = "5",
-    six = "6",
-    seven = "7",
-    eight = "8",
-    nine = "9",
-    ten = "10"
-}
