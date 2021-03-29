@@ -20,20 +20,20 @@ export interface IMission extends IFirebaseObject {
     startDate?: Date;
     maxDate?: Date;
     closeDate?: Date;
-    category: missionCategory;
-    state: missionState;
+    category: MissionCategory;
+    state: MissionState;
     group: string;
     userInChargeOfDelivery: string
     requiredLevel: number;
 }
 
-export enum missionState {
+export enum MissionState {
     started = 'Iniciada',
     finished = 'Terminada',
     canceled = 'Cancelada'
 }
 
-export enum missionCategory {
+export enum MissionCategory {
     legal = 'Legal',
     ilegal = 'Ilegal'
 }

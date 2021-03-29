@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IMission, IUser, missionCategory, MissionLevel, missionState } from 'src/app/core/entities';
+import { IMission, IUser, MissionCategory, MissionLevel, MissionState } from 'src/app/core/entities';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -19,7 +19,7 @@ export class MissionAddComponent implements OnInit {
     public levelControl = new FormControl(MissionLevel.one, Validators.required);
     public descriptionControl = new FormControl(null, Validators.required);
     public maxDayControl = new FormControl(null, Validators.required);
-    public categoryControl = new FormControl(missionCategory.legal, Validators.required);
+    public categoryControl = new FormControl(MissionCategory.legal, Validators.required);
     public companyProfitControl = new FormControl(null, Validators.required);
     public userExperienceControl = new FormControl(null, Validators.required);
     public deliverToControl = new FormControl('Ivana', Validators.required);
@@ -58,7 +58,7 @@ export class MissionAddComponent implements OnInit {
     }
 
     public getMissionCategory(): string[] {
-        return Object.values(missionCategory);
+        return Object.values(MissionCategory);
     }
 
     public generateMissionId(): string {

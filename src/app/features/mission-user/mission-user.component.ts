@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ConnectionStatus, IMission, IUser, IWithdrawRequest, missionState, RequestType, StateOfWithdrawRequest } from 'src/app/core/entities';
+import { ConnectionStatus, IMission, IUser, IWithdrawRequest, Levels, MissionLevel, MissionState, StateOfWithdrawRequest, RequestType } from 'src/app/core/entities';
+import { MissionsService } from 'src/app/shared/services/missions.service';
 import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -39,14 +40,18 @@ export class MissionUserComponent implements OnInit {
 	public loading: boolean = true;
 
 	// Admin encargado de la solicitud de entrega
-	public userInChargeOfWithdrawal: IUser;
+	public userInChargeOfWithdrawal: IUser = undefined;
+
+	// Misiones 
+	public missions: IMission[];
 
 
-	constructor(private session: SessionService, private dbUser: UserService, private toastr: ToastrService, private router: Router) { }
+	constructor(private session: SessionService, private dbUser: UserService, private toastr: ToastrService, private router: Router, private dbMission: MissionsService) { }
 
 	ngOnInit(): void {
 		this.getConectedUser();
 		this.getAdminUser();
+		this.getMissions();
 	}
 
 	private async getConectedUser(): Promise<void> {
@@ -54,18 +59,30 @@ export class MissionUserComponent implements OnInit {
 		user$.subscribe(user => {
 			this.conectedUser = user;
 			this.getMissionsRunByTheUserConected();
+			this.getMissions();	
 			this.loading = false;
 		});
 	}
 
+	private async getMissions(): Promise<void> {
+		let mission$ = await this.dbMission.getAll()
+			.valueChanges().subscribe(missions => {
+			this.missions = missions;
+		});
+	}
+
 	private getMissionsRunByTheUserConected(): void {
+		this.firstPlaceAvailable = undefined;
+		this.secondPlaceAvailable = undefined;
+		this.thirdPlaceAvailable = undefined;
+
 		let index: number = 0;
 		this.missionsRunByTheUserConected = this.conectedUser.currentMissions;
 		this.listOfMissionsWithDeliveryRequest = [];
 
 		for(let mission of this.missionsRunByTheUserConected){
 			if(index == 0){
-				if(mission.state == missionState.started){
+				if(mission.state == MissionState.started){
 					this.firstPlaceAvailable = mission;
 					index++
 				}
@@ -73,7 +90,7 @@ export class MissionUserComponent implements OnInit {
 					this.listOfMissionsWithDeliveryRequest.push(mission);
 			}
 			else if(index == 1){
-				if(mission.state == missionState.started){
+				if(mission.state == MissionState.started){
 					this.secondPlaceAvailable = mission;
 					index++
 				}
@@ -81,7 +98,7 @@ export class MissionUserComponent implements OnInit {
 					this.listOfMissionsWithDeliveryRequest.push(mission);
 			}
 			else if(index == 2){
-				if(mission.state == missionState.started){
+				if(mission.state == MissionState.started){
 					this.thirdPlaceAvailable = mission;
 					break;
 				}
@@ -114,8 +131,9 @@ export class MissionUserComponent implements OnInit {
 	public confirmedPerformMissionDelivery(): void {
 		for(let i=0; i<this.conectedUser.currentMissions.length; i++){
 			if(this.conectedUser.currentMissions[i] == this.missionToDeliver){
-				this.conectedUser.currentMissions[i].state = missionState.finished;
+				this.conectedUser.currentMissions[i].state = MissionState.finished;
 				this.conectedUser.currentMissions[i].closeDate = new Date();
+				this.conectedUser.currentMissions[i].userInChargeOfDelivery = this.userInChargeOfWithdrawal.nameInGame;
 				break;
 			}
 		}
@@ -139,17 +157,6 @@ export class MissionUserComponent implements OnInit {
 						timeOut: 4000,
 						positionClass: 'toast-bottom-right',
 					});
-					switch(this.missionToDeliver){
-						case this.firstPlaceAvailable:
-							this.firstPlaceAvailable = undefined;
-							break;
-						case this.secondPlaceAvailable:
-							this.secondPlaceAvailable = undefined;
-							break;
-						case this.thirdPlaceAvailable:
-							this.thirdPlaceAvailable = undefined;
-							break;
-					}
 				})
 				.catch(() => {
 					this.toastr.error('Contacte con algún líder de la banda', 'Error en la entrega', {
@@ -170,10 +177,39 @@ export class MissionUserComponent implements OnInit {
 		})
 		
 	}
+
+	public requestMission(): void{
+		switch(this.conectedUser.level.level){
+			case Levels[0].level:
+			case Levels[1].level:
+			case Levels[2].level:
+				let missionsLevelOne = this.getMisionslevelOne();
+				let mission = missionsLevelOne[this.random(0, missionsLevelOne.length)];
+				mission.state = MissionState.started;
+				mission.startDate = new Date();
+				this.conectedUser.currentMissions.push(mission);
+				break;
+		}
+		this.dbUser.modify(this.conectedUser)
+	}
+
+	private getMisionslevelOne(): IMission[] {
+		let missionsLevelOne: IMission[] = [];
+		for(let mission of this.missions){
+			if(mission.level == MissionLevel.one){
+				missionsLevelOne.push(mission);
+			}
+		}
+		return missionsLevelOne;
+	}
 	
 	public backToTop(): void {
 		this.router.navigate(['']);
 	}
 
+	// No incluye el número máximo
+	private random(min: number, max: number): number {
+		return Math.floor((Math.random()*(max - min))+min);
+	}
 
 }
