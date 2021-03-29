@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { CoreHelper } from 'src/app/core/core-helper';
-import { IItem, IMission, IUser, RequestType } from 'src/app/core/entities';
+import { IItem, IMission, IUser, IWithdrawRequest, RequestType } from 'src/app/core/entities';
 import { SessionService } from 'src/app/shared/services/session.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
 	selector: 'app-homeadmin',
@@ -13,7 +15,7 @@ export class HomeadminComponent implements OnInit {
 	public user: IUser;
 	public requests: IRequest[] = [];
 
-	constructor(private session: SessionService) { }
+	constructor(private session: SessionService, private userService: UserService, private toastr: ToastrService) { }
 
 	async ngOnInit() {
 		let user$ = await this.session.getUserObservable();
@@ -23,10 +25,10 @@ export class HomeadminComponent implements OnInit {
 		});
 	}
 
-	// Cambiar la forma en la que se obtiene todo tiene que ser en tiempo real, se duplican registros
+	// The ID will be the exact date
 	private mapRequests(): void {
-		this.user.withdrawRequest.forEach(x => {
-			let req: IRequest = {};
+		this.requests = this.user.withdrawRequest.map(x => {
+			let req: IRequest = { id : x.requestDate.toString() };
 
 			switch(x.requestType)
 			{
@@ -52,13 +54,31 @@ export class HomeadminComponent implements OnInit {
 					break;
 			}
 
-			this.requests.push(req);
+			return req;
 		})
+	}
+
+	public closeRequest(reqId: string): void {
+		let withdrawRequest:IWithdrawRequest = this.user.withdrawRequest.find(x => x.requestDate.toString() == reqId);
+		this.userService.markRequestAsComplete(this.user.firebaseId, withdrawRequest)
+			.then(() => {
+				this.toastr.success('Solicitud completada!', '', {
+					timeOut: 4000,
+					positionClass: 'toast-bottom-right',
+				});
+			})
+			.catch(() => {
+				this.toastr.error('No se pudo completar la solicitud', '', {
+					timeOut: 4000,
+					positionClass: 'toast-bottom-right',
+				});
+			})
 	}
 
 }
 
 export interface IRequest {
+	id: string;
 	title?: string,
 	date?: string,
 	description?: string,

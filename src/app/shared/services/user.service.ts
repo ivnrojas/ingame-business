@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { CoreHelper } from 'src/app/core/core-helper';
-import { IUser, UserRole } from 'src/app/core/entities';
+import { IUser, IWithdrawRequest, UserRole } from 'src/app/core/entities';
+import * as firebase from 'firebase/app';
 
 @Injectable({
 	providedIn: 'root'
@@ -63,4 +64,10 @@ export class UserService {
 				return null;
 			});
     }
+
+	public markRequestAsComplete(userFirebaseId: string, request: IWithdrawRequest) {
+		return this.db.collection('users').doc(userFirebaseId).update({
+			withdrawRequest: firebase.default.firestore.FieldValue.arrayRemove(CoreHelper.convertToObject(request))
+		})
+	}
 }
