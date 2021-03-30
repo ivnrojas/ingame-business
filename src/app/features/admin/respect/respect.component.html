@@ -52,8 +52,12 @@
                                 <hr>
                             </div>
                         </div>
+                        <div class="row mt-2">
+                            <div class="col text-center">
+                                <div class="mat-h2 mat-h1-color">{{userSelected.nameInGame}}</div>
+                            </div>
+                        </div>
                         <div class="row justify-content-center mt-4">
-                            <div class="col"></div>
                             <div class="col-1">
                                 <button mat-mini-fab color="accent" class="mt-2" (click)="modifyRespect(-3)"><b>-3</b></button>
                             </div>
@@ -63,15 +67,13 @@
                             <div class="col-1">
                                 <button mat-mini-fab color="accent" class="mt-2" (click)="modifyRespect(-1)"><b>-1</b></button>
                             </div>
-                            <div class="col"></div>
-                            <div class="col-4">
+                            <div class="col-4 ml-4 mr-4">
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Respeto</mat-label>
                                     <input required matInput disabled type="text" autocomplete="off"
                                         [(ngModel)]="userSelected.respect">
                                 </mat-form-field>
                             </div>
-                            <div class="col"></div>
                             <div class="col-1">
                                 <button mat-mini-fab color="primary" class="mt-2" (click)="modifyRespect(1)"><b>+1</b></button>
                             </div>
@@ -81,7 +83,6 @@
                             <div class="col-1">
                                 <button mat-mini-fab color="primary" class="mt-2" (click)="modifyRespect(3)"><b>+3</b></button>
                             </div>
-                            <div class="col"></div>
                         </div>
                     </div>
                 </div>
