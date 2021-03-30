@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { CoreHelper } from 'src/app/core/core-helper';
-import { IItem, IMission, IUser, IWithdrawRequest, UserRole } from 'src/app/core/entities';
+import { IItem, ILevel, IMission, IUser, IWithdrawRequest, UserRole } from 'src/app/core/entities';
 import * as firebase from 'firebase/app';
 
 @Injectable({
@@ -80,6 +80,18 @@ export class UserService {
 	public removeMissionFromList(userFirebaseId: string, item: IMission) {
 		return this.db.collection('users').doc(userFirebaseId).update({
 			currentMissions: firebase.default.firestore.FieldValue.arrayRemove(CoreHelper.convertToObject(item))
+		})
+	}
+
+	public addToMissionHistory(userFirebaseId: string, item: IMission) {
+		return this.db.collection('users').doc(userFirebaseId).update({
+			missionHistory: firebase.default.firestore.FieldValue.arrayUnion(CoreHelper.convertToObject(item))
+		})
+	}
+
+	public changeLevelAndExperience(userFirebaseId: string, level: ILevel, experience: number) {
+		return this.db.collection('users').doc(userFirebaseId).update({
+			level: level, experience: experience
 		})
 	}
 
