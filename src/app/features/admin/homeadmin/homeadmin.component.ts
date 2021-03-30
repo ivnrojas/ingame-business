@@ -124,7 +124,7 @@ export class HomeadminComponent implements OnInit {
 									}
 								}
 								this.comprobateTotalExperience(otherUser);
-						
+								otherUser.missionHistory.push(withdrawRequest.itemRequest as IMission);
 								this.userService.modify(otherUser)
 									.then(() => {
 										let profit = otherUser.generatedProfit + (withdrawRequest.itemRequest as IMission).companyProfit;
