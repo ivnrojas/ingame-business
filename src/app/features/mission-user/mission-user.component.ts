@@ -88,6 +88,7 @@ export class MissionUserComponent implements OnInit {
 		this.listOfMissionsWithDeliveryRequest = [];
 
 		for(let mission of this.missionsRunByTheUserConected){
+			console.log(mission)
 			if(index == 0){
 				if(mission.state == MissionState.started){
 					this.firstPlaceAvailable = mission;
@@ -117,6 +118,7 @@ export class MissionUserComponent implements OnInit {
 		if(this.listOfMissionsWithDeliveryRequest.length == 0){
 			this.listOfMissionsWithDeliveryRequest = undefined;
 		}
+
 	}
 
 	private async getAdminUser(): Promise<void> {

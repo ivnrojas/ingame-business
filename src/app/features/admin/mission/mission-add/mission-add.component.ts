@@ -84,7 +84,7 @@ export class MissionAddComponent implements OnInit {
             category: this.missionForm.get('category').value,
             state: null,
             userInChargeOfDelivery: null,
-            requiredLevel: null,
+            requiredLevel: this.requiredLevelControl.value,
         }
         
         this.db.add(mission)
