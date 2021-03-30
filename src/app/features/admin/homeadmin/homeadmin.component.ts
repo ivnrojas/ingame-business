@@ -99,7 +99,6 @@ export class HomeadminComponent implements OnInit {
 					case RequestType.Mission:
 						this.userService.removeMissionFromList(userId, withdrawRequest.itemRequest as IMission)
 							.then(() => {
-
 								let experienceToAdd: number = (withdrawRequest.itemRequest as IMission).userExperienceProfit;
 								
 								otherUser = this.comprobateTotalExperience(otherUser);
@@ -124,23 +123,22 @@ export class HomeadminComponent implements OnInit {
 									}
 								}
 								otherUser = this.comprobateTotalExperience(otherUser);
-								otherUser.missionHistory.push(withdrawRequest.itemRequest as IMission);
-								this.userService.modify(otherUser)
-									.then(() => {
-										let profit = otherUser.generatedProfit + (withdrawRequest.itemRequest as IMission).companyProfit;
-										this.userService.changeProfit(userId, profit);
-										let register: IMissionRegister = {
-											date: new Date(),
-											person: otherUser.nameInGame,
-											level: otherUser.level.level,
-											experience: (withdrawRequest.itemRequest as IMission).userExperienceProfit,
-											profit: (withdrawRequest.itemRequest as IMission).companyProfit,
-											firebaseTimestamp: Date.now()
-										}
-										this.log.addMissionRegister(register);
-										this.handleSuccess();
-									})
-									.catch(() => this.handleError());
+
+								let register: IMissionRegister = {
+									date: new Date(),
+									person: otherUser.nameInGame,
+									level: otherUser.level.level,
+									experience: (withdrawRequest.itemRequest as IMission).userExperienceProfit,
+									profit: (withdrawRequest.itemRequest as IMission).companyProfit,
+									firebaseTimestamp: Date.now()
+								}
+								let profit = otherUser.generatedProfit + (withdrawRequest.itemRequest as IMission).companyProfit;
+
+								this.log.addMissionRegister(register);
+								this.userService.changeProfit(userId, profit);
+								this.userService.addToMissionHistory(userId, withdrawRequest.itemRequest as IMission);
+								this.userService.changeLevelAndExperience(userId, otherUser.level, otherUser.experience);
+								this.handleSuccess();
 							})
 							.catch(() => this.handleError())
 						break;
