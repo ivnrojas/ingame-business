@@ -34,7 +34,6 @@ export class HomeadminComponent implements OnInit {
 	private mapRequests(): void {
 		this.requests = this.user.withdrawRequest.map(x => {
 			let req: IRequest = { id : x.requestDate.toString() };
-
 			switch(x.requestType)
 			{
 				case RequestType.Item:

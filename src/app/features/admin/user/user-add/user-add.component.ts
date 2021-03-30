@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ConnectionStatus, ILevel, IngameRole, IUser, Levels, UserRole } from 'src/app/core/entities';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SessionService } from 'src/app/shared/services/session.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class UserAddComponent implements OnInit {
 
 	public roleList: string[] = [];
 
-	constructor(private auth: AuthService, private userService: UserService, private toastr: ToastrService, private router: Router) { }
+	constructor(private auth: AuthService, private userService: UserService, private toastr: ToastrService, private router: Router, private session: SessionService) { }
 
 	ngOnInit(): void {
 		this.initLists();
@@ -74,12 +75,14 @@ export class UserAddComponent implements OnInit {
 			.then(() => {
 				this.userService.add(user)
 					.then(() => {
-						this.toastr.success('Registrado con éxito', '', {
+						this.toastr.success('Registrado con éxito. Te vamos a desloguear por razones de seguridad', '', {
 							timeOut: 4000,
 							positionClass: 'toast-bottom-right',
 						});
 						
-						this.router.navigate(['/']);
+						this.session.cleanSession();
+						this.auth.logoutEmail();
+						this.router.navigate(['/login']);
 					})
 					.catch(() => {
 						this.toastr.error('Error al registrar el usuario', '', {
