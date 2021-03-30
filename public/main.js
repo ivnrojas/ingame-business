@@ -78,7 +78,7 @@ function RouletteComponent_div_1_div_1_div_21_Template(rf, ctx) { if (rf & 1) {
 function RouletteComponent_div_1_div_1_div_22_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 10);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "button", 33);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, "Comprar");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, "Abrir");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 } }
@@ -2860,6 +2860,7 @@ class MissionUserComponent {
         this.missionsRunByTheUserConected = this.conectedUser.currentMissions;
         this.listOfMissionsWithDeliveryRequest = [];
         for (let mission of this.missionsRunByTheUserConected) {
+            console.log(mission);
             if (index == 0) {
                 if (mission.state == src_app_core_entities__WEBPACK_IMPORTED_MODULE_2__["MissionState"].started) {
                     this.firstPlaceAvailable = mission;
