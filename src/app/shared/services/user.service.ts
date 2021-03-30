@@ -40,7 +40,7 @@ export class UserService {
 			});
     }
 
-	public add(user: IUser): Promise<unknown> {
+	public add(user: IUser) {
         return this.db.collection('users').add(CoreHelper.convertToObject(user));
     }
 

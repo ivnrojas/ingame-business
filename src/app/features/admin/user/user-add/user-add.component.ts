@@ -74,15 +74,25 @@ export class UserAddComponent implements OnInit {
 		this.auth.registerEmail(user.email, user.password)
 			.then(() => {
 				this.userService.add(user)
-					.then(() => {
-						this.toastr.success('Registrado con éxito. Te vamos a desloguear por razones de seguridad', '', {
-							timeOut: 4000,
-							positionClass: 'toast-bottom-right',
-						});
-						
-						this.session.cleanSession();
-						this.auth.logoutEmail();
-						this.router.navigate(['/login']);
+					.then(data => {
+						user.firebaseId = data.id;
+						this.userService.modify(user)
+							.then(() =>{
+								this.toastr.success('Registrado con éxito. Te vamos a desloguear por razones de seguridad', '', {
+									timeOut: 4000,
+									positionClass: 'toast-bottom-right',
+								});
+								
+								this.session.cleanSession();
+								this.auth.logoutEmail();
+								this.router.navigate(['/login']);
+							})
+							.catch(() => {
+								this.toastr.error('Error al registrar el usuario', '', {
+									timeOut: 4000,
+									positionClass: 'toast-bottom-right',
+								});
+							})
 					})
 					.catch(() => {
 						this.toastr.error('Error al registrar el usuario', '', {
