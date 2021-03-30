@@ -101,7 +101,8 @@ export class HomeadminComponent implements OnInit {
 							.then(() => {
 
 								let experienceToAdd: number = (withdrawRequest.itemRequest as IMission).userExperienceProfit;
-								this.comprobateTotalExperience(otherUser);
+								
+								otherUser = this.comprobateTotalExperience(otherUser);
 
 								otherUser.experience += experienceToAdd;
 						
@@ -112,7 +113,7 @@ export class HomeadminComponent implements OnInit {
 									let count = true;
 					
 									while(count){
-										this.comprobateTotalExperience(otherUser);
+										otherUser = this.comprobateTotalExperience(otherUser);
 					
 										if(otherUser.experience >= otherUser.level.totalExperience){
 											otherUser.experience -= otherUser.level.totalExperience;
@@ -122,7 +123,7 @@ export class HomeadminComponent implements OnInit {
 											count = false;
 									}
 								}
-								this.comprobateTotalExperience(otherUser);
+								otherUser = this.comprobateTotalExperience(otherUser);
 								otherUser.missionHistory.push(withdrawRequest.itemRequest as IMission);
 								this.userService.modify(otherUser)
 									.then(() => {
@@ -173,11 +174,11 @@ export class HomeadminComponent implements OnInit {
 		});
 	}
 	
-	private comprobateTotalExperience(user: IUser): void {
+	private comprobateTotalExperience(user: IUser): IUser {
 		for(let level of Levels){
-			if(this.user.level.level == level.level){
-				this.user.level.totalExperience = level.totalExperience;
-				break;
+			if(user.level.level == level.level){
+				user.level.totalExperience = level.totalExperience;
+				return user;
 			}
 		}
 	}

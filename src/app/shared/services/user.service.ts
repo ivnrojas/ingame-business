@@ -79,7 +79,7 @@ export class UserService {
 
 	public removeMissionFromList(userFirebaseId: string, item: IMission) {
 		return this.db.collection('users').doc(userFirebaseId).update({
-			currentMissions: firebase.default.firestore.FieldValue.arrayRemove(CoreHelper.convertToObject(item))
+			currentMissions: firebase.default.firestore.FieldValue.arrayRemove(item)
 		})
 	}
 
